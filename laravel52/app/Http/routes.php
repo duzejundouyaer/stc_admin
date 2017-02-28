@@ -28,4 +28,5 @@ Route::group(['prefix'=>'admin','namespace'=>'Admin'], function () {
 
     Route::get('moveadd','MoveController@moveadd');//电影添加
     Route::get('movelist','MoveController@movelist');//电影列表
+    Route::get('foot','FootController@foot');//添加食品
 });
