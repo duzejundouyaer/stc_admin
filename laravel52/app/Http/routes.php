@@ -25,4 +25,7 @@ Route::group(['prefix'=>'admin','namespace'=>'Admin'], function () {
     Route::get('admin','LoginController@index');//登录
     Route::get('index','IndexController@index');//首页
     Route::get('info','IndexController@info');//首页
+
+    Route::get('moveadd','MoveController@moveadd');//电影添加
+    Route::get('movelist','MoveController@movelist');//电影列表
 });

@@ -19,10 +19,10 @@
 </div>
 <div class="leftnav">
     <div class="leftnav-title"><strong><span class="icon-list"></span>菜单列表</strong></div>
-    <h2>导航管理</h2>
+    <h2>电影管理</h2>
     <ul style="display:block">
-        <li><a href="?r=nav/index" target="right"><span class="icon-caret-right"></span>导航添加</a></li>
-        <li><a href="?r=nav/show" target="right"><span class="icon-caret-right"></span>导航列表</a></li>
+        <li><a href="{{URL('admin/moveadd')}}" target="right"><span class="icon-caret-right"></span>电影添加</a></li>
+        <li><a href="{{URL('admin/movelist')}}" target="right"><span class="icon-caret-right"></span>电影列表</a></li>
     </ul>
     <h2>咨询管理</h2>
     <ul>
