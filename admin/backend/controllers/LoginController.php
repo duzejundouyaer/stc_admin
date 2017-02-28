@@ -19,19 +19,25 @@ class LoginController extends Controller
     //登录页面
     public function actionIndex(){
         $request = Yii::$app->request;
+        $time = date("Y-m-d H:i:s");
+        $ip = $_SERVER['REMOTE_ADDR'];
         if($request->isPost){
             $bank=$request->post('bank');
             $pwd=md5($request->post('pwd'));
 
             $data=Admin::find()
                 ->asArray()
-                ->where(['admin_name'=>$bank,'admin_pwd'=>$pwd])
+                ->where(['name'=>$bank,'pwd'=>$pwd])
                 ->one();
             if($data){
                 $session = Yii::$app->session;
                 $session->open();
-                $session['admin_id'] = $data['admin_id'];
-                $session['admin_name'] = $data['admin_name'];
+                $session['admin_id'] = $data['id'];
+                $session['admin_name'] = $data['name'];
+                 $admin = Admin::findOne($session['admin_id']);
+                 $admin->ip = $ip;
+                 $admin->time = $time;
+                 $admin->save();
                 $session->close();
                 echo 0;
             }else{
