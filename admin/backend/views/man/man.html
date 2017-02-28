@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+<meta name="renderer" content="webkit">
+<title></title>
+<link rel="stylesheet" href="css/pintuer.css">
+<link rel="stylesheet" href="css/admin.css">
+<script src="js/jquery.js"></script>
+<script src="js/pintuer.js"></script>
+</head>
+<body>
+<div class="panel admin-panel">
+  <div class="panel-head"><strong class="icon-reorder">厂家列表</strong></div>
+  <div class="padding border-bottom">  
+  <!--<button type="button" class="button border-yellow" onclick="window.location.href='?r=images/images_add'"><span class="icon-plus-square-o"></span> 添加图片</button>-->
+  </div>
+  <table class="table table-hover text-center">
+    <tr>
+      <th width="11.1%">ID</th>
+      <th width="11.1%">服务商店名</th>
+      <th width="11.1%">服务商联系人</th>
+      <th width="11.1%">服务商手机号</th>
+      <th width="11.1%">服务商logo</th>
+      <th width="11.1%">服务商地址</th>
+      <th width="11.1%">是否审核</th>
+      <th width="11.1%">操作</th>
+    </tr>
+    <?php foreach($man as $val){ ?>
+    <tr ids="<?php echo $val['man_id']?>">
+      <td><?php echo $val['man_id']?></td>
+      <td><?php echo $val['man_name']?></td>
+      <td><?php echo $val['man_username']?></td>
+      <td><?php echo $val['man_phone']?></td>
+      <td><img src="<?php echo $val['man_img']?>" width="80" alt="服务商LOGO"></td>
+      <td><?php echo $val['man_address']?></td>
+      <td man_examine="<?php echo $val['man_examine']?>">
+        <?php if($val['man_examine']==0){ ?>
+        <a href="JavaScript:void(0)" class="man_examine" style="font-size: 18px;color: red;">未审核</a>
+        <?php }else{ ?>
+        <a href="JavaScript:void(0)" class="man_examine" style="color: green;">已审核</a>
+        <?php } ?>
+      </td>
+      <td>
+        <div class="button-group">
+      <!--<a class="button border-main" href="#add"><span class="icon-edit"></span> 修改</a>-->
+          <?php if($val['man_del']==0){?>
+          <a class="button border-red" href="javascript:void(0)" onclick="return del(<?php echo $val['man_id']?>)"><span class="icon-trash-o"></span> 删除</a>
+          <?php }else{?>
+          <a class="button border-red" href="javascript:void(0)" onclick="return reduction(<?php echo $val['man_id']?>)"><span class="icon-trash-o"></span> 还原</a>
+          <?php }?>
+      </div>
+      </td>
+    </tr>
+<?php } ?>
+  </table>
+</div>
+<center>
+  <?php
+  echo yii\widgets\LinkPager::widget([
+       'pagination' => $data['pages'],
+  ]);
+  ?>
+</center>
+<script type="text/javascript">
+  //审核
+  $(".man_examine").click(function () {
+      var id=$(this).parents('tr').attr('ids');
+      var man_examine=$(this).parent('td').attr('man_examine');
+      $.ajax({
+          type:"post",
+          url: "?r=man/index",
+          data: {id:id,man_examine:man_examine},
+          success: function(msg){
+              if(msg=="OK"){
+                  location.href='?r=man/index'
+              }else{
+                  alert('修改失败');
+              }
+          }
+      });
+  });
+  //删除
+function del(id) {
+    if(confirm("您确定要删除吗?")){
+        $.ajax({
+            type:"post",
+            url: "?r=man/del",
+            data: {id:id},
+            success: function(msg){
+                if(msg=="OK"){
+                    location.href='?r=man/index'
+                }else{
+                    alert('删除失败');
+                }
+            }
+        });
+    }
+}
+//还原
+  function reduction(id) {
+      if(confirm("您确定要还原吗?")){
+          var msg=1;
+          $.ajax({
+              type:"post",
+              url: "?r=man/del",
+              data: {id:id,msg:msg},
+              success: function(msg){
+                  if(msg=="OK"){
+                      location.href='?r=man/index'
+                  }else{
+                      alert('还原失败');
+                  }
+              }
+          });
+      }
+  }
+//$(".span").click(function () {
+//    var _this=$(this);
+//    _this.css('display','none');
+//    _this.next().css('display','block').focus();
+//});
+//$(".input").blur(function () {
+//    var _this=$(this);
+//    var id=_this.parents('tr').attr('ids');
+//    var name=_this.attr('name');
+//    var text=_this.val();
+//    $.ajax({
+//        type:"get",
+//        url: "?r=images/images_sort",
+//        data: {id:id,name:name,text:text},
+//        success: function(msg){
+//            if(msg=="OK"){
+//                _this.css('display','none');
+//                _this.prev().html(text);
+//                _this.prev().css('display','block')
+//            }else{
+//                _this.css('display','none');
+//                _this.prev().css('display','block')
+//            }
+//        }
+//    });
+//})
+</script>
+</body></html>
