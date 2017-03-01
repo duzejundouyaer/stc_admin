@@ -28,6 +28,11 @@ Route::group(['prefix'=>'admin','namespace'=>'Admin'], function () {
 
     Route::any('moveadd','MoveController@moveadd');//电影添加
     Route::get('movelist','MoveController@movelist');//电影列表
+    Route::any('uploadss','MoveController@uploadss');//电影列表
+    Route::post('isnew','MoveController@isnew');
+    Route::post('ishot','MoveController@ishot');
+    Route::post('isstatus','MoveController@isstatus');
+
     Route::get('foot','FootController@foot');//添加食品
     Route::post('addfoot','FootController@addfoot');//食物入库
 });
