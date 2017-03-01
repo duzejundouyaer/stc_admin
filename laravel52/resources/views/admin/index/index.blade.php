@@ -27,6 +27,9 @@
     <h2>套餐管理</h2>
     <ul>
         <li><a href="{{URL('admin/foot')}}" target="right"><span class="icon-caret-right"></span>添加食品</a></li>
+        <li><a href="{{URL('admin/footshow')}}" target="right"><span class="icon-caret-right"></span>食品列表</a></li>
+        <li><a href="{{URL('admin/package')}}" target="right"><span class="icon-caret-right"></span>添加套餐</a></li>
+        <li><a href="{{URL('admin/packageshow')}}" target="right"><span class="icon-caret-right"></span>套餐展示</a></li>
     </ul>
     <h2>咨询管理</h2>
     <ul>
