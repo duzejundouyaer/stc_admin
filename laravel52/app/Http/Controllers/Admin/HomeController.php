@@ -79,4 +79,34 @@ class HomeController extends Controller
             }
         }
     }
+    //计算结束时间
+    public function calCulate()
+    {
+        $movie_id = Input::get('movie_id');
+        $begin_time = Input::get('begin_time');
+        $movieInfo = DB::table('movie')->select('movie_length')->where("movie_id",'=',$movie_id)->first();
+        $length = $movieInfo->movie_length;
+        $length = $length * 60;
+        $end_time = strtotime($begin_time) + $length;
+        echo  date('H:i',$end_time);
+    }
+
+    //改变厅的状态
+    public function changeOpen()
+    {
+        $home_id = Input::get('home_id');
+        $is_open = Input::get('is_open');
+        if($is_open == 1)
+        {
+            //改为关
+            $data['is_open'] = 0;
+            DB::table('home')->where("home_id",'=',$home_id)->update($data);
+            echo 0;
+        }else{
+            //改为开
+            $data['is_open'] = 1;
+            DB::table('home')->where("home_id",'=',$home_id)->update($data);
+            echo 1;
+        }
+    }
 }

@@ -6,7 +6,7 @@
     <meta content="black" name="apple-mobile-web-app-status-bar-style" />
     <meta content="telephone=no" name="format-detection" />
     <title>
-        仿新版中影票务通触屏版自适应手机wap电影网站模板下载
+       爱影院
     </title>
     <link id="ctl00_css1" href="{{asset('style/home/css/style.css')}}" rel="stylesheet" />
     <link id="ctl00_css2" href="{{asset('style/home/css/inside_pages.css')}}" rel="stylesheet" />

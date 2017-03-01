@@ -16,11 +16,15 @@
         <div class="mark">
             <span style="color: red"><?php echo e($error); ?></span>
         </div>
+        <?php else: ?>
+        <div class="mark">
+            <span style="color: green;font-weight: 600">注意:填写的开始时间必须大于上一场结束时间并且大于20分钟,结束时间根据您选择的电影和开始时间自动计算</span>
+        </div>
     <?php endif; ?>
 </div>
 <div class="content">
     <div class="toptit"> <?php echo e($day); ?> 场次</div>
-    <table  border="0"  bgcolor="#FFFFFF"  width="1000">
+    <table  border="0"  bgcolor="#FFFFFF"  width="1000" >
         <tr bgcolor="#87cefa">
             <td align="center" width="5%">序号</td>
             <td align="center" width="10%">开始时间</td>
@@ -44,7 +48,7 @@
             <?php endforeach; ?>
             <?php else: ?>
               <tr bgcolor="#87cefa">
-                  <td colspan="7" style="text-align: center"><span style="color: red;font-weight: bold">暂没添加场次！</span></td>
+                  <td colspan="7" style="text-align: center"><span style="color: red;">暂无添加场次！</span></td>
               </tr>
           <?php endif; ?>
         <tr style="height: 30px" bgcolor="#87cefa">
@@ -54,7 +58,7 @@
                     <input type="hidden" name="home_id" value="<?php echo e($homeInfo->home_id); ?>">
                     <input type="hidden" name="day" value="<?php echo e($day); ?>">
                     选择电影:
-                    <select name="movie_id" id="">
+                    <select name="movie_id" id="movies">
                         <option value="0">请选择播放电影</option>
                         <?php foreach($movieList as $k=>$v): ?>
                             <option value="<?php echo e($v->movie_id); ?>"><?php echo e($v->movie_name); ?></option>
@@ -130,6 +134,23 @@
     $("#houtian").attr('href','homeCourse?home_id='+ <?php echo e($homeInfo->home_id); ?>+'&day='+dateOperator(day,2,'+'));
 
 
-
+    //当填写结束时间 自动算出来结束时间
+    $("input[name='begin_time']").blur(function()
+    {
+         //获取电影id 获取开始时间
+         var movie_id = $("#movies").val();
+         var begin_time = $("input[name='begin_time']").val();
+         if(begin_time != '' && movie_id!=0)
+         {
+             $.ajax({
+                 type: "get",
+                 url: "calCulate",
+                 data: "movie_id="+movie_id+'&begin_time='+begin_time,
+                 success: function(msg){
+                     $("input[name='end_time']").val(msg);
+                 }
+             });
+         }
+    })
 </script>
 
