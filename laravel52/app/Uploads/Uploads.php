@@ -22,7 +22,7 @@ namespace App\Uploads;
 
 class Uploads{
 
-protected $allowExt = 'jpg,jpeg,gif,bmp,png';
+protected $allowExt = 'jpg,jpeg,gif,bmp,png,mp4,flv';
 
 protected $maxSize = 10; //1M ，以M为单位
 
