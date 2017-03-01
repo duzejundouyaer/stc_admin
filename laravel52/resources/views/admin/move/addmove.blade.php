@@ -11,8 +11,10 @@
     <script src="{{asset('style/admin/js/jquery.js')}}"></script>
     <script src="{{asset('style/admin/js/pintuer.js')}}"></script>
 
-    <script type="text/javascript" src="{{asset('style/admin/diyUpload/js/webuploader.html5only.min.js')}}"></script>
-    <script type="text/javascript" src="{{asset('style/admin/diyUpload/js/diyUpload.js')}}"></script>
+    {{--<link rel="stylesheet" type="text/css" href="{{asset('style/admin/diyUpload/css/webuploader.css')}}">--}}
+    {{--<link rel="stylesheet" type="text/css" href="{{asset('style/admin/diyUpload/css/diyUpload.css')}}">--}}
+    {{--<script type="text/javascript" src="{{asset('style/admin/diyUpload/js/webuploader.html5only.min.js')}}"></script>--}}
+    {{--<script type="text/javascript" src="{{asset('style/admin/diyUpload/js/diyUpload.js')}}"></script>--}}
 </head>
 <style>
     *{ margin:0; padding:0;}
@@ -46,15 +48,68 @@
             </div>
             <div class="form-group">
                 <div class="label">
-                    <label>所属类型：</label>
+                    <label>是否上映：</label>
                 </div>
                 <div class="field">
-                    <input type="checkbox" name="movie_type[]" value="爱情"/>爱情
-                    <input type="checkbox" name="movie_type[]" value="动作"/>动作
-                    <input type="checkbox" name="movie_type[]" value="片"/>片
+                    {{--<input type="radio" onclick="yivideo()" name="release" value="1" data-validate="required:请选择"/>已上映--}}
+                    {{--<input type="radio" onclick="weivideo()" name="release" value="0" data-validate="required:请选择"/>未上映--}}
+
+                <div class="tips"></div>
+                    <div class="button-group radio">
+                        <label class="button active"  style="cursor: pointer">
+                            <span class="icon icon-check"></span>
+                            <input name="release" onclick="yivideo()" value="1" type="radio" checked="checked">是
+                        </label>
+
+                        <label class="button active"  style="cursor: pointer">
+                            <span class="icon icon-times"></span>
+                            <input name="release" onclick="weivideo()" value="0"  type="radio" checked="checked">否
+                        </label>
+                    </div>
+                </div>
+            </div>
+            <div class="form-group" id="videos" style="display: none">
+                <div class="label">
+                    <label>电影预告：</label>
+                </div>
+                <div class="field">
+                    <input type="file" class="button bg-blue margin-left" name="movie_voi" data-validate="required:请上传电影预告">
                     <div class="tips"></div>
                 </div>
             </div>
+            <div class="form-group">
+                <div class="label">
+                    <label>所属类型：</label>
+                </div>
+                <div class="field">
+                    <?php foreach($type as $key=>$val){?>
+                        <input type="checkbox" name="movie_type[]" value="<?=$val->type_name?>" data-validate="required:请选择"/><?=$val->type_name?>
+                    <?php }?>
+                    <div class="tips"></div>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <div class="label">
+                    <label>电影套餐：</label>
+                </div>
+                <div class="field">
+                    <?php foreach($pack as $key=>$val){?>
+                    <input type="checkbox" name="movie_pack[]" value="<?=$val->id?>" data-validate="required:请选择"/><?=$val->pack_name?>
+                    <?php }?>
+                    <div class="tips"></div>
+                </div>
+            </div>
+            {{--<div class="form-group">--}}
+                {{--<div class="label">--}}
+                    {{--<label>电影预告：</label>--}}
+                {{--</div>--}}
+                {{--<div class="field">--}}
+                    {{--<div id="demo">--}}
+                        {{--<div id="as" ></div>--}}
+                    {{--</div>--}}
+                {{--</div>--}}
+            {{--</div>--}}
             <div class="form-group">
                 <div class="label">
                     <label>电影时长：</label>
@@ -190,7 +245,7 @@
                     <label></label>
                 </div>
                 <div class="field">
-                    <button class="button bg-main icon-check-square-o" type="button" id="jie"> 追加章节</button>
+                    {{--<button class="button bg-main icon-check-square-o" type="button" id="jie"> 追加章节</button>--}}
                     <button class="button bg-main icon-check-square-o" type="submit"> 提交</button>
                 </div>
             </div>
@@ -200,39 +255,33 @@
 </body>
 </html>
 <script>
-    //追加章节
-    $('#jie').click(function () {
-        var str1='<div class="form-group"><div class="label"><label>添加章节：</label></div><div class="field"><input type="text" class="input" name="chapter[]" style="width: 500px;float: left" data-validate="required:请输入章节"/><div class="tips"></div></div></div>';
-        //var str1=$('#l').clone();
-        $('#k').append(str1);
-    })
-    $(document).on('click','#p',function () {
-        $('#pr').remove();
-        /* 显示一个文本框 */
-        var str='<input type="text" class="input" name="price" data-validate="required:请输入价格" style="width:100px;"/> <div class="tips"></div> ';
-        $('#en').html(str);
-    })
-</script>
-<script>
-    $('#as').diyUpload({
-        url:'?r=column/uploadimg',
-        success:function( data ) {
-            console.info( data );
-            alert(data['imgpath'])
-        },
-        error:function( err ) {
-            console.info( err );
-        },
-        buttonText : '选择文件',
-        chunked:true,
-        // 分片大小
-        chunkSize:512 * 1024,
-        //最大上传的文件数量, 总文件大小,单个文件大小(单位字节);
-        fileNumLimit:50,
-        fileSizeLimit:5000000 * 1024,
-        fileSingleSizeLimit:5000000 * 1024,
-        accept: {
+    function yivideo(){
+        $("#videos").hide();
+    }
+    function weivideo(){
+        $("#videos").show();
+    }
+    {{--var _token="{{csrf_token()}}";--}}
+    {{--$('#as').diyUpload({--}}
+        {{--url:"{{URL('admin/uploadss')}}",--}}
+{{--//        data:{_token:_token},--}}
+        {{--success:function( data ) {--}}
+            {{--console.info( data );--}}
+            {{--alert(data['imgpath'])--}}
+        {{--},--}}
+        {{--error:function( err ) {--}}
+            {{--console.info( err );--}}
+        {{--},--}}
+        {{--buttonText : '选择文件',--}}
+        {{--chunked:true,--}}
+        {{--// 分片大小--}}
+        {{--chunkSize:512 * 1024,--}}
+        {{--//最大上传的文件数量, 总文件大小,单个文件大小(单位字节);--}}
+        {{--fileNumLimit:50,--}}
+        {{--fileSizeLimit:5000000 * 1024,--}}
+        {{--fileSingleSizeLimit:5000000 * 1024,--}}
+        {{--accept: {--}}
 
-        }
-    });
+        {{--}--}}
+    {{--});--}}
 </script>
