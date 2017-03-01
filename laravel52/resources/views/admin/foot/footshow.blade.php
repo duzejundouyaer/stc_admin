@@ -32,7 +32,7 @@
         @foreach($foot as $v)
         <tr>
             <td>{{$v->foot_name}}</td>
-            <td><img src="{{$v->img}}" alt="" width="120" height="50" /></td>
+            <td><img src="{{asset($v->img)}}" alt="" width="120" height="50" /></td>
             <td>{{$v->price}}</td>
             <td>
                 <div class="button-group">

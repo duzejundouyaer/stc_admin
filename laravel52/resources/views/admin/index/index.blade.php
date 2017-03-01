@@ -41,9 +41,9 @@
         <li><a href="?r=rbac/power" target="right"><span class="icon-caret-right"></span>权限控制</a></li>
         <li><a href="?r=rbac/role-power" target="right"><span class="icon-caret-right"></span>角色赋权</a></li>
         <li><a href="?r=rbac/user-role" target="right"><span class="icon-caret-right"></span>用户角色控制</a></li>
-        <h2>咨询管理</h2>    <ul>
+    </ul>
+    <h2>咨询管理</h2>    <ul>
         <li><a href="homeList" target="right"><span class="icon-caret-right"></span>厅号列表</a></li>
-        </ul>
     </ul>
 </div>
 <script type="text/javascript">
