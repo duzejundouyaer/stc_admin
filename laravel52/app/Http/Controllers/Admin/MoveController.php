@@ -42,6 +42,7 @@ class MoveController extends Controller
                     'is_new'=>$data['is_new'],
                     'is_status'=>$data['is_status'],
                     'release'=>$data['release'],
+                    'movie_region'=>$data['movie_region'],
                     'movie_desc'=>$data['movie_desc'],
                 ]);
                 foreach($data['movie_pack'] as $k=>$v){
