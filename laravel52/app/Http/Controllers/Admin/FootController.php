@@ -39,7 +39,7 @@ class FootController extends Controller
     //食物展示
     public function footShow()
     {
-        $foot = DB::table('foot')->paginate(1);
+        $foot = DB::table('foot')->paginate(5);
         return view('admin.foot.footshow',['foot'=>$foot]);
     }
     //添加套餐
@@ -76,7 +76,8 @@ class FootController extends Controller
                 'pack_img'=>$imgpath,
                 'discount_price'=>$discountPrice,
                 'original_price'=>$total,
-                'zuhe'=>$id
+                'zuhe'=>$id,
+                'zheshu'=>$discount
             ]);
             if($res)
             {
@@ -97,7 +98,9 @@ class FootController extends Controller
         $result = DB::table('pack')->get();
         foreach ($result as $k=>$v)
         {
-             
+           $ids = explode(',',$v->zuhe);
+           $v->foot=DB::table('foot')->whereIn('id',$ids)->get();
         }
+        return view('admin.foot.packageshow',['pack'=>$result]);
     }
 }
