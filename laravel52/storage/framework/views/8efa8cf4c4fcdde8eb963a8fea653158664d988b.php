@@ -19,30 +19,13 @@
 </div>
 <div class="leftnav">
     <div class="leftnav-title"><strong><span class="icon-list"></span>菜单列表</strong></div>
-    <h2>导航管理</h2>
-    <ul style="display:block">
-        <li><a href="?r=nav/index" target="right"><span class="icon-caret-right"></span>导航添加</a></li>
-        <li><a href="?r=nav/show" target="right"><span class="icon-caret-right"></span>导航列表</a></li>
-    </ul>
-    <h2>咨询管理</h2>
+    <h2>电影管理</h2>
     <ul>
-        <li><a href="?r=advice/index" target="right"><span class="icon-caret-right"></span>咨询列表</a></li>
+        <li><a href="<?php echo e(URL('admin/moveadd')); ?>" target="right"><span class="icon-caret-right"></span>电影添加</a></li>
+        <li><a href="<?php echo e(URL('admin/movelist')); ?>" target="right"><span class="icon-caret-right"></span>电影列表</a></li>
     </ul>
-    <h2>审核管理</h2>
-    <ul>
-        <li><a href="?r=man/index" target="right"><span class="icon-caret-right"></span>服务商列表</a></li>
-        <li><a href="?r=man/del" target="right"><span class="icon-caret-right"></span>服务商回收站</a></li>
-    </ul>
-    <h2>订单管理</h2>
-    <ul>
-        <li><a href="?r=order/order" target="right"><span class="icon-caret-right"></span>订单列表</a></li>
-    </ul>
-    <h2>权限管理</h2>
-    <ul>
-        <li><a href="?r=rbac/role" target="right"><span class="icon-caret-right"></span>角色控制</a></li>
-        <li><a href="?r=rbac/power" target="right"><span class="icon-caret-right"></span>权限控制</a></li>
-        <li><a href="?r=rbac/role-power" target="right"><span class="icon-caret-right"></span>角色赋权</a></li>
-        <li><a href="?r=rbac/user-role" target="right"><span class="icon-caret-right"></span>用户角色控制</a></li>
+    <h2>咨询管理</h2>    <ul>
+        <li><a href="homeList" target="right"><span class="icon-caret-right"></span>厅号列表</a></li>
     </ul>
 </div>
 <script type="text/javascript">
@@ -67,6 +50,7 @@
 <div class="admin">
     <iframe scrolling="auto" rameborder="0" src="<?php echo e(URL('admin/info')); ?>" name="right" width="100%" height="100%"></iframe>
 </div>
+
 <div style="text-align:center;">
     <p>来源:<a href="http://www.mycodes.net/" target="_blank">源码之家</a></p>
 </div>

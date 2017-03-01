@@ -20,12 +20,11 @@
 <div class="leftnav">
     <div class="leftnav-title"><strong><span class="icon-list"></span>菜单列表</strong></div>
     <h2>电影管理</h2>
-    <ul style="display:block">
+    <ul>
         <li><a href="{{URL('admin/moveadd')}}" target="right"><span class="icon-caret-right"></span>电影添加</a></li>
         <li><a href="{{URL('admin/movelist')}}" target="right"><span class="icon-caret-right"></span>电影列表</a></li>
     </ul>
-    <h2>厅号管理</h2>
-    <ul>
+    <h2>咨询管理</h2>    <ul>
         <li><a href="homeList" target="right"><span class="icon-caret-right"></span>厅号列表</a></li>
     </ul>
 </div>
