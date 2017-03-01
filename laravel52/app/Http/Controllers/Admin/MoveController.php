@@ -7,6 +7,7 @@ use DB;
 use App\Model\Move;
 use App\Http\Requests;
 use App\Uploads\Uploads;
+use App\Uploads\Uploadfile;
 use App\Http\Controllers\Controller;
 
 class MoveController extends Controller
@@ -16,41 +17,48 @@ class MoveController extends Controller
         if($request->isMethod("post")){
             $data=$request->input();
             //print_r($data);die;
-            $movie_type=implode(',',$data['movie_type']);
-            $obj = new Uploads();
-            $movie_img = $obj->up($_FILES['movie_img']);
-            $obj = new Uploads();
-            $movie_voi = $obj->up($_FILES['movie_voi']);
-            //print_r($mov);die;
-            $res=DB::table('movie')->insertGetId([
-                'movie_name'=>$data['movie_name'],
-                'movie_voi'=>$movie_voi,
-                'movie_img'=>$movie_img,
-                'movie_type'=>$movie_type,
-                'movie_length'=>$data['movie_length'],
-                'movie_time'=>$data['movie_time'],
-                'movie_director'=>$data['movie_director'],
-                'movie_boss'=>$data['movie_boss'],
-                'movie_score'=>$data['movie_score'],
-                'movie_box'=>$data['movie_box'],
-                'movie_price'=>$data['movie_price'],
-                'is_hot'=>$data['is_hot'],
-                'is_new'=>$data['is_new'],
-                'is_status'=>$data['is_status'],
-                'movie_desc'=>$data['movie_desc'],
-            ]);
-            foreach($data['movie_pack'] as $k=>$v){
-                $re=DB::table('package')->insert([
-                    'movie_id'=>$res,
-                    'foot_id'=>$v
+            $uploads=new Uploadfile();
+            $uploads->UploadFile($_FILES['movie_voi'], './uploads',122102400000);
+            $num = $uploads->upload();
+            if ($num != 0) {
+                $info = $uploads->getSaveInfo();
+                $movie_type=implode(',',$data['movie_type']);
+                $obj = new Uploads();
+                $movie_img = $obj->up($_FILES['movie_img']);
+                //print_r($mov);die;
+                $res=DB::table('movie')->insertGetId([
+                    'movie_name'=>$data['movie_name'],
+                    'movie_voi'=>$info[0]['newpath'],
+                    'movie_img'=>$movie_img,
+                    'movie_type'=>$movie_type,
+                    'movie_length'=>$data['movie_length'],
+                    'movie_time'=>$data['movie_time'],
+                    'movie_director'=>$data['movie_director'],
+                    'movie_boss'=>$data['movie_boss'],
+                    'movie_score'=>$data['movie_score'],
+                    'movie_box'=>$data['movie_box'],
+                    'movie_price'=>$data['movie_price'],
+                    'is_hot'=>$data['is_hot'],
+                    'is_new'=>$data['is_new'],
+                    'is_status'=>$data['is_status'],
+                    'release'=>$data['release'],
+                    'movie_desc'=>$data['movie_desc'],
                 ]);
-            }
-             if($re){
+                foreach($data['movie_pack'] as $k=>$v){
+                    $re=DB::table('package')->insert([
+                        'movie_id'=>$res,
+                        'foot_id'=>$v
+                    ]);
+                }
+                if($re){
 //                 header('Location:'."admin/movelist");
-                 return redirect('admin/movelist');
-             }else{
-                 return view('errors.503');
-             }
+                    return redirect('admin/movelist');
+                }else{
+                    return view('errors.503');
+                }
+            }else{
+                return view('errors.503');
+            }
             //print_r($data);
         }else{
             $type=DB::table('type')->get();
