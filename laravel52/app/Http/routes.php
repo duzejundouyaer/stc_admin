@@ -30,4 +30,7 @@ Route::group(['prefix'=>'admin','namespace'=>'Admin'], function () {
     Route::get('movelist','MoveController@movelist');//电影列表
     Route::get('foot','FootController@foot');//添加食品
     Route::post('addfoot','FootController@addfoot');//食物入库
+    Route::get('footshow','FootController@footshow');//食物展示
+    Route::any('package','FootController@package');//添加套餐
+    Route::any('packageshow','FootController@packageshow');//套餐展示
 });
