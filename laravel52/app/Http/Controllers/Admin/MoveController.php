@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use DB;
 use App\Model\Move;
 use App\Http\Requests;
+use App\Uploads\Uploads;
 use App\Http\Controllers\Controller;
 
 class MoveController extends Controller
@@ -15,6 +16,9 @@ class MoveController extends Controller
         if($request->isMethod("post")){
             $data=$request->input();
             $movie_type=implode(',',$data['movie_type']);
+            $obj = new Uploads();
+            $mov = $obj->up($_FILES['movie_img']);
+            print_r($mov);die;
             $res=DB::table('movie')->insert([
                 'movie_name'=>$data['movie_name'],
                 'movie_type'=>$movie_type,
