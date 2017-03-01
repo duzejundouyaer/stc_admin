@@ -120,9 +120,10 @@
         <div class="tab_nav">
             <ul>
                 <li class="fl cur"><a href="javascript:void(0)javascript:void(0);" class="oaClick">影片</a></li>
-                <li class="fl cur"><a href="javascript:void(0)javascript:void(0);">影院</a></li>
-                <li class="fl cur"><a href="javascript:void(0)javascript:void(0);">活动</a></li>
+                <li class="fl cur"><a href="javascript:void(0)javascript:void(0);">选购套餐</a></li>
+                <li class="fl cur"><a href="javascript:void(0)javascript:void(0);">票房排行</a></li>
                 <li class="fl cur"><a href="<?php echo e(URL('lists')); ?>">正在热映</a></li>
+                <li class="fl cur"><a href="<?php echo e(URL('center')); ?>">我的地盘</a></li>
             </ul>
         </div>
     </div>

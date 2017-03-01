@@ -280,7 +280,7 @@ $session = new Session;
                 <a class="hide" href="javascript:void(0)javascript:history.go(-1)">
                     <img src="http://m.douyou100.com/Resources/douyou100_1/images/return.png" width="20" height="16" class="fl" /></a><div class="fl Hide
                             ">
-                    我最好朋友的婚礼-详情
+                    {{$movieList->movie_name}} - 购票页
                 </div>
             </div>
         </div>
@@ -291,23 +291,18 @@ $session = new Session;
             <div class="movie_in fl top">
                 <dl>
                     <dt>
-                        <img src="http://douyou100.com:7000/Upload/FilmPic/201607/201607191024302995.jpg_170x240.jpg" width="147" height="203" /></dt>
+                        <img src="{{asset($movieList->movie_img)}}" width="147" height="203" /></dt>
                     <dd>
                         <div class="all_dd">
-                            <p class="Hide f15 fl w_movie">我最好朋友的婚礼  </p>
+                            <p class="Hide f15 fl w_movie">{{$movieList->movie_name}}  </p>
                             <span class="fr hsz">7.5</span>
                         </div>
-                        <p class="all_dd clear Hide f12"><span class="hhsz">导演：</span> 陈奕利</p>
-                        <p class="all_dd clear Hide f12"><span class="hhsz">主演：</span>舒淇 / 冯绍峰 / 宋茜</p>
-                        <p class="all_dd clear Hide f12"><span class="hhsz">类型：</span>喜剧 / 爱情</p>
-                        <p class="all_dd clear Hide f12"><span class="hhsz">片长：</span> 91分钟</p>
-                        <p class="all_dd clear Hide f12"><span class="hhsz">产地： </span>中国大陆</p>
-                        <p class="all_dd clear Hide f12"><span class="hhsz">上映日期:</span> 2016-08-05</p>
-                        <div class="all_dd clear" style="margin-bottom: 4px;">
-                            <input name="" id="Gp" type="button" value="购  票" class="btn_infor_gp" "Buymovie('10001449','我最好朋友的婚礼');" />
-                        </div>
-
-
+                        <p class="all_dd clear Hide f12"><span class="hhsz">导演：</span> {{$movieList->movie_director}}</p>
+                        <p class="all_dd clear Hide f12"><span class="hhsz">主演：</span> {{$movieList->movie_boss}} </p>
+                        <p class="all_dd clear Hide f12"><span class="hhsz">类型：</span> {{$movieList->movie_type}}</p>
+                        <p class="all_dd clear Hide f12"><span class="hhsz">片长：</span> {{$movieList->movie_length}}/分钟</p>
+                        <p class="all_dd clear Hide f12"><span class="hhsz">市场价： </span>{{$movieList->movie_price}}元</p>
+                        <p class="all_dd clear Hide f12"><span class="hhsz">上映日期:</span>{{$movieList->movie_time}}</p>
                     </dd>
                 </dl>
 
@@ -320,144 +315,44 @@ $session = new Session;
          
         <div class="new_nav clear fl">
             <ul>
-                <li class="cur" id='newtab1' >剧情</li>
-                <li class="cur " id='newtab2' >剧照<div class="border fl"></div>
+                <li class="cur new_nav_sel_li" id='newtab1' >今天</li>
+                <li class="cur " id='newtab2' >明天<div class="border fl"></div>
                 </li>
-                <li class="cur new_nav_sel_li" id='newtab3'>影评<div class="border fl"></div>
+                <li class="cur " id='newtab3'>后天<div class="border fl"></div>
                 </li>
             </ul>
         </div>
 
-        <div id='newtabid1' class='tabid clear mr_top' style='display: none;'>
-            <div class="story clear">
-                <div class="fl">剧情：</div>
-                <p>顾佳（舒淇 饰）是国内某时尚杂志的新任主编，奉命去米兰参加时装周。一通意外的电话让她刚刚落地就放弃了工作安排飞往伦敦。因为她曾经逃避但其实内心深爱的男人林然（冯绍峰 饰）马上就要和一位年轻富家女萱萱（宋茜 饰）结婚，她想在婚礼之前把新郎抢回来。在飞往伦敦的飞机上，顾佳邂逅了型男Nick（凤小岳 饰），她一直出糗，令Nick非常尴尬。见面后，林然的准新娘萱萱却待她亲如姐妹。尽管内心矛盾，顾佳还是有意无意的制造着麻烦，并因为一个误会使婚礼无法在英国如期举行，但林然和萱萱情比金坚，顾佳决定安排林然和萱萱去意大利办婚礼。在米兰，顾佳鼓起勇气和林然表白，却意外被萱萱撞见，三人在街头展开了追逐……</p>
-            </div>
-
-        </div>
-        <div id='newtabid2' class='tabid clear' style='display: none;'>
-            <div class="poster fl" style="height: auto">
-
+        <div id='newtabid1' class='tabid clear mr_top' >
+            <div class="story clear" style="height: auto;color: #FFFFff" >
                 <ul>
-
-                    <li class="fl" style="margin-right: 12px;">
-                        <a href="javascript:void(0)http://douyou100.com:7000/Upload/FilmPicture/201607/201607191025369428.jpg_600x400.jpg">
-                            <img src="http://douyou100.com:7000/Upload/FilmPicture/201607/201607191025369428.jpg_600x400.jpg" width="80" height="88" /></a></li>
-
-                    <li class="fl" style="margin-right: 12px;">
-                        <a href="javascript:void(0)http://douyou100.com:7000/Upload/FilmPicture/201607/201607191025378164.jpg_600x400.jpg">
-                            <img src="http://douyou100.com:7000/Upload/FilmPicture/201607/201607191025378164.jpg_600x400.jpg" width="80" height="88" /></a></li>
-
-                    <li class="fl" style="margin-right: 12px;">
-                        <a href="javascript:void(0)http://douyou100.com:7000/Upload/FilmPicture/201607/201607191025390020.jpg_600x400.jpg">
-                            <img src="http://douyou100.com:7000/Upload/FilmPicture/201607/201607191025390020.jpg_600x400.jpg" width="80" height="88" /></a></li>
-
-                    <li class="fl" style="margin-right: 12px;">
-                        <a href="javascript:void(0)http://douyou100.com:7000/Upload/FilmPicture/201607/201607191025400316.jpg_600x400.jpg">
-                            <img src="http://douyou100.com:7000/Upload/FilmPicture/201607/201607191025400316.jpg_600x400.jpg" width="80" height="88" /></a></li>
-
-                    <li class="fl" style="margin-right: 12px;">
-                        <a href="javascript:void(0)http://douyou100.com:7000/Upload/FilmPicture/201607/201607191025410924.jpg_600x400.jpg">
-                            <img src="http://douyou100.com:7000/Upload/FilmPicture/201607/201607191025410924.jpg_600x400.jpg" width="80" height="88" /></a></li>
-
-                    <li class="fl" style="margin-right: 12px;">
-                        <a href="javascript:void(0)http://douyou100.com:7000/Upload/FilmPicture/201607/201607191025421220.jpg_600x400.jpg">
-                            <img src="http://douyou100.com:7000/Upload/FilmPicture/201607/201607191025421220.jpg_600x400.jpg" width="80" height="88" /></a></li>
-
+                    @foreach($todayList as $k=>$v)
+                    <li>{{$v->begin_time}} - {{$v->end_time}}&nbsp;&nbsp;{{$v->home_name}} <input name="" id="Gp" type="button" value="预  订" class="btn_infor_gp" style="width: 50px;margin-left: 150px"/></li>
+                     @endforeach
                 </ul>
+            </div>
 
-            </div>
-            <div class="more clear">
-                <button type="button" class="btn_jz cur" id="more" "var ClientID = document.getElementById('ClientID').value; window.location.href='javascript:void(0)PictureList.aspx?filmNo=10001449&ClientID='+ClientID">更多剧照>></button>
-            </div>
         </div>
-        <div id='newtabid3' class='tabid clear' >
-            {{--评论--}}
-            <div id="dloginbox">
-                
-                <div class="cloum" >
-                    <span>发表评论</span><span style="margin-left:180px;">共有<span>10000</span>条评论</span>
-                    <textarea  class="emotion" name="" id="" cols="50" rows="10" style="" placeholder='来说点儿什么吧。'></textarea>
-                </div>
-                <div style="margin-left:30px;">
-                    <span><a href="javascript:void(0)" style="color:#3C3C3C;" id="face">表情</a></span>
-                    <span style="margin-left:260px;" ><a href="javascript:void(0)" id="analytic"   style="color:red;">发布</a></span>
-                </div>
-                <h3 style="margin-top:40px;margin-left:10px;">请您注意:</h3>
-                <div style="margin-top:5px;margin-left:30px">
-                    <p>自觉遵守：爱国、守法、自律、真实、文明的原则。</p>
-                    <p>尊重网上道德，遵守《全国人大常委会关于维护互联网安全的决定》及中华人民共和国其他各项有关法律法规。</p>
-                    <p>严禁发表危害国家安全，破坏民族团结、国家宗教政策和社会稳定，含侮辱、诽谤、教唆、淫秽等内容的作品。</p>
-                </div>
+        {{--第二个选项卡--}}
+        <div id='newtabid2' class='tabid clear' style='display: none;'>
+            <div class="story clear" style="height: auto;color: #FFFFff" >
+                <ul>
+                    @foreach($tmorryList as $k=>$v)
+                        <li>{{$v->begin_time}} - {{$v->end_time}}&nbsp;&nbsp;{{$v->home_name}} <input name="" id="Gp" type="button" value="预  订" class="btn_infor_gp" style="width: 50px;margin-left: 150px"/></li>
+                    @endforeach
+                </ul>
             </div>
-            <div class="hsz" style="width: 94%; height:100%; margin: 0 3%; line-height: 35px; text-decoration:underline" id="header">
-                <span class="fr">
-                    <?php  
-                         if($session->get('username')!='')
-                         {
-                            echo "<a class='hhsz' 'FilmReview(10001449);' href='login'>登录发表评论</a>";
-                         }else
-                         {
-                            echo"<a class='hhsz' 'FilmReview(10001449);' onClick='ShowLoginBox()'  id='FilmReview'>发表影评</a>";
-                         }
-                    ?>
-                    
-                </span>
-                  <img src='http://m.douyou100.com/Resources/douyou100_1/images/discuss.png' width='14' height='12' class='fr' style='margin-top: 12px;' />
-            </div >
-            <hr style="height:1px;border:none;border-top:1px dashed #0066CC; width:500px;" />
-            <div class="hsz" style="width: 94%; height:100%; margin: 0 3%; line-height: 35px; text-decoration:underline">
-                  <div style="500%"><dl style="width:350px;">
-                      <dt  style="float:left; width:40px;"><img  src="http://douyou100.com:7000/Upload/FilmPic/201607/201607191024302995.jpg_170x240.jpg" alt="" style="margin-top:10px;border-radius:80px;width:50px;height:50px;">
-                    </dt>
-                   
-                      <dd  style="float:right;width:280px;margin-left:20px;"><p>的卡拉季昆仑决圣诞快乐发生了还是死啦的骄傲的骄傲</p></dd>
-                       </dl>
-                 </div>
-                  <hr style="height:1px;border:none;border-top:1px dashed #C6A300; width:500px;" />
-            </div>
-             <div class="hsz" style="width: 94%; height:100%; margin: 0 3%; line-height: 35px; text-decoration:underline">
-                  <div style="500%"><dl style="width:350px;">
-                      <dt  style="float:left; width:40px;"><img  src="http://douyou100.com:7000/Upload/FilmPic/201607/201607191024302995.jpg_170x240.jpg" alt="" style="margin-top:10px;border-radius:80px;width:50px;height:50px;">
-                    </dt>
-                   
-                      <dd  style="float:right;width:280px;margin-left:20px;"><p>的卡拉季昆仑决圣诞快乐发生了还是死啦的骄傲的骄傲</p></dd>
-                       </dl>
-                 </div>
-                  <hr style="height:1px;border:none;border-top:1px dashed #C6A300; width:500px;" />
-            </div>
-             <div class="hsz" style="width: 94%; height:100%; margin: 0 3%; line-height: 35px; text-decoration:underline">
-                  <div style="500%"><dl style="width:350px;">
-                      <dt  style="float:left; width:40px;"><img  src="http://douyou100.com:7000/Upload/FilmPic/201607/201607191024302995.jpg_170x240.jpg" alt="" style="margin-top:10px;border-radius:80px;width:50px;height:50px;">
-                    </dt>
-                   
-                      <dd  style="float:right;width:280px;margin-left:20px;"><p>的卡拉季昆仑决圣诞快乐发生了还是死啦的骄傲的骄傲</p></dd>
-                       </dl>
-                 </div>
-                  <hr style="height:1px;border:none;border-top:1px dashed #C6A300; width:500px;" />
-            </div>
-             <div class="hsz" style="width: 94%; height:100%; margin: 0 3%; line-height: 35px; text-decoration:underline">
-                  <div style="500%"><dl style="width:350px;">
-                      <dt  style="float:left; width:40px;"><img  src="http://douyou100.com:7000/Upload/FilmPic/201607/201607191024302995.jpg_170x240.jpg" alt="" style="margin-top:10px;border-radius:80px;width:50px;height:50px;">
-                    </dt>
-                   
-                      <dd  style="float:right;width:280px;margin-left:20px;"><p>的卡拉季昆仑决圣诞快乐发生了还是死啦的骄傲的骄傲</p></dd>
-                       </dl>
-                 </div>
-                  <hr style="height:1px;border:none;border-top:1px dashed #C6A300; width:500px;" />
-            </div>
-             <div class="hsz" style="width: 94%; height:100%; margin: 0 3%; line-height: 35px; text-decoration:underline">
-                  <div style="500%"><dl style="width:350px;">
-                      <dt  style="float:left; width:40px;"><img  src="http://douyou100.com:7000/Upload/FilmPic/201607/201607191024302995.jpg_170x240.jpg" alt="" style="margin-top:10px;border-radius:80px;width:50px;height:50px;">
-                    </dt>
-                   
-                      <dd  style="float:right;width:280px;margin-left:20px;"><p>的卡拉季昆仑决圣诞快乐发生了还是死啦的骄傲的骄傲</p></dd>
-                       </dl>
-                 </div>
-                  <hr style="height:1px;border:none;border-top:1px dashed #C6A300; width:500px;" />
-            </div>
-             <div class="more clear">
-                <button type="button" class="btn_jz cur" id="more" "var ClientID = document.getElementById('ClientID').value; window.location.href='javascript:void(0)PictureList.aspx?filmNo=10001449&ClientID='+ClientID">更多评论>></button>
+
+        </div>
+        {{--第三个选项卡--}}
+        <div id='newtabid3' class='tabid clear' style='display: none;' style="height: auto;color: #FFFFff" >
+
+            <div class="story clear" style="height: auto;color: #FFFFff" >
+            <ul>
+                @foreach($houtianList as $k=>$v)
+                    <li>{{$v->begin_time}} - {{$v->end_time}}&nbsp;&nbsp;{{$v->home_name}} <input name="" id="Gp" type="button" value="预  订" class="btn_infor_gp" style="width: 50px;margin-left: 150px"/></li>
+                @endforeach
+            </ul>
             </div>
         </div>
 

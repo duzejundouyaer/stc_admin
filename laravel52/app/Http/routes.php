@@ -4,6 +4,7 @@ Route::get('/','Home\IndexController@index');//首页
 Route::get('/lists','Home\IndexController@lists');//正在热播
 Route::get('/details','Home\DetailsController@details');//详情页
 Route::get('/pay/{movie_id?}','Home\PayController@pay');//购票页
+Route::get('/center','Home\CenterController@center');//详情页
 
 
 
