@@ -11,6 +11,7 @@
     <link id="ctl00_css1" href="{{asset('style/home/css/style.css')}}" rel="stylesheet" />
     <link id="ctl00_css2" href="{{asset('style/home/css/inside_pages.css')}}" rel="stylesheet" />
     <script src="{{asset('style/home/js/public.js')}}"></script>
+    <script src="{{asset('style/home/js/jquery-1.8.0.min.js')}}"></script>
     <style> .all{width: 100%;} </style>
 </head>
 <body>
@@ -88,192 +89,194 @@
         <!--导航样式-->
         <div class="nav">
             <div class="tab_nav tab_nav_one">
-                <a class="hide" href="javascript:void(0);history.back(-1);"><img src="http://m.douyou100.com/Resources/douyou100_1/images/return.png" width="20" height="16" class="fl"/></a><div class=" Hide fl">正在热映 <span class="movie_tag">12</span></div>
+                <a class="hide" href="javascript:void(0);history.back(-1);"><img src="http://m.douyou100.com/Resources/douyou100_1/images/return.png" width="20" height="16" class="fl"/></a><div class=" Hide fl">正在热映 <span class="movie_tag">{{$number}}</span></div>
             </div>
         </div>
 
         <!--正在热映样式开始-->
         <div class="all_movie">
-
+            @foreach($movie as $v)
             <div class="movie_in fl">
                 <dl>
-                    <dt><a href="article.htm"><img src='http://douyou100.com:7000/Upload/FilmPic/201607/201607191024302995.jpg_170x240.jpg' width="87" height="120" / ></a></dt>
+                    <dt><a href="{{URL('details')}}?movie_id={{$v->movie_id}}"><img src='{{asset($v->movie_img)}}' width="87" height="120" / ></a></dt>
                     <dd >
-                        <div class="all_dd"><p class="Hide fl w_movie f15">我最好朋友的婚礼</p><span class="fr hsz">7.5</span></div>
-                        <p class="all_dd clear Hide f12"><span class="hhsz">导演：</span>陈奕利</p>
-                        <p class="all_dd clear Hide f12"><span class="hhsz">主演：</span>舒淇 / 冯绍峰 / 宋茜</p>
+                        <div class="all_dd"><p class="Hide fl w_movie f15">{{$v->movie_name}}</p><span class="fr hsz">{{$v->movie_score}}</span></div>
+                        <p class="all_dd clear Hide f12"><span class="hhsz">导演：</span>{{$v->movie_director}}</p>
+                        <p class="all_dd clear Hide f12"><span class="hhsz">主演：</span>{{$v->movie_boss}}</p>
                         <div class="all_dd clear">
-                            <div class="gp_movie Hide fl"><span class="hsz">0</span>人已购票</div>
-                            <button type="button"class="btn_gp cur fl" "window.location.href='javascript:void(0)buy_movie.aspx?filmNo=10001449&filmName=我最好朋友的婚礼&ClientID='">购 票</button>
+                            <div class="gp_movie Hide fl"><span class="hsz">{{$v->movie_box}}</span>人已购票</div>
+                            <a href="{{URL('/pay')}}/{{$v->movie_id}}"><button type="button" class="btn_gp cur fl">购 票</button></a>
                         </div>
                     </dd>
                 </dl>
             </div>
+            @endforeach
 
-            <div class="movie_in fl">
-                <dl>
-                    <dt><img src='http://douyou100.com:7000/Upload/FilmPic/201607/201607221125214499.jpg_170x240.jpg' width="87" height="120" "window.location.href='javascript:void(0)Movie_detail.aspx?ftype=1&filmNo=10001524&ClientID='"/></dt>
-                    <dd >
-                        <div class="all_dd"><p class="Hide fl w_movie f15">夏有乔木 雅望天堂</p><span class="fr hsz">8.3</span></div>
-                        <p class="all_dd clear Hide f12"><span class="hhsz">导演：</span>赵真奎</p>
-                        <p class="all_dd clear Hide f12"><span class="hhsz">主演：</span>吴亦凡 / 韩庚 / 卢杉 / 周元 / 包贝尔 / 张瑶</p>
-                        <div class="all_dd clear">
-                            <div class="gp_movie Hide fl"><span class="hsz">0</span>人已购票</div>
-                            <button type="button"class="btn_gp cur fl" "window.location.href='javascript:void(0)buy_movie.aspx?filmNo=10001524&filmName=夏有乔木 雅望天堂&ClientID='">购 票</button>
-                        </div>
-                    </dd>
-                </dl>
-            </div>
 
-            <div class="movie_in fl">
-                <dl>
-                    <dt><img src='http://douyou100.com:7000/Upload/FilmPic/201608/201608011057219752.jpg_170x240.jpg' width="87" height="120" "window.location.href='javascript:void(0)Movie_detail.aspx?ftype=1&filmNo=10001578&ClientID='"/></dt>
-                    <dd >
-                        <div class="all_dd"><p class="Hide fl w_movie f15">古曼</p><span class="fr hsz">7.7</span></div>
-                        <p class="all_dd clear Hide f12"><span class="hhsz">导演：</span>张江南</p>
-                        <p class="all_dd clear Hide f12"><span class="hhsz">主演：</span>韩雪 / 唐宸禹 / 吴艺璇</p>
-                        <div class="all_dd clear">
-                            <div class="gp_movie Hide fl"><span class="hsz">0</span>人已购票</div>
-                            <button type="button"class="btn_gp cur fl" "window.location.href='javascript:void(0)buy_movie.aspx?filmNo=10001578&filmName=古曼&ClientID='">购 票</button>
-                        </div>
-                    </dd>
-                </dl>
-            </div>
+            {{--<div class="movie_in fl">--}}
+                {{--<dl>--}}
+                    {{--<dt><img src='http://douyou100.com:7000/Upload/FilmPic/201607/201607221125214499.jpg_170x240.jpg' width="87" height="120" "window.location.href='javascript:void(0)Movie_detail.aspx?ftype=1&filmNo=10001524&ClientID='"/></dt>--}}
+                    {{--<dd >--}}
+                        {{--<div class="all_dd"><p class="Hide fl w_movie f15">夏有乔木 雅望天堂</p><span class="fr hsz">8.3</span></div>--}}
+                        {{--<p class="all_dd clear Hide f12"><span class="hhsz">导演：</span>赵真奎</p>--}}
+                        {{--<p class="all_dd clear Hide f12"><span class="hhsz">主演：</span>吴亦凡 / 韩庚 / 卢杉 / 周元 / 包贝尔 / 张瑶</p>--}}
+                        {{--<div class="all_dd clear">--}}
+                            {{--<div class="gp_movie Hide fl"><span class="hsz">0</span>人已购票</div>--}}
+                            {{--<button type="button"class="btn_gp cur fl" "window.location.href='javascript:void(0)buy_movie.aspx?filmNo=10001524&filmName=夏有乔木 雅望天堂&ClientID='">购 票</button>--}}
+                        {{--</div>--}}
+                    {{--</dd>--}}
+                {{--</dl>--}}
+            {{--</div>--}}
 
-            <div class="movie_in fl">
-                <dl>
-                    <dt><img src='http://douyou100.com:7000/Upload/FilmPic/201607/201607061033184798.jpg_170x240.jpg' width="87" height="120" "window.location.href='javascript:void(0)Movie_detail.aspx?ftype=1&filmNo=10001628&ClientID='"/></dt>
-                    <dd >
-                        <div class="all_dd"><p class="Hide fl w_movie f15">泰山归来：险战丛林</p><span class="fr hsz">8.2</span></div>
-                        <p class="all_dd clear Hide f12"><span class="hhsz">导演：</span>大卫·叶茨</p>
-                        <p class="all_dd clear Hide f12"><span class="hhsz">主演：</span>亚历山大·斯卡斯加德 / 玛格特·罗比 / 塞缪尔·杰克逊 / 克里斯托弗·沃尔兹 / 杰曼·翰苏</p>
-                        <div class="all_dd clear">
-                            <div class="gp_movie Hide fl"><span class="hsz">5</span>人已购票</div>
-                            <button type="button"class="btn_gp cur fl" "window.location.href='javascript:void(0)buy_movie.aspx?filmNo=10001628&filmName=泰山归来：险战丛林&ClientID='">购 票</button>
-                        </div>
-                    </dd>
-                </dl>
-            </div>
+            {{--<div class="movie_in fl">--}}
+                {{--<dl>--}}
+                    {{--<dt><img src='http://douyou100.com:7000/Upload/FilmPic/201608/201608011057219752.jpg_170x240.jpg' width="87" height="120" "window.location.href='javascript:void(0)Movie_detail.aspx?ftype=1&filmNo=10001578&ClientID='"/></dt>--}}
+                    {{--<dd >--}}
+                        {{--<div class="all_dd"><p class="Hide fl w_movie f15">古曼</p><span class="fr hsz">7.7</span></div>--}}
+                        {{--<p class="all_dd clear Hide f12"><span class="hhsz">导演：</span>张江南</p>--}}
+                        {{--<p class="all_dd clear Hide f12"><span class="hhsz">主演：</span>韩雪 / 唐宸禹 / 吴艺璇</p>--}}
+                        {{--<div class="all_dd clear">--}}
+                            {{--<div class="gp_movie Hide fl"><span class="hsz">0</span>人已购票</div>--}}
+                            {{--<button type="button"class="btn_gp cur fl" "window.location.href='javascript:void(0)buy_movie.aspx?filmNo=10001578&filmName=古曼&ClientID='">购 票</button>--}}
+                        {{--</div>--}}
+                    {{--</dd>--}}
+                {{--</dl>--}}
+            {{--</div>--}}
 
-            <div class="movie_in fl">
-                <dl>
-                    <dt><img src='http://douyou100.com:7000/Upload/FilmPic/201607/201607121445505332.jpg_170x240.jpg' width="87" height="120" "window.location.href='javascript:void(0)Movie_detail.aspx?ftype=1&filmNo=10001629&ClientID='"/></dt>
-                    <dd >
-                        <div class="all_dd"><p class="Hide fl w_movie f15">绝地逃亡</p><span class="fr hsz">8.0</span></div>
-                        <p class="all_dd clear Hide f12"><span class="hhsz">导演：</span>雷尼·哈林</p>
-                        <p class="all_dd clear Hide f12"><span class="hhsz">主演：</span>成龙 / 范冰冰 / 约翰尼·诺克斯维尔 / 曾志伟 / 王敏德</p>
-                        <div class="all_dd clear">
-                            <div class="gp_movie Hide fl"><span class="hsz">16</span>人已购票</div>
-                            <button type="button"class="btn_gp cur fl" "window.location.href='javascript:void(0)buy_movie.aspx?filmNo=10001629&filmName=绝地逃亡&ClientID='">购 票</button>
-                        </div>
-                    </dd>
-                </dl>
-            </div>
+            {{--<div class="movie_in fl">--}}
+                {{--<dl>--}}
+                    {{--<dt><img src='http://douyou100.com:7000/Upload/FilmPic/201607/201607061033184798.jpg_170x240.jpg' width="87" height="120" "window.location.href='javascript:void(0)Movie_detail.aspx?ftype=1&filmNo=10001628&ClientID='"/></dt>--}}
+                    {{--<dd >--}}
+                        {{--<div class="all_dd"><p class="Hide fl w_movie f15">泰山归来：险战丛林</p><span class="fr hsz">8.2</span></div>--}}
+                        {{--<p class="all_dd clear Hide f12"><span class="hhsz">导演：</span>大卫·叶茨</p>--}}
+                        {{--<p class="all_dd clear Hide f12"><span class="hhsz">主演：</span>亚历山大·斯卡斯加德 / 玛格特·罗比 / 塞缪尔·杰克逊 / 克里斯托弗·沃尔兹 / 杰曼·翰苏</p>--}}
+                        {{--<div class="all_dd clear">--}}
+                            {{--<div class="gp_movie Hide fl"><span class="hsz">5</span>人已购票</div>--}}
+                            {{--<button type="button"class="btn_gp cur fl" "window.location.href='javascript:void(0)buy_movie.aspx?filmNo=10001628&filmName=泰山归来：险战丛林&ClientID='">购 票</button>--}}
+                        {{--</div>--}}
+                    {{--</dd>--}}
+                {{--</dl>--}}
+            {{--</div>--}}
 
-            <div class="movie_in fl">
-                <dl>
-                    <dt><img src='http://douyou100.com:7000/Upload/FilmPic/201607/201607051434202639.jpg_170x240.jpg' width="87" height="120" "window.location.href='javascript:void(0)Movie_detail.aspx?ftype=1&filmNo=10001635&ClientID='"/></dt>
-                    <dd >
-                        <div class="all_dd"><p class="Hide fl w_movie f15">红色警戒999</p><span class="fr hsz">8.0</span></div>
-                        <p class="all_dd clear Hide f12"><span class="hhsz">导演：</span>约翰·希尔寇特</p>
-                        <p class="all_dd clear Hide f12"><span class="hhsz">主演：</span>卡西·阿弗莱克 / 切瓦特·埃加福特 / 安东尼·麦凯 / 亚伦·保尔 / 小克利夫顿·克林斯</p>
-                        <div class="all_dd clear">
-                            <div class="gp_movie Hide fl"><span class="hsz">0</span>人已购票</div>
-                            <button type="button"class="btn_gp cur fl" "window.location.href='javascript:void(0)buy_movie.aspx?filmNo=10001635&filmName=红色警戒999&ClientID='">购 票</button>
-                        </div>
-                    </dd>
-                </dl>
-            </div>
+            {{--<div class="movie_in fl">--}}
+                {{--<dl>--}}
+                    {{--<dt><img src='http://douyou100.com:7000/Upload/FilmPic/201607/201607121445505332.jpg_170x240.jpg' width="87" height="120" "window.location.href='javascript:void(0)Movie_detail.aspx?ftype=1&filmNo=10001629&ClientID='"/></dt>--}}
+                    {{--<dd >--}}
+                        {{--<div class="all_dd"><p class="Hide fl w_movie f15">绝地逃亡</p><span class="fr hsz">8.0</span></div>--}}
+                        {{--<p class="all_dd clear Hide f12"><span class="hhsz">导演：</span>雷尼·哈林</p>--}}
+                        {{--<p class="all_dd clear Hide f12"><span class="hhsz">主演：</span>成龙 / 范冰冰 / 约翰尼·诺克斯维尔 / 曾志伟 / 王敏德</p>--}}
+                        {{--<div class="all_dd clear">--}}
+                            {{--<div class="gp_movie Hide fl"><span class="hsz">16</span>人已购票</div>--}}
+                            {{--<button type="button"class="btn_gp cur fl" "window.location.href='javascript:void(0)buy_movie.aspx?filmNo=10001629&filmName=绝地逃亡&ClientID='">购 票</button>--}}
+                        {{--</div>--}}
+                    {{--</dd>--}}
+                {{--</dl>--}}
+            {{--</div>--}}
 
-            <div class="movie_in fl">
-                <dl>
-                    <dt><img src='http://douyou100.com:7000/Upload/FilmPic/201607/201607111508345342.jpg_170x240.jpg' width="87" height="120" "window.location.href='javascript:void(0)Movie_detail.aspx?ftype=1&filmNo=10001639&ClientID='"/></dt>
-                    <dd >
-                        <div class="all_dd"><p class="Hide fl w_movie f15">爱宠大机密</p><span class="fr hsz">8.2</span></div>
-                        <p class="all_dd clear Hide f12"><span class="hhsz">导演：</span>克里斯·雷纳德 / 雅候·迟内</p>
-                        <p class="all_dd clear Hide f12"><span class="hhsz">主演：</span>路易·C·K / 艾瑞克·斯通斯崔特 / 凯文·哈特 / 艾丽·坎伯尔 / 史蒂夫·库根</p>
-                        <div class="all_dd clear">
-                            <div class="gp_movie Hide fl"><span class="hsz">0</span>人已购票</div>
-                            <button type="button"class="btn_gp cur fl" "window.location.href='javascript:void(0)buy_movie.aspx?filmNo=10001639&filmName=爱宠大机密&ClientID='">购 票</button>
-                        </div>
-                    </dd>
-                </dl>
-            </div>
+            {{--<div class="movie_in fl">--}}
+                {{--<dl>--}}
+                    {{--<dt><img src='http://douyou100.com:7000/Upload/FilmPic/201607/201607051434202639.jpg_170x240.jpg' width="87" height="120" "window.location.href='javascript:void(0)Movie_detail.aspx?ftype=1&filmNo=10001635&ClientID='"/></dt>--}}
+                    {{--<dd >--}}
+                        {{--<div class="all_dd"><p class="Hide fl w_movie f15">红色警戒999</p><span class="fr hsz">8.0</span></div>--}}
+                        {{--<p class="all_dd clear Hide f12"><span class="hhsz">导演：</span>约翰·希尔寇特</p>--}}
+                        {{--<p class="all_dd clear Hide f12"><span class="hhsz">主演：</span>卡西·阿弗莱克 / 切瓦特·埃加福特 / 安东尼·麦凯 / 亚伦·保尔 / 小克利夫顿·克林斯</p>--}}
+                        {{--<div class="all_dd clear">--}}
+                            {{--<div class="gp_movie Hide fl"><span class="hsz">0</span>人已购票</div>--}}
+                            {{--<button type="button"class="btn_gp cur fl" "window.location.href='javascript:void(0)buy_movie.aspx?filmNo=10001635&filmName=红色警戒999&ClientID='">购 票</button>--}}
+                        {{--</div>--}}
+                    {{--</dd>--}}
+                {{--</dl>--}}
+            {{--</div>--}}
 
-            <div class="movie_in fl">
-                <dl>
-                    <dt><img src='http://douyou100.com:7000/Upload/FilmPic/201607/201607201119350122.jpg_170x240.jpg' width="87" height="120" "window.location.href='javascript:void(0)Movie_detail.aspx?ftype=1&filmNo=10001643&ClientID='"/></dt>
-                    <dd >
-                        <div class="all_dd"><p class="Hide fl w_movie f15">宝贝当家</p><span class="fr hsz">8.0</span></div>
-                        <p class="all_dd clear Hide f12"><span class="hhsz">导演：</span>张敏</p>
-                        <p class="all_dd clear Hide f12"><span class="hhsz">主演：</span>王诗龄 / 吴镇宇 / 杨千嬅 / 詹瑞文 / 元秋</p>
-                        <div class="all_dd clear">
-                            <div class="gp_movie Hide fl"><span class="hsz">0</span>人已购票</div>
-                            <button type="button"class="btn_gp cur fl" "window.location.href='javascript:void(0)buy_movie.aspx?filmNo=10001643&filmName=宝贝当家&ClientID='">购 票</button>
-                        </div>
-                    </dd>
-                </dl>
-            </div>
+            {{--<div class="movie_in fl">--}}
+                {{--<dl>--}}
+                    {{--<dt><img src='http://douyou100.com:7000/Upload/FilmPic/201607/201607111508345342.jpg_170x240.jpg' width="87" height="120" "window.location.href='javascript:void(0)Movie_detail.aspx?ftype=1&filmNo=10001639&ClientID='"/></dt>--}}
+                    {{--<dd >--}}
+                        {{--<div class="all_dd"><p class="Hide fl w_movie f15">爱宠大机密</p><span class="fr hsz">8.2</span></div>--}}
+                        {{--<p class="all_dd clear Hide f12"><span class="hhsz">导演：</span>克里斯·雷纳德 / 雅候·迟内</p>--}}
+                        {{--<p class="all_dd clear Hide f12"><span class="hhsz">主演：</span>路易·C·K / 艾瑞克·斯通斯崔特 / 凯文·哈特 / 艾丽·坎伯尔 / 史蒂夫·库根</p>--}}
+                        {{--<div class="all_dd clear">--}}
+                            {{--<div class="gp_movie Hide fl"><span class="hsz">0</span>人已购票</div>--}}
+                            {{--<button type="button"class="btn_gp cur fl" "window.location.href='javascript:void(0)buy_movie.aspx?filmNo=10001639&filmName=爱宠大机密&ClientID='">购 票</button>--}}
+                        {{--</div>--}}
+                    {{--</dd>--}}
+                {{--</dl>--}}
+            {{--</div>--}}
 
-            <div class="movie_in fl">
-                <dl>
-                    <dt><img src='http://douyou100.com:7000/Upload/FilmPic/201607/201607201548023993.jpg_170x240.jpg' width="87" height="120" "window.location.href='javascript:void(0)Movie_detail.aspx?ftype=1&filmNo=10001647&ClientID='"/></dt>
-                    <dd >
-                        <div class="all_dd"><p class="Hide fl w_movie f15">封神传奇</p><span class="fr hsz">7.7</span></div>
-                        <p class="all_dd clear Hide f12"><span class="hhsz">导演：</span>许安</p>
-                        <p class="all_dd clear Hide f12"><span class="hhsz">主演：</span>李连杰 / 范冰冰 / 黄晓明 / 杨颖 / 古天乐</p>
-                        <div class="all_dd clear">
-                            <div class="gp_movie Hide fl"><span class="hsz">2</span>人已购票</div>
-                            <button type="button"class="btn_gp cur fl" "window.location.href='javascript:void(0)buy_movie.aspx?filmNo=10001647&filmName=封神传奇&ClientID='">购 票</button>
-                        </div>
-                    </dd>
-                </dl>
-            </div>
+            {{--<div class="movie_in fl">--}}
+                {{--<dl>--}}
+                    {{--<dt><img src='http://douyou100.com:7000/Upload/FilmPic/201607/201607201119350122.jpg_170x240.jpg' width="87" height="120" "window.location.href='javascript:void(0)Movie_detail.aspx?ftype=1&filmNo=10001643&ClientID='"/></dt>--}}
+                    {{--<dd >--}}
+                        {{--<div class="all_dd"><p class="Hide fl w_movie f15">宝贝当家</p><span class="fr hsz">8.0</span></div>--}}
+                        {{--<p class="all_dd clear Hide f12"><span class="hhsz">导演：</span>张敏</p>--}}
+                        {{--<p class="all_dd clear Hide f12"><span class="hhsz">主演：</span>王诗龄 / 吴镇宇 / 杨千嬅 / 詹瑞文 / 元秋</p>--}}
+                        {{--<div class="all_dd clear">--}}
+                            {{--<div class="gp_movie Hide fl"><span class="hsz">0</span>人已购票</div>--}}
+                            {{--<button type="button"class="btn_gp cur fl" "window.location.href='javascript:void(0)buy_movie.aspx?filmNo=10001643&filmName=宝贝当家&ClientID='">购 票</button>--}}
+                        {{--</div>--}}
+                    {{--</dd>--}}
+                {{--</dl>--}}
+            {{--</div>--}}
 
-            <div class="movie_in fl">
-                <dl>
-                    <dt><img src='http://douyou100.com:7000/Upload/FilmPic/201607/201607211122499687.jpg_170x240.jpg' width="87" height="120" "window.location.href='javascript:void(0)Movie_detail.aspx?ftype=1&filmNo=10001648&ClientID='"/></dt>
-                    <dd >
-                        <div class="all_dd"><p class="Hide fl w_movie f15">神秘世界历险记3</p><span class="fr hsz">7.8</span></div>
-                        <p class="all_dd clear Hide f12"><span class="hhsz">导演：</span>王云飞</p>
-                        <p class="all_dd clear Hide f12"><span class="hhsz">主演：</span>刘校妤 / 孟泉霖 / 陆 揆 / 宝木中阳 / 郭政建</p>
-                        <div class="all_dd clear">
-                            <div class="gp_movie Hide fl"><span class="hsz">0</span>人已购票</div>
-                            <button type="button"class="btn_gp cur fl" "window.location.href='javascript:void(0)buy_movie.aspx?filmNo=10001648&filmName=神秘世界历险记3&ClientID='">购 票</button>
-                        </div>
-                    </dd>
-                </dl>
-            </div>
+            {{--<div class="movie_in fl">--}}
+                {{--<dl>--}}
+                    {{--<dt><img src='http://douyou100.com:7000/Upload/FilmPic/201607/201607201548023993.jpg_170x240.jpg' width="87" height="120" "window.location.href='javascript:void(0)Movie_detail.aspx?ftype=1&filmNo=10001647&ClientID='"/></dt>--}}
+                    {{--<dd >--}}
+                        {{--<div class="all_dd"><p class="Hide fl w_movie f15">封神传奇</p><span class="fr hsz">7.7</span></div>--}}
+                        {{--<p class="all_dd clear Hide f12"><span class="hhsz">导演：</span>许安</p>--}}
+                        {{--<p class="all_dd clear Hide f12"><span class="hhsz">主演：</span>李连杰 / 范冰冰 / 黄晓明 / 杨颖 / 古天乐</p>--}}
+                        {{--<div class="all_dd clear">--}}
+                            {{--<div class="gp_movie Hide fl"><span class="hsz">2</span>人已购票</div>--}}
+                            {{--<button type="button"class="btn_gp cur fl" "window.location.href='javascript:void(0)buy_movie.aspx?filmNo=10001647&filmName=封神传奇&ClientID='">购 票</button>--}}
+                        {{--</div>--}}
+                    {{--</dd>--}}
+                {{--</dl>--}}
+            {{--</div>--}}
 
-            <div class="movie_in fl">
-                <dl>
-                    <dt><img src='http://douyou100.com:7000/Upload/FilmPic/201607/201607261647162265.jpg_170x240.jpg' width="87" height="120" "window.location.href='javascript:void(0)Movie_detail.aspx?ftype=1&filmNo=10001651&ClientID='"/></dt>
-                    <dd >
-                        <div class="all_dd"><p class="Hide fl w_movie f15">盗墓笔记</p><span class="fr hsz">8.0</span></div>
-                        <p class="all_dd clear Hide f12"><span class="hhsz">导演：</span>李仁港</p>
-                        <p class="all_dd clear Hide f12"><span class="hhsz">主演：</span>鹿晗 / 井柏然 / 马思纯 / 王景春 / 张博宇</p>
-                        <div class="all_dd clear">
-                            <div class="gp_movie Hide fl"><span class="hsz">3</span>人已购票</div>
-                            <button type="button"class="btn_gp cur fl" "window.location.href='javascript:void(0)buy_movie.aspx?filmNo=10001651&filmName=盗墓笔记&ClientID='">购 票</button>
-                        </div>
-                    </dd>
-                </dl>
-            </div>
+            {{--<div class="movie_in fl">--}}
+                {{--<dl>--}}
+                    {{--<dt><img src='http://douyou100.com:7000/Upload/FilmPic/201607/201607211122499687.jpg_170x240.jpg' width="87" height="120" "window.location.href='javascript:void(0)Movie_detail.aspx?ftype=1&filmNo=10001648&ClientID='"/></dt>--}}
+                    {{--<dd >--}}
+                        {{--<div class="all_dd"><p class="Hide fl w_movie f15">神秘世界历险记3</p><span class="fr hsz">7.8</span></div>--}}
+                        {{--<p class="all_dd clear Hide f12"><span class="hhsz">导演：</span>王云飞</p>--}}
+                        {{--<p class="all_dd clear Hide f12"><span class="hhsz">主演：</span>刘校妤 / 孟泉霖 / 陆 揆 / 宝木中阳 / 郭政建</p>--}}
+                        {{--<div class="all_dd clear">--}}
+                            {{--<div class="gp_movie Hide fl"><span class="hsz">0</span>人已购票</div>--}}
+                            {{--<button type="button"class="btn_gp cur fl" "window.location.href='javascript:void(0)buy_movie.aspx?filmNo=10001648&filmName=神秘世界历险记3&ClientID='">购 票</button>--}}
+                        {{--</div>--}}
+                    {{--</dd>--}}
+                {{--</dl>--}}
+            {{--</div>--}}
 
-            <div class="movie_in fl">
-                <dl>
-                    <dt><img src='http://douyou100.com:7000/Upload/FilmPic/201608/201608011036497135.jpg_170x240.jpg' width="87" height="120" "window.location.href='javascript:void(0)Movie_detail.aspx?ftype=1&filmNo=10001660&ClientID='"/></dt>
-                    <dd >
-                        <div class="all_dd"><p class="Hide fl w_movie f15">狼兵吼</p><span class="fr hsz">7.5</span></div>
-                        <p class="all_dd clear Hide f12"><span class="hhsz">导演：</span>王勇</p>
-                        <p class="all_dd clear Hide f12"><span class="hhsz">主演：</span>刘德凯 / 谢苗 / 徐冬梅 / 何云龙 / 王侃</p>
-                        <div class="all_dd clear">
-                            <div class="gp_movie Hide fl"><span class="hsz">0</span>人已购票</div>
-                            <button type="button"class="btn_gp cur fl" "window.location.href='javascript:void(0)buy_movie.aspx?filmNo=10001660&filmName=狼兵吼&ClientID='">购 票</button>
-                        </div>
-                    </dd>
-                </dl>
-            </div>
+            {{--<div class="movie_in fl">--}}
+                {{--<dl>--}}
+                    {{--<dt><img src='http://douyou100.com:7000/Upload/FilmPic/201607/201607261647162265.jpg_170x240.jpg' width="87" height="120" "window.location.href='javascript:void(0)Movie_detail.aspx?ftype=1&filmNo=10001651&ClientID='"/></dt>--}}
+                    {{--<dd >--}}
+                        {{--<div class="all_dd"><p class="Hide fl w_movie f15">盗墓笔记</p><span class="fr hsz">8.0</span></div>--}}
+                        {{--<p class="all_dd clear Hide f12"><span class="hhsz">导演：</span>李仁港</p>--}}
+                        {{--<p class="all_dd clear Hide f12"><span class="hhsz">主演：</span>鹿晗 / 井柏然 / 马思纯 / 王景春 / 张博宇</p>--}}
+                        {{--<div class="all_dd clear">--}}
+                            {{--<div class="gp_movie Hide fl"><span class="hsz">3</span>人已购票</div>--}}
+                            {{--<button type="button"class="btn_gp cur fl" "window.location.href='javascript:void(0)buy_movie.aspx?filmNo=10001651&filmName=盗墓笔记&ClientID='">购 票</button>--}}
+                        {{--</div>--}}
+                    {{--</dd>--}}
+                {{--</dl>--}}
+            {{--</div>--}}
+
+            {{--<div class="movie_in fl">--}}
+                {{--<dl>--}}
+                    {{--<dt><img src='http://douyou100.com:7000/Upload/FilmPic/201608/201608011036497135.jpg_170x240.jpg' width="87" height="120" "window.location.href='javascript:void(0)Movie_detail.aspx?ftype=1&filmNo=10001660&ClientID='"/></dt>--}}
+                    {{--<dd >--}}
+                        {{--<div class="all_dd"><p class="Hide fl w_movie f15">狼兵吼</p><span class="fr hsz">7.5</span></div>--}}
+                        {{--<p class="all_dd clear Hide f12"><span class="hhsz">导演：</span>王勇</p>--}}
+                        {{--<p class="all_dd clear Hide f12"><span class="hhsz">主演：</span>刘德凯 / 谢苗 / 徐冬梅 / 何云龙 / 王侃</p>--}}
+                        {{--<div class="all_dd clear">--}}
+                            {{--<div class="gp_movie Hide fl"><span class="hsz">0</span>人已购票</div>--}}
+                            {{--<button type="button"class="btn_gp cur fl" "window.location.href='javascript:void(0)buy_movie.aspx?filmNo=10001660&filmName=狼兵吼&ClientID='">购 票</button>--}}
+                        {{--</div>--}}
+                    {{--</dd>--}}
+                {{--</dl>--}}
+            {{--</div>--}}
 
 
             <!-- <div class="movie_in fl">
@@ -299,8 +302,8 @@
 
         <div id="foot" class="foot clear">
             <p><a href="javascript:void(0)../help.aspx?ClientID=" class="c1">帮助</a><a  href="javascript:void(0)../client.aspx?ClientID=" class="c1">客户端</a><a href="javascript:void(0)../idear.aspx?ClientID=" class="c1">意见反馈</a></p>
-            <p><a href="javascript:void(0)tel:400-066-8882" style="margin-right:10px;" id="CustomService">400-066-8882</a>     http://m.douyou100.com</p>
-            <p class="f10">Copyright2005-2013 兜有电影版权所有. </p>
+            <p><a href="javascript:void(0)tel:400-066-8882" style="margin-right:10px;" id="CustomService">400-066-8882</a>     http://aimovie.duzejun.cn</p>
+            <p class="f10">Copyright2013- 2017爱电影版权所有. </p>
         </div>
         <script>
             var CityName=document.getElementById("defaultCityName").innerHTML = Utils.getCookie("CityName");
