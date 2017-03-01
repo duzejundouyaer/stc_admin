@@ -1,5 +1,5 @@
 <?php
-namespace app\Uploads;
+namespace App\Uploads;
 /*
 
 单个文件上传

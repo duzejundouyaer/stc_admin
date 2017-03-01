@@ -18,6 +18,8 @@ class FootController extends Controller
     //食物入库
     public function addFoot(){
         $obj = new Uploads();
+        $res=$obj->up($_FILES['foot_img']);
+        print_r($res);die;
         $foot = Input::get();
         return view('admin.index.info');
     }
