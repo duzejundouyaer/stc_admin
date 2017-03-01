@@ -73,7 +73,7 @@
                     <label>电影预告：</label>
                 </div>
                 <div class="field">
-                    <input type="file" class="button bg-blue margin-left" name="movie_voi" data-validate="required:请上传电影预告">
+                    <input type="file" class="button bg-blue margin-left" name="movie_voi[]" data-validate="required:请上传电影预告">
                     <div class="tips"></div>
                 </div>
             </div>
