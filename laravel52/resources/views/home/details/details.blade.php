@@ -5,7 +5,7 @@ $session = new Session;
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml">
 <style>
-    .cloum{text-align: center;margin-top:70px;}
+    .cloum{text-align: center;margin-top:70px; }
 </style>
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
@@ -321,7 +321,17 @@ $session = new Session;
 
 
         </div>
-         
+          @if($desc->release==0)
+        <div class="new_nav clear fl">
+            <ul>
+                <li class="cur" id='newtab1' >剧情</li>
+                <li class="cur " id='newtab2' >预告<div class="border fl"></div>
+                </li>
+                <li class="cur new_nav_sel_li" id='newtab3'>影评<div class="border fl"></div>
+                </li>
+            </ul>
+        </div>
+        @else
         <div class="new_nav clear fl">
             <ul>
                 <li class="cur" id='newtab1' >剧情</li>
@@ -331,7 +341,7 @@ $session = new Session;
                 </li>
             </ul>
         </div>
-
+         @endif
         <div id='newtabid1' class='tabid clear mr_top' style='display: none;'>
             <div class="story clear">
                 <div class="fl">剧情：</div>
@@ -339,6 +349,7 @@ $session = new Session;
             </div>
 
         </div>
+          @if($desc->release==1)
         <div id='newtabid2' class='tabid clear' style='display: none;'>
             @foreach($packages as $key => $val)
             <div class="poster fl" style="height: auto">
@@ -358,6 +369,22 @@ $session = new Session;
             </div>
             @endforeach
             </div>
+            @else
+            <div id='newtabid2' class='tabid clear' style='display: none;'>
+            <div class="poster fl" style="height: auto">
+                <div class="hsz" style="width: 94%; height:100%; margin: 0 3%; line-height: 35px; text-decoration:underline">
+                  <div style="500%">
+                    <img src="" alt="" >
+                    <video id="myVideo" style="width:300px;height:200px;margin-left:30px;" controls poster="{{$desc->movie_img}}">
+                            <source src="{{asset($desc->movie_voi)}}" type="video/mp4">
+                         </video>
+
+                 </div>
+                  <hr style="height:1px;border:none;border-top:1px dashed #C6A300; width:500px;" />
+              </div>
+            </div>
+           </div> 
+            @endif
           <!--   <div class="more clear">
                 <button type="button" class="btn_jz cur" id="more" "var ClientID = document.getElementById('ClientID').value; window.location.href='javascript:void(0)PictureList.aspx?filmNo=10001449&ClientID='+ClientID">更多剧照>></button>
             </div> -->
@@ -459,7 +486,7 @@ $session = new Session;
         </script>
 
 
-        <div id="foot" class="foot clear">
+        <div id="footer" class="foot clear" >
             <p><a href="javascript:void(0)../help.aspx?ClientID=" class="c1">帮助</a><a  href="javascript:void(0)../client.aspx?ClientID=" class="c1">客户端</a><a href="javascript:void(0)../idear.aspx?ClientID=" class="c1">意见反馈</a></p>
             <p><a href="javascript:void(0)tel:400-066-8882" style="margin-right:10px;" id="CustomService">400-066-8882</a>     http://m.douyou100.com</p>
             <p class="f10">Copyright2005-2013 兜有电影版权所有. </p>
@@ -532,5 +559,6 @@ $session = new Session;
            $("#newtab2").css("background","#272727")
            $("#newtab2").css("color","#fff")
         })
-    })
+       
+ })
 </script>

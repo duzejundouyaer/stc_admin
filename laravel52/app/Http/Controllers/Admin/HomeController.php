@@ -38,7 +38,6 @@ class HomeController extends Controller
 
         return view('admin.home.course',['counrse'=>$counrse,'day'=>$day,'movieList'=>$movieList,'homeInfo'=>$homeInfo,'error'=>$error]);
     }
-
     //添加历程
     public function addPlay()
     {
