@@ -64,12 +64,11 @@
        </li>
         <li class="fr Hide">
             <label>
-                @if(session('nickname')){
-                    <p class="fl paint Hide"><a href="" style="color: white; margin-right:10px;">session(nickname)</a>,<a href="{{URL('login_out')}}">退出</a></p>
-                }
-                @endif
-                <p class="fl paint Hide"><a href="{{URL('login')}}" style="color: white; margin-right:10px;">登陆</a></p>
-               
+               <?php if($nickname==""){?>
+                    <p class="fl paint Hide"><a href="{{URL('login')}}" style="color: white; margin-right:10px;">登陆</a></p>
+               <?php }else {?>
+                    <p class="fl paint Hide"><a href="{{URL('center')}}" style="color: white; margin-right:10px;">{{$nickname}}</a></p>
+                <?php }?>
             </label>
         </li>
         
