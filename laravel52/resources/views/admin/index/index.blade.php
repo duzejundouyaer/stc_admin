@@ -24,6 +24,24 @@
         <li><a href="{{URL('admin/moveadd')}}" target="right"><span class="icon-caret-right"></span>电影添加</a></li>
         <li><a href="{{URL('admin/movelist')}}" target="right"><span class="icon-caret-right"></span>电影列表</a></li>
     </ul>
+    <h2>套餐管理</h2>
+    <ul>
+        <li><a href="{{URL('admin/foot')}}" target="right"><span class="icon-caret-right"></span>添加食品</a></li>
+        <li><a href="{{URL('admin/footshow')}}" target="right"><span class="icon-caret-right"></span>食品列表</a></li>
+        <li><a href="{{URL('admin/package')}}" target="right"><span class="icon-caret-right"></span>添加套餐</a></li>
+        <li><a href="{{URL('admin/packageshow')}}" target="right"><span class="icon-caret-right"></span>套餐展示</a></li>
+    </ul>
+    <h2>订单管理</h2>
+    <ul>
+        <li><a href="?r=order/order" target="right"><span class="icon-caret-right"></span>订单列表</a></li>
+    </ul>
+    <h2>权限管理</h2>
+    <ul>
+        <li><a href="?r=rbac/role" target="right"><span class="icon-caret-right"></span>角色控制</a></li>
+        <li><a href="?r=rbac/power" target="right"><span class="icon-caret-right"></span>权限控制</a></li>
+        <li><a href="?r=rbac/role-power" target="right"><span class="icon-caret-right"></span>角色赋权</a></li>
+        <li><a href="?r=rbac/user-role" target="right"><span class="icon-caret-right"></span>用户角色控制</a></li>
+    </ul>
     <h2>咨询管理</h2>    <ul>
         <li><a href="homeList" target="right"><span class="icon-caret-right"></span>厅号列表</a></li>
     </ul>

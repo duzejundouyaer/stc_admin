@@ -1,7 +1,9 @@
 <?php
 
 Route::get('/','Home\IndexController@index');//首页
-Route::get('/lists','Home\IndexController@lists');//正在热播
+Route::get('/lists','Home\ListsController@lists');//正在热播
+
+
 Route::get('/details','Home\DetailsController@details');//详情页
 Route::get('/pay/{movie_id?}','Home\PayController@pay');//购票页
 Route::get('/center','Home\CenterController@center');//详情页
@@ -28,4 +30,7 @@ Route::group(['prefix'=>'admin','namespace'=>'Admin'], function () {
     Route::post('isstatus','MoveController@isstatus');
     Route::get('foot','FootController@foot');//添加食品
     Route::post('addfoot','FootController@addfoot');//食物入库
+    Route::get('footshow','FootController@footshow');//食物展示
+    Route::any('package','FootController@package');//添加套餐
+    Route::any('packageshow','FootController@packageshow');//套餐展示
 });
