@@ -295,16 +295,20 @@ $session = new Session;
                     <dd>
                         <div class="all_dd">
                             <p class="Hide f15 fl w_movie">{{$desc->movie_name}}  </p>
-                            <span class="fr hsz">7.5</span>
+                            <span class="fr hsz">{{$desc->movie_score}}</span>
                         </div>
                         <p class="all_dd clear Hide f12"><span class="hhsz">导演：</span> {{$desc->movie_director}}</p>
                         <p class="all_dd clear Hide f12"><span class="hhsz">主演：</span>{{$desc->movie_boss}}</p>
                         <p class="all_dd clear Hide f12"><span class="hhsz">类型：</span>{{$desc->movie_type}}</p>
                         <p class="all_dd clear Hide f12"><span class="hhsz">片长：</span> {{$desc->movie_length}}</p>
-                        <p class="all_dd clear Hide f12"><span class="hhsz">产地： </span>中国大陆</p>
+                        <p class="all_dd clear Hide f12"><span class="hhsz">产地： </span>{{$desc->movie_region}}</p>
                         <p class="all_dd clear Hide f12"><span class="hhsz">上映日期:</span>{{$desc->movie_time}}</p>
                         <div class="all_dd clear" style="margin-bottom: 4px;">
-                            <input name="" id="Gp" type="button" value="购  票" class="btn_infor_gp" "Buymovie('10001449','我最好朋友的婚礼');" onclick="window.location.href='{{URL('/pay')}}/{{$desc->movie_id}}'" />
+                            @if($desc->release==0)
+                            <input name="" id="Gp" type="button" value="还未上映" class="btn_infor_gp" "Buymovie('10001449','我最好朋友的婚礼');" disabled='disabled' onclick="window.location.href='{{URL('/pay')}}/{{$desc->movie_id}}'" />
+                            @else
+                               <input name="" id="Gp" type="button" value="购  票" class="btn_infor_gp" "Buymovie('10001449','我最好朋友的婚礼');"  onclick="window.location.href='{{URL('/pay')}}/{{$desc->movie_id}}'" />
+                            @endif
                         </div>
 
 
@@ -321,7 +325,7 @@ $session = new Session;
         <div class="new_nav clear fl">
             <ul>
                 <li class="cur" id='newtab1' >剧情</li>
-                <li class="cur " id='newtab2' >剧照<div class="border fl"></div>
+                <li class="cur " id='newtab2' >新套餐<div class="border fl"></div>
                 </li>
                 <li class="cur new_nav_sel_li" id='newtab3'>影评<div class="border fl"></div>
                 </li>
@@ -336,40 +340,27 @@ $session = new Session;
 
         </div>
         <div id='newtabid2' class='tabid clear' style='display: none;'>
+            @foreach($packages as $key => $val)
             <div class="poster fl" style="height: auto">
-
-                <ul>
-
-                    <li class="fl" style="margin-right: 12px;">
-                        <a href="javascript:void(0)http://douyou100.com:7000/Upload/FilmPicture/201607/201607191025369428.jpg_600x400.jpg">
-                            <img src="http://douyou100.com:7000/Upload/FilmPicture/201607/201607191025369428.jpg_600x400.jpg" width="80" height="88" /></a></li>
-
-                    <li class="fl" style="margin-right: 12px;">
-                        <a href="javascript:void(0)http://douyou100.com:7000/Upload/FilmPicture/201607/201607191025378164.jpg_600x400.jpg">
-                            <img src="http://douyou100.com:7000/Upload/FilmPicture/201607/201607191025378164.jpg_600x400.jpg" width="80" height="88" /></a></li>
-
-                    <li class="fl" style="margin-right: 12px;">
-                        <a href="javascript:void(0)http://douyou100.com:7000/Upload/FilmPicture/201607/201607191025390020.jpg_600x400.jpg">
-                            <img src="http://douyou100.com:7000/Upload/FilmPicture/201607/201607191025390020.jpg_600x400.jpg" width="80" height="88" /></a></li>
-
-                    <li class="fl" style="margin-right: 12px;">
-                        <a href="javascript:void(0)http://douyou100.com:7000/Upload/FilmPicture/201607/201607191025400316.jpg_600x400.jpg">
-                            <img src="http://douyou100.com:7000/Upload/FilmPicture/201607/201607191025400316.jpg_600x400.jpg" width="80" height="88" /></a></li>
-
-                    <li class="fl" style="margin-right: 12px;">
-                        <a href="javascript:void(0)http://douyou100.com:7000/Upload/FilmPicture/201607/201607191025410924.jpg_600x400.jpg">
-                            <img src="http://douyou100.com:7000/Upload/FilmPicture/201607/201607191025410924.jpg_600x400.jpg" width="80" height="88" /></a></li>
-
-                    <li class="fl" style="margin-right: 12px;">
-                        <a href="javascript:void(0)http://douyou100.com:7000/Upload/FilmPicture/201607/201607191025421220.jpg_600x400.jpg">
-                            <img src="http://douyou100.com:7000/Upload/FilmPicture/201607/201607191025421220.jpg_600x400.jpg" width="80" height="88" /></a></li>
-
-                </ul>
-
+                          <a href="javascript:void(0)" style="float:right;margin-right:30px;margin-top:15px;">购买</a>
+                <div class="hsz" style="width: 94%; height:100%; margin: 0 3%; line-height: 35px; text-decoration:underline">
+                  <div style="500%"><dl style="width:350px;">
+                      <dt  style="float:left; width:40px;"><img  src="{{asset($val->pack_img)}}" alt="" style="margin-top:10px;border-radius:80px;width:50px;height:50px;">
+                    </dt>
+                      <dd  style="float:right;width:280px;margin-left:20px;">
+                        <p>套餐名称：{{$val->pack_name}}</p>
+                        <p>套餐价格：<?php echo $desc->movie_price+$val->discount_price?></p>
+                    </dd>
+                       </dl>
+                 </div>
+                  <hr style="height:1px;border:none;border-top:1px dashed #C6A300; width:500px;" />
+              </div>
             </div>
-            <div class="more clear">
+            @endforeach
+            </div>
+          <!--   <div class="more clear">
                 <button type="button" class="btn_jz cur" id="more" "var ClientID = document.getElementById('ClientID').value; window.location.href='javascript:void(0)PictureList.aspx?filmNo=10001449&ClientID='+ClientID">更多剧照>></button>
-            </div>
+            </div> -->
         </div>
         <div id='newtabid3' class='tabid clear' >
             {{--评论--}}
