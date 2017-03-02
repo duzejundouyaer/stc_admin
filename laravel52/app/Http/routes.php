@@ -19,7 +19,7 @@ Route::get('/lists','Home\ListsController@lists');//正在热播
 
 
 Route::get('/details','Home\DetailsController@details');//详情页
-<<<<<<< HEAD
+
 /**
  * 登陆
  */
@@ -37,13 +37,13 @@ Route::get('/login_out','Home\LoginController@login_out');//退出登录
 	Route::get('/only','Home\LoginController@only');//注册唯一性
 	Route::get('/short','Home\LoginController@short');//发送短信
 	Route::get('/contrast','Home\LoginController@contrast');//验证码对比
-=======
+
 Route::get('/center','Home\CenterController@center');//个人中心页
 
 Route::get('/grab','Home\GrabController@index');//选座页
 
 
->>>>>>> 7345a1a02ebcdfa21a4ba0c005e4332a250a2f18
+
 
 /////////////////////////************后台************//////////////////////////////////////
 Route::group(['prefix'=>'admin','namespace'=>'Admin'], function () {

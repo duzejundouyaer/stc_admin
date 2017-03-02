@@ -6,13 +6,7 @@
     <meta content="yes" name="apple-mobile-web-app-capable" />
     <meta content="black" name="apple-mobile-web-app-status-bar-style" />
     <meta content="telephone=no" name="format-detection" />
-<<<<<<< HEAD
-    <title>
-	首页
-    </title>
-=======
-    <title>中影票</title>
->>>>>>> 7345a1a02ebcdfa21a4ba0c005e4332a250a2f18
+    <title>爱影院</title>
     <link id="ctl00_css1" href="{{asset('style/home/css/style.css')}}" rel="stylesheet" />
     <link id="ctl00_css2" href="{{asset('style/home/css/inside_pages.css')}}" rel="stylesheet" />
     <link href="{{asset('style/home/css/index.css')}}" rel="stylesheet" />
