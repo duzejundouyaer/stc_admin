@@ -47,8 +47,8 @@
             </ul>
         </div>
         <script>
-            document.getElementById("defaultCityName").innerHTML = Utils.getCookie("CityName");
-            document.getElementById("defaultCityName").title = Utils.getCookie("CityName");
+           // document.getElementById("defaultCityName").innerHTML = Utils.getCookie("CityName");
+           // document.getElementById("defaultCityName").title = Utils.getCookie("CityName");
             //function CurentTime()
             //{
             //    var now = new Date();

@@ -23,16 +23,16 @@ $session = new Session;
     <script src="{{asset('style/home/js/jquery-1.10.2.min.js')}}"></script>
     <script src="{{asset('style/home/layer/layer.js')}}"></script>
     <script src="{{asset('style/home/js/demo.js')}}"></script>
-    <script src="{{asset('style/home/js/iscroll.js')}}"></script>
+    {{--<script src="{{asset('style/home/js/iscroll.js')}}"></script>--}}
     <style>
         .all
         {
             width: 100%;
         }
     </style>
-    <link href="css/scrollbar.css" rel="stylesheet" />
-    <script src="js/FancyZoom_zzjs_net.js"></script>
-    <script src="js/FancyZoomHTML.js"></script>
+    {{--<link href="{{asset('style/home/css/scrollbar.css')}}" rel="stylesheet" />--}}
+    {{--<script src="js/FancyZoom_zzjs_net.js"></script>--}}
+    {{--<script src="js/FancyZoomHTML.js"></script>--}}
 
     <script type="text/javascript">
         var url = location.href;

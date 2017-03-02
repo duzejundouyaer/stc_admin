@@ -10,7 +10,11 @@
     <link id="ctl00_css1" href="{{asset('style/home/css/style.css')}}" rel="stylesheet" />
     <link id="ctl00_css2" href="{{asset('style/home/css/inside_pages.css')}}" rel="stylesheet" />
     <link href="{{asset('style/home/css/index.css')}}" rel="stylesheet" />
-        <style>
+    <link rel="stylesheet" href="{{asset('style/home/css/demo.css')}}">
+    <script src="{{asset('style/home/js/demo1.js')}}"></script>
+    <script src="{{asset('style/home/js/jquery-1.10.2.min.js')}}"></script>
+    <script src="{{asset('style/home/layer/layer.js')}}"></script>
+    <style>
         .all
         {
             width: 100%;
@@ -126,11 +130,20 @@
             </ul>
         </div>
     </div>
+{{--遮罩层--}}
+        <div id="dloginbox">
+            <h3 style="margin-top:40px;margin-left:10px;">请您注意:</h3>
+            <div style="margin-top:5px;margin-left:30px">
+                <p>自觉遵守：爱国、守法、自律、真实、文明的原则。</p>
+                <p>尊重网上道德，遵守《全国人大常委会关于维护互联网安全的决定》及中华人民共和国其他各项有关法律法规。</p>
+                <p>严禁发表危害国家安全，破坏民族团结、国家宗教政策和社会稳定，含侮辱、诽谤、教唆、淫秽等内容的作品。</p>
+            </div>
+        </div>
 
     <!--TAB1样式开始-->
     <div id='tabid1' class='tabid' style='display: block;'>
 
-        <p class="title"><img src="http://m.douyou100.com/Resources/douyou100_1/images/movie_icon.png" width="18" height="18" class="fl" style="margin:9px 3px 0px 0px;" /><span class="f15 hsz fl">正在热映</span><a class="fr" href="javascript:void(0);">如何购票<img src="http://m.douyou100.com/Resources/douyou100_1/images/how.png" width="12px" height="12px" /></a></p>
+        <p class="title"><img src="http://m.douyou100.com/Resources/douyou100_1/images/movie_icon.png" width="18" height="18" class="fl" style="margin:9px 3px 0px 0px;" /><span class="f15 hsz fl">正在热映</span><a class="cd-bouncy-nav-trigger" href="javascript:void(0);" onClick='ShowLoginBox()' style="float: right">如何购票<img src="http://m.douyou100.com/Resources/douyou100_1/images/how.png" width="12px" height="12px" /></a></p>
         <div class="all_movie clear">
              <?php foreach($well as $key=>$val){?>
                  <div class="movie">
@@ -188,11 +201,12 @@
         
     <div id="foot" class="foot clear">
 		<p><a href="javascript:void(0)" class="c1">帮助</a><a  href="javascript:void(0)" class="c1">客户端</a><a href="javascript:void(0)../idear.aspx?ClientID=" class="c1">意见反馈</a></p>
-		<p><a href="javascript:void(0)" style="margin-right:10px;" id="CustomService">400-066-8882</a>     http://m.douyou100.com</p>
-		<p class="f10">Copyright2005-2013 兜有电影版权所有. </p>
+		<p><a href="javascript:void(0)" style="margin-right:10px;" id="CustomService">400-066-8882</a>     http://aimovie.duzejun.cn    </p>
+		<p class="f10">Copyright2005-2013 爱影院版权所有. </p>
 	</div>
 </form>
     </div>
+
     <div id="my_errMsg" class="my_errMsg">
         <div class="errMsg">
             <div id="errTtile" class="errTtile"></div>
@@ -201,7 +215,7 @@
         </div>
     </div>
     <div id="overlayAll" class="overlayAll"></div>
-<script type="text/javascript">
+    <script type="text/javascript">
     function f_aClick(url) {
         var ClientID = document.getElementById("ClientID").value;
         window.location.href = url + "?ClientID=" + ClientID;
@@ -306,21 +320,21 @@
 <script src="{{asset('style/home/js/public.js')}}"></script>
 <script type="text/javascript" name="baidu-tc-cerfication" src="{{asset('style/home/js/lightapp.js')}}"></script>
 <script type="text/javascript">window.bd && bd._qdc && bd._qdc.init({ app_id: '7a7a35fe993bd40ac8ca2bae' });</script>
-<script>
-    var CityName=document.getElementById("defaultCityName").innerHTML = Utils.getCookie("CityName");
-    if (CityName == '北京市') {
-        document.getElementById("CustomService").innerHTML = '400-010-1515';
-        document.getElementById("CustomService").href = 'tel:400-010-1515';
-    }
-    else {
-        document.getElementById("CustomService").innerHTML = '400-066-8882';
-        document.getElementById("CustomService").href = 'tel:400-066-8882';
-    }
-    var ClientID = document.getElementById("ClientID").value;
-    if (ClientID == 'C100000175') {
-        document.getElementById("foot").style.display="none";
-    }
-</script>
+{{--<script>--}}
+    {{--var CityName=document.getElementById("defaultCityName").innerHTML = Utils.getCookie("CityName");--}}
+    {{--if (CityName == '北京市') {--}}
+        {{--document.getElementById("CustomService").innerHTML = '400-010-1515';--}}
+        {{--document.getElementById("CustomService").href = 'tel:400-010-1515';--}}
+    {{--}--}}
+    {{--else {--}}
+        {{--document.getElementById("CustomService").innerHTML = '400-066-8882';--}}
+        {{--document.getElementById("CustomService").href = 'tel:400-066-8882';--}}
+    {{--}--}}
+    {{--var ClientID = document.getElementById("ClientID").value;--}}
+    {{--if (ClientID == 'C100000175') {--}}
+        {{--document.getElementById("foot").style.display="none";--}}
+    {{--}--}}
+{{--</script>--}}
 <script type="text/javascript">
     //<![CDATA[
     var InterfaceErrMsg='';
