@@ -23,5 +23,12 @@ class ListsController extends Controller
         $number = sizeof($movie);
         return view('home.lists.forthcoming',['movie'=>$movie,'number'=>$number]);
     }
+    //票房排行
+    public function box()
+    {
+        $movie = DB::table('movie')->where('release','=',1)->where('is_status','=',1)->orderBy('movie_box','desc')->limit(20)->get();
+        $number = count($movie);
+        return view('home.lists.box',['movie'=>$movie,'number'=>$number]);
+    }
 
 }

@@ -17,6 +17,7 @@
 Route::get('/','Home\IndexController@index');//首页
 Route::get('/lists','Home\ListsController@lists');//正在热播
 Route::get('/forthcoming','Home\ListsController@forthcoming');//即将上映列表
+Route::get('/box','Home\ListsController@box');//票房排行
 
 
 Route::get('/details','Home\DetailsController@details');//详情页
