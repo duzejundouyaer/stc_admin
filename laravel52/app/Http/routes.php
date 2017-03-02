@@ -5,12 +5,11 @@ Route::get('/lists','Home\ListsController@lists');//正在热播
 
 
 Route::get('/details','Home\DetailsController@details');//详情页
-Route::get('/pay/{movie_id?}','Home\PayController@pay');//购票页
-Route::get('/center','Home\CenterController@center');//详情页
 
 Route::get('/grab/{play_id?}','Home\GrabController@index');//选座页
 Route::any('/payGrab','Home\GrabController@payGrab');//购买座位
 Route::any('/checked','Home\GrabController@checked');//已购座位
+
 
 
 

@@ -13,6 +13,8 @@ class CenterController extends Controller
 {
     //
     public function center(){
+        $session=new Session();
+        $nickname=$session->get('nickname','');
         return view('home.center.center');
     }
 }

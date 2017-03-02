@@ -1,55 +1,142 @@
 <!doctype html>
-<html lang="en">
+<html>
 <head>
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" />
-    <meta charset="UTF-8">
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=1.0" />
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <title>个人中心</title>
-    <link rel="stylesheet" href="{{URL::asset('style/home/css/memberindex.css')}}">
+    <link rel="stylesheet" type="text/css" href="{{asset('style/home/css/stylecenter.css')}}">
 </head>
+
 <body>
-    <div id="header">
-        <a href="/" id="return">←</a>
-        <span>个人中心</span>
+
+<div id="_centent">
+    <header>
+        <div class="rt-bk">
+            <i class="bk"></i>
+            <p>返回</p>
+        </div>
+        <div class="top-name"><p>个人中心</p></div>
+    </header>
+
+    <div class="head">
+        <div class="head-img">
+            <img src="{{asset('style/home/img/head-img.png')}}">
+        </div>
+        <div class="head-dsb">
+            <p class="dsb-name">--凌乱</p>
+            <p class="dsb-id">ID  1271543621</p>
+        </div>
     </div>
-    <ul id="list">
-        <li id="changeimg">头像
-        @if($userInfo->img != '')
-                <div id="img" style="background-image: url(<?php echo $userInfo->img?>)"></div>
-            @else
-                <div id="img" style="background-image: url('./images/yiren.gif')"></div>
-            @endif
-        </li>
-        <li id="nick">昵称
-            @if($userInfo->nickname !='')
-                <span class="show"><?php echo $userInfo->nickname?></span>
-                @else
-                <span class="show">暂无设置</span>
-            @endif
-        </li>
-        <li>性别
-            @if($userInfo->sex !='')
-            <span class="show"><?php echo $userInfo->sex?></span>
-            @else
-                <span class="show">暂无设置</span>
-            @endif
-        </li>
-        <li>出生年月
-            @if($userInfo->year != '' && $userInfo->month !='' && $userInfo->day != '')
-                <span class="show"><?php echo $userInfo->year?>年<?php echo $userInfo->month?>月<?php echo $userInfo->day?>日</span>
-                @else
-                <span class="show">暂无设置</span>
-            @endif
-        </li>
-        <li>积分 <span class="show"><?php echo $userInfo->score?></span></li>
-    </ul>
 
+    <div class="nav">
+        <ul>
+            <li>
+                <i class="idt"></i>
+                <p>订单</p>
+            </li>
+            <li class="pt-line">
+                <i class="clt"></i>
+                <p>收藏</p>
+            </li>
+            <li>
+                <i class="rcm"></i>
+                <p>推荐</p>
+            </li>
+        </ul>
+    </div>
 
-</body>
-</html>
-<script src="./js/jquery-1.11.1.min.js"></script>
+    <section class="mt-1">
+        <div class="ps-lt">
+            <div class="lt-dsb">
+                <p>修改个人资料</p>
+                <i class="arr-right"></i>
+            </div>
+            <div class="lt-dsb cl-bb">
+                <p>修改密码</p>
+                <i class="arr-right"></i>
+            </div>
+        </div>
+    </section>
+
+    <section class="mt-2">
+        <div class="ps-lt">
+            <div class="lt-dsb cl-bb">
+                <p>声音推送通知</p>
+                <i class="check-on"></i>
+            </div>
+        </div>
+    </section>
+
+    <section class="mt-3">
+        <div class="ps-lt">
+            <div class="lt-dsb">
+                <p>猜你喜欢</p>
+                <i class="arr-right"></i>
+            </div>
+        </div>
+        <div class="ps-lt">
+            <div class="lt-dsb">
+                <p>附近热门</p>
+                <i class="arr-right"></i>
+            </div>
+        </div>
+        <div class="ps-lt">
+            <div class="lt-dsb">
+                <p>推荐商家</p>
+                <i class="arr-right"></i>
+            </div>
+        </div>
+        <div class="ps-lt">
+            <div class="lt-dsb cl-bb">
+                <p>设置</p>
+                <i class="arr-right"></i>
+            </div>
+        </div>
+    </section>
+
+    <div class="jg"></div>
+</div>
+{{--<footer>--}}
+    {{--<div class="mune">--}}
+        {{--<img src="img/1.png">--}}
+        {{--<p>首页</p>--}}
+    {{--</div>--}}
+    {{--<div class="mune">--}}
+        {{--<img src="img/2.png">--}}
+        {{--<p>商家</p>--}}
+    {{--</div>--}}
+    {{--<div class="mune">--}}
+        {{--<img src="img/3.png">--}}
+        {{--<p>申请加盟</p>--}}
+    {{--</div>--}}
+    {{--<div class="mune">--}}
+        {{--<img src="img/4.png">--}}
+        {{--<p>个人中心</p>--}}
+    {{--</div>--}}
+{{--</footer>--}}
+
 <script>
-    $("#changeimg").click(function()
-    {
-        location.href = "/changeimg";
+    (function (doc, win) {
+        var docEl = doc.documentElement,
+                resizeEvt = 'orientationchange' in window ? 'orientationchange' : 'resize',
+                recalc = function () {
+                    var clientWidth = docEl.clientWidth;
+                    if (!clientWidth) return;
+                    docEl.style.fontSize = 100 * (clientWidth / 750) + 'px';
+                };
+
+        if (!doc.addEventListener) return;
+        win.addEventListener(resizeEvt, recalc, false);
+        doc.addEventListener('DOMContentLoaded', recalc, false);
+    })(document, window);
+</script>
+<script type="text/javascript" src="{{asset('style/home/js/jquery-1.8.0.min.js')}}"></script>
+<script type="text/javascript">
+    $('.check-on').click(function(){
+        $(this).toggleClass('check-off');
     })
 </script>
+</body>
+</html>
