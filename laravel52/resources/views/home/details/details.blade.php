@@ -277,10 +277,10 @@ $session = new Session;
 
         <div class="nav">
             <div class="tab_nav tab_nav_one">
-                <a class="hide" href="javascript:void(0)javascript:history.go(-1)">
+                <a class="hide" href="javascript:void(0);history.back(-1);">
                     <img src="http://m.douyou100.com/Resources/douyou100_1/images/return.png" width="20" height="16" class="fl" /></a><div class="fl Hide
                             ">
-                    我最好朋友的婚礼-详情
+                   {{$desc->movie_name}}-详情
                 </div>
             </div>
         </div>
@@ -291,20 +291,20 @@ $session = new Session;
             <div class="movie_in fl top">
                 <dl>
                     <dt>
-                        <img src="http://douyou100.com:7000/Upload/FilmPic/201607/201607191024302995.jpg_170x240.jpg" width="147" height="203" /></dt>
+                        <img src="{{asset($desc->movie_img)}}" width="147" height="203" /></dt>
                     <dd>
                         <div class="all_dd">
-                            <p class="Hide f15 fl w_movie">我最好朋友的婚礼  </p>
+                            <p class="Hide f15 fl w_movie">{{$desc->movie_name}}  </p>
                             <span class="fr hsz">7.5</span>
                         </div>
-                        <p class="all_dd clear Hide f12"><span class="hhsz">导演：</span> 陈奕利</p>
-                        <p class="all_dd clear Hide f12"><span class="hhsz">主演：</span>舒淇 / 冯绍峰 / 宋茜</p>
-                        <p class="all_dd clear Hide f12"><span class="hhsz">类型：</span>喜剧 / 爱情</p>
-                        <p class="all_dd clear Hide f12"><span class="hhsz">片长：</span> 91分钟</p>
+                        <p class="all_dd clear Hide f12"><span class="hhsz">导演：</span> {{$desc->movie_director}}</p>
+                        <p class="all_dd clear Hide f12"><span class="hhsz">主演：</span>{{$desc->movie_boss}}</p>
+                        <p class="all_dd clear Hide f12"><span class="hhsz">类型：</span>{{$desc->movie_type}}</p>
+                        <p class="all_dd clear Hide f12"><span class="hhsz">片长：</span> {{$desc->movie_length}}</p>
                         <p class="all_dd clear Hide f12"><span class="hhsz">产地： </span>中国大陆</p>
-                        <p class="all_dd clear Hide f12"><span class="hhsz">上映日期:</span> 2016-08-05</p>
+                        <p class="all_dd clear Hide f12"><span class="hhsz">上映日期:</span>{{$desc->movie_time}}</p>
                         <div class="all_dd clear" style="margin-bottom: 4px;">
-                            <input name="" id="Gp" type="button" value="购  票" class="btn_infor_gp" "Buymovie('10001449','我最好朋友的婚礼');" />
+                            <input name="" id="Gp" type="button" value="购  票" class="btn_infor_gp" "Buymovie('10001449','我最好朋友的婚礼');" onclick="window.location.href='{{URL('/pay')}}/{{$desc->movie_id}}'" />
                         </div>
 
 
@@ -331,7 +331,7 @@ $session = new Session;
         <div id='newtabid1' class='tabid clear mr_top' style='display: none;'>
             <div class="story clear">
                 <div class="fl">剧情：</div>
-                <p>顾佳（舒淇 饰）是国内某时尚杂志的新任主编，奉命去米兰参加时装周。一通意外的电话让她刚刚落地就放弃了工作安排飞往伦敦。因为她曾经逃避但其实内心深爱的男人林然（冯绍峰 饰）马上就要和一位年轻富家女萱萱（宋茜 饰）结婚，她想在婚礼之前把新郎抢回来。在飞往伦敦的飞机上，顾佳邂逅了型男Nick（凤小岳 饰），她一直出糗，令Nick非常尴尬。见面后，林然的准新娘萱萱却待她亲如姐妹。尽管内心矛盾，顾佳还是有意无意的制造着麻烦，并因为一个误会使婚礼无法在英国如期举行，但林然和萱萱情比金坚，顾佳决定安排林然和萱萱去意大利办婚礼。在米兰，顾佳鼓起勇气和林然表白，却意外被萱萱撞见，三人在街头展开了追逐……</p>
+                <p>{{$desc->movie_desc}}</p>
             </div>
 
         </div>

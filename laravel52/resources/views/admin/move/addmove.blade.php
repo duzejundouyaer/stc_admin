@@ -36,7 +36,20 @@
                     <div class="tips"></div>
                 </div>
             </div>
-
+            <div class="form-group">
+                <div class="label">
+                    <label>电影地区：</label>
+                </div>
+                <div class="field">
+                    <select name="movie_region" class="input w50">
+                        <option value="大陆">大陆</option>
+                        <option value="欧美">欧美</option>
+                        <option value="日韩">日韩</option>
+                        <option value="港澳">港澳</option>
+                    </select>
+                    <div class="tips">默认一级分类</div>
+                </div>
+            </div>
             <div class="form-group">
                 <div class="label">
                     <label>课程封面图：</label>
