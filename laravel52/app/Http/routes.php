@@ -39,6 +39,9 @@ Route::get('/login_out','Home\LoginController@login_out');//退出登录
 	Route::get('/contrast','Home\LoginController@contrast');//验证码对比
 
 Route::get('/center','Home\CenterController@center');//个人中心页
+Route::any('/updatecenter','Home\CenterController@updatecenter');//个人中心页
+Route::any('/updateone','Home\CenterController@updateone');//个人中心页
+Route::get('/orders','Home\CenterController@orders');//orders
 
 Route::get('/grab','Home\GrabController@index');//选座页
 
