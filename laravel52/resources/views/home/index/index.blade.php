@@ -124,25 +124,28 @@
             <ul>
                 <li class="fl cur"><a href="javascript:void(0);" class="oaClick">影片</a></li>
                 <li class="fl cur"><a href="javascript:void(0)">选购套餐</a></li>
-                <li class="fl cur"><a href="javascript:void(0)">票房排行</a></li>
+                <li class="fl cur"><a href="{{URL('')}}">票房排行</a></li>
                 <li class="fl cur"><a href="{{URL('center')}}">我的地盘</a></li>
             </ul>
         </div>
     </div>
 {{--遮罩层--}}
         <div id="dloginbox">
-            <h3 style="margin-top:40px;margin-left:10px;">请您注意:</h3>
+            <h3 style="margin-top:20px;margin-left:10px;">请您注意:</h3>
             <div style="margin-top:5px;margin-left:30px">
-                <p>自觉遵守：爱国、守法、自律、真实、文明的原则。</p>
-                <p>尊重网上道德，遵守《全国人大常委会关于维护互联网安全的决定》及中华人民共和国其他各项有关法律法规。</p>
-                <p>严禁发表危害国家安全，破坏民族团结、国家宗教政策和社会稳定，含侮辱、诽谤、教唆、淫秽等内容的作品。</p>
+                <p style="text-indent:2em;line-height:30px;font-size:15px">1.自觉遵守：爱国、守法、自律、真实、文明的原则。</p>
+                <p style="text-indent:2em;line-height:30px;font-size:15px">2.尊重网上道德，遵守《全国人大常委会关于维护互联网安全的决定》及中华人民共和国其他各项有关法律法规。</p>
+                <p style="text-indent:2em;line-height:30px;font-size:15px">3.请观众确认好电影的场次，电影票售出后概不退换。</p>
+                <p style="text-indent:2em;line-height:30px;font-size:15px">4.请您当面点清找零和票面金额，离开柜台概不负责。</p>
+                <p style="text-indent:2em;line-height:30px;font-size:15px">5.普通观众在非活动时间需按照正价购买影票，购买影票张数不限，每张票仅限一人使用。</p>
+                <p style="text-indent:2em;line-height:30px;font-size:15px">6.本影院支持支付宝，微信，现金支付，线上购票，线下消费。</p>
             </div>
         </div>
 
     <!--TAB1样式开始-->
     <div id='tabid1' class='tabid' style='display: block;'>
 
-        <p class="title"><img src="http://m.douyou100.com/Resources/douyou100_1/images/movie_icon.png" width="18" height="18" class="fl" style="margin:9px 3px 0px 0px;" /><span class="f15 hsz fl">正在热映</span><a class="cd-bouncy-nav-trigger" href="javascript:void(0);" onClick='ShowLoginBox()' style="float: right">如何购票<img src="http://m.douyou100.com/Resources/douyou100_1/images/how.png" width="12px" height="12px" /></a></p>
+        <p class="title"><img src="http://m.douyou100.com/Resources/douyou100_1/images/movie_icon.png" width="18" height="18" class="fl" style="margin:9px 3px 0px 0px;" /><span class="f15 hsz fl">正在热映</span><a class="cd-bouncy-nav-trigger" href="javascript:void(0);" onClick='ShowLoginBox()' style="float: right">购票须知<img src="http://m.douyou100.com/Resources/douyou100_1/images/how.png" width="12px" height="12px" /></a></p>
         <div class="all_movie clear">
              <?php foreach($well as $key=>$val){?>
                  <div class="movie">
