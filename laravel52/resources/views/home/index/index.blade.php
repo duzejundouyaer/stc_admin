@@ -6,9 +6,13 @@
     <meta content="yes" name="apple-mobile-web-app-capable" />
     <meta content="black" name="apple-mobile-web-app-status-bar-style" />
     <meta content="telephone=no" name="format-detection" />
+<<<<<<< HEAD
     <title>
 	首页
     </title>
+=======
+    <title>中影票</title>
+>>>>>>> 7345a1a02ebcdfa21a4ba0c005e4332a250a2f18
     <link id="ctl00_css1" href="{{asset('style/home/css/style.css')}}" rel="stylesheet" />
     <link id="ctl00_css2" href="{{asset('style/home/css/inside_pages.css')}}" rel="stylesheet" />
     <link href="{{asset('style/home/css/index.css')}}" rel="stylesheet" />
@@ -49,9 +53,7 @@
 <div>
 <input type="hidden" name="__VIEWSTATE" id="__VIEWSTATE" value="/wEPDwUKLTM3Nzk3NzI3Mg9kFgJmD2QWBAIBD2QWBAIGDxYCHgRocmVmBSQvUmVzb3VyY2VzL2RvdXlvdTEwMF8xL2Nzcy9zdHlsZS5jc3NkAgcPFgIfAAUrL1Jlc291cmNlcy9kb3V5b3UxMDBfMS9jc3MvaW5zaWRlX3BhZ2VzLmNzc2QCAw9kFgICAQ9kFgRmDxYCHgtfIUl0ZW1Db3VudAIEFghmD2QWAmYPFQcIMTAwMDE0NDlSaHR0cDovL2RvdXlvdTEwMC5jb206NzAwMC9VcGxvYWQvRmlsbVBpYy8yMDE2MDcvMjAxNjA3MTkxMDI0MzAyOTk1LmpwZ18xNzB4MjQwLmpwZxjmiJHmnIDlpb3mnIvlj4vnmoTlqZrnpLwIMTAwMDE0NDkY5oiR5pyA5aW95pyL5Y+L55qE5ama56S8ASAAZAIBD2QWAmYPFQcIMTAwMDE1MjRSaHR0cDovL2RvdXlvdTEwMC5jb206NzAwMC9VcGxvYWQvRmlsbVBpYy8yMDE2MDcvMjAxNjA3MjIxMTI1MjE0NDk5LmpwZ18xNzB4MjQwLmpwZxnlpI/mnInkuZTmnKgg6ZuF5pyb5aSp5aCCCDEwMDAxNTI0GeWkj+acieS5lOacqCDpm4XmnJvlpKnloIIBIABkAgIPZBYCZg8VBwgxMDAwMTU3OFJodHRwOi8vZG91eW91MTAwLmNvbTo3MDAwL1VwbG9hZC9GaWxtUGljLzIwMTYwOC8yMDE2MDgwMTEwNTcyMTk3NTIuanBnXzE3MHgyNDAuanBnBuWPpOabvAgxMDAwMTU3OAblj6Tmm7wBIABkAgMPZBYCZg8VBwgxMDAwMTYyOFJodHRwOi8vZG91eW91MTAwLmNvbTo3MDAwL1VwbG9hZC9GaWxtUGljLzIwMTYwNy8yMDE2MDcwNjEwMzMxODQ3OTguanBnXzE3MHgyNDAuanBnG+azsOWxseW9kuadpe+8mumZqeaImOS4m+aelwgxMDAwMTYyOBvms7DlsbHlvZLmnaXvvJrpmanmiJjkuJvmnpcDdGFnBElNQVhkAgEPFgIfAQIEFghmD2QWAmYPFQYIMTAwMDE2NTdSaHR0cDovL2RvdXlvdTEwMC5jb206NzAwMC9VcGxvYWQvRmlsbVBpYy8yMDE2MDcvMjAxNjA3MjcxNzA2MDE1OTk4LmpwZ18xNzB4MjQwLmpwZw/osI7oqIDopb/opb/ph4wKMjAxNi0wOC0wOQEgAGQCAQ9kFgJmDxUGCDEwMDAxNjU1Umh0dHA6Ly9kb3V5b3UxMDAuY29tOjcwMDAvVXBsb2FkL0ZpbG1QaWMvMjAxNjA3LzIwMTYwNzI3MTUxMDQ5Nzg5My5qcGdfMTcweDI0MC5qcGcM5L2/5b6S6KGM6ICFCjIwMTYtMDgtMTEBIABkAgIPZBYCZg8VBggxMDAwMTY1NlJodHRwOi8vZG91eW91MTAwLmNvbTo3MDAwL1VwbG9hZC9GaWxtUGljLzIwMTYwNy8yMDE2MDcyNzE1MDI1NTY1NzYuanBnXzE3MHgyNDAuanBnFeaIkeS7rOivnueUn+WcqOS4reWbvQoyMDE2LTA4LTEyASAAZAIDD2QWAmYPFQYIMTAwMDE2NTRSaHR0cDovL2RvdXlvdTEwMC5jb206NzAwMC9VcGxvYWQvRmlsbVBpYy8yMDE2MDcvMjAxNjA3MjcxNTEzMDI3NjM5LmpwZ18xNzB4MjQwLmpwZxXor7rkuprmlrnoiJ/mvILmtYHorrAKMjAxNi0wOC0xMgN0YWcCM0RkZIAg6t9GVOEWf0lWap1CP36R7hED" />
 </div>
-
 <div>
-
 	<input type="hidden" name="__VIEWSTATEGENERATOR" id="__VIEWSTATEGENERATOR" value="822A24EC" />
 </div>
         <input type="hidden" value="" id="ClientID"/>
@@ -83,7 +85,7 @@
     document.getElementById("defaultCityName").innerHTML = Utils.getCookie("CityName");
     document.getElementById("defaultCityName").title = Utils.getCookie("CityName");
     //function CurentTime()
-    //{ 
+    //{
     //    var now = new Date();
        
     //    var year = now.getFullYear();       //年
@@ -109,9 +111,9 @@
     //        clock += "0";
            
     //    clock += hh + ":";
-    //    if (mm < 10) clock += '0'; 
-    //    clock += mm; 
-    //    return(clock); 
+    //    if (mm < 10) clock += '0';
+    //    clock += mm;
+    //    return(clock);
     //}
     //if ((new Date(CurentTime())) >= new Date("2014-03-27 08:00:00")) {
     //    document.getElementById("tips").style.display = "none";
@@ -123,10 +125,10 @@
     <div class="nav">
         <div class="tab_nav">
             <ul>
-                <li class="fl cur"><a href="javascript:void(0)javascript:void(0);" class="oaClick">影片</a></li>
-                <li class="fl cur"><a href="javascript:void(0)javascript:void(0);">影院</a></li>
-                <li class="fl cur"><a href="javascript:void(0)javascript:void(0);">活动</a></li>
-                <li class="fl cur"><a href="{{URL('lists')}}">正在热映</a></li>
+                <li class="fl cur"><a href="javascript:void(0);" class="oaClick">影片</a></li>
+                <li class="fl cur"><a href="javascript:void(0)">选购套餐</a></li>
+                <li class="fl cur"><a href="javascript:void(0)">票房排行</a></li>
+                <li class="fl cur"><a href="{{URL('center')}}">我的地盘</a></li>
             </ul>
         </div>
     </div>
@@ -134,118 +136,55 @@
     <!--TAB1样式开始-->
     <div id='tabid1' class='tabid' style='display: block;'>
 
-        <p class="title"><img src="http://m.douyou100.com/Resources/douyou100_1/images/movie_icon.png" width="18" height="18" class="fl" style="margin:9px 3px 0px 0px;" /><span class="f15 hsz fl">正在热映</span><a class="fr" href="javascript:void(0)Buy_tickit.aspx?ClientID=">如何购票<img src="http://m.douyou100.com/Resources/douyou100_1/images/how.png" width="12px" height="12px" /></a></p>
+        <p class="title"><img src="http://m.douyou100.com/Resources/douyou100_1/images/movie_icon.png" width="18" height="18" class="fl" style="margin:9px 3px 0px 0px;" /><span class="f15 hsz fl">正在热映</span><a class="fr" href="javascript:void(0);">如何购票<img src="http://m.douyou100.com/Resources/douyou100_1/images/how.png" width="12px" height="12px" /></a></p>
         <div class="all_movie clear">
-            
-                    <div class="movie">
-                        <a href="{{URL('details')}}">
-                            <img src='images/201607191024302995.jpg_170x240.jpg' width="140px" height="195px" class="fl" /></a>
-                        <div class="poster">
-                            <p class="Hide">我最好朋友的婚礼</p>
-                            <a href="javascript:void(0)" class="btn">立即购票</a>                        </div>
-                        <div class=" ">
-                            <div class="tag_wz"></div>
-                        </div>
-                    </div>
+             <?php foreach($well as $key=>$val){?>
+                 <div class="movie">
+                     <a href="{{URL('details')}}?movie_id={{$val['movie_id']}}">
+                         <img src='{{$val['movie_img']}}' width="140px" height="195px" class="fl" />
+                     </a>
+                     <div class="poster">
+                         <p class="Hide">{{$val['movie_name']}}</p>
+                         <a href="javascript:void(0)" class="btn">立即购票</a>                                       </div>
+                     <div class=" ">
+                         <div class="tag_wz"></div>
+                     </div>
+                 </div>
+             <?php }?>
+
                 
-                    <div class="movie">
-                        <a  "OnDetailClick('10001524','1')">
-                            <img src='http://douyou100.com:7000/Upload/FilmPic/201607/201607221125214499.jpg_170x240.jpg' width="140px" height="195px" class="fl" /></a>
-                        <div class="poster">
-                            <p class="Hide">夏有乔木 雅望天堂</p>
-                            <a href="javascript:void(0)#" "Buy_TK('10001524','夏有乔木 雅望天堂')" class="btn">立即购票</a>                        </div>
-                        <div class=" ">
-                            <div class="tag_wz"></div>
-                        </div>
-                    </div>
-                
-                    <div class="movie">
-                        <a  "OnDetailClick('10001578','1')">
-                            <img src='http://douyou100.com:7000/Upload/FilmPic/201608/201608011057219752.jpg_170x240.jpg' width="140px" height="195px" class="fl" /></a>
-                        <div class="poster">
-                            <p class="Hide">古曼</p>
-                            <a href="javascript:void(0)#" "Buy_TK('10001578','古曼')" class="btn">立即购票</a>                        </div>
-                        <div class=" ">
-                            <div class="tag_wz"></div>
-                        </div>
-                    </div>
-                
-                    <div class="movie">
-                        <a  "OnDetailClick('10001628','1')">
-                            <img src='http://douyou100.com:7000/Upload/FilmPic/201607/201607061033184798.jpg_170x240.jpg' width="140px" height="195px" class="fl" /></a>
-                        <div class="poster">
-                            <p class="Hide">泰山归来：险战丛林</p>
-                            <a href="javascript:void(0)#" "Buy_TK('10001628','泰山归来：险战丛林')" class="btn">立即购票</a>                        </div>
-                        <div class="tag">
-                            <div class="tag_wz">IMAX</div>
-                        </div>
-                    </div>
-                 
+
             <div class="movie movie_one"></div>
             <div class="movie movie_one"></div>
         </div>
 
         <div class="clear" style="">
-            <a type="button" class="btn_hs cur" href="list.htm">更多正在热映影片>></a>
+            <a type="button" class="btn_hs cur" href="{{URL('lists')}}">更多正在热映影片>></a>
         </div>
 
         <p class="title"><img src="http://m.douyou100.com/Resources/douyou100_1/images/movie_icon.png" width="18" height="18" class="fl" style="margin:9px 3px 0px 0px;" /><span class="f15 hsz fl">即将上映</span></p>
         <div class="all_movie clear">
-            
+            <?php foreach($soon as $key=>$val){?>
                     <div class="movie">
-                         <a  "OnDetailClick('10001657','2')">
-                            <img src='http://douyou100.com:7000/Upload/FilmPic/201607/201607271706015998.jpg_170x240.jpg' width="140px" height="195px" class="fl" /></a>
+                         <a href="{{URL('details')}}?movie_id={{$val['movie_id']}}">
+                            <img src='{{$val['movie_img']}}' width="140px" height="195px" class="fl" /></a>
                         <div class="poster">
-                            <p class="Hide f14">谎言西西里</p>
-                            <p class="Hide f14">2016-08-09上映</p>
+                            <p class="Hide f14">{{$val['movie_name']}}</p>
+                            <p class="Hide f14">{{$val['movie_time']}}</p>
                         </div>
-                        <div class=" ">
+                        <div class="">
                             <div class="tag_wz"></div>
                         </div>
                     </div>
-                
-                    <div class="movie">
-                         <a  "OnDetailClick('10001655','2')">
-                            <img src='http://douyou100.com:7000/Upload/FilmPic/201607/201607271510497893.jpg_170x240.jpg' width="140px" height="195px" class="fl" /></a>
-                        <div class="poster">
-                            <p class="Hide f14">使徒行者</p>
-                            <p class="Hide f14">2016-08-11上映</p>
-                        </div>
-                        <div class=" ">
-                            <div class="tag_wz"></div>
-                        </div>
-                    </div>
-                
-                    <div class="movie">
-                         <a  "OnDetailClick('10001656','2')">
-                            <img src='http://douyou100.com:7000/Upload/FilmPic/201607/201607271502556576.jpg_170x240.jpg' width="140px" height="195px" class="fl" /></a>
-                        <div class="poster">
-                            <p class="Hide f14">我们诞生在中国</p>
-                            <p class="Hide f14">2016-08-12上映</p>
-                        </div>
-                        <div class=" ">
-                            <div class="tag_wz"></div>
-                        </div>
-                    </div>
-                
-                    <div class="movie">
-                         <a  "OnDetailClick('10001654','2')">
-                            <img src='http://douyou100.com:7000/Upload/FilmPic/201607/201607271513027639.jpg_170x240.jpg' width="140px" height="195px" class="fl" /></a>
-                        <div class="poster">
-                            <p class="Hide f14">诺亚方舟漂流记</p>
-                            <p class="Hide f14">2016-08-12上映</p>
-                        </div>
-                        <div class="tag">
-                            <div class="tag_wz">3D</div>
-                        </div>
-                    </div>
+            <?php }?>
+
                  
             <div class="movie movie_one">&nbsp;</div>
             <div class="movie movie_one">&nbsp;</div>
         </div>
 
         <div class="clear" style="">
-            <button type="button" class="btn_hs cur" "var id=document.getElementById('ClientID').value; window.location.href='javascript:void(0)movie_future_list.aspx?ClientID='+id">更多即将上映影片>></button>
+            <button type="button" class="btn_hs cur">更多即将上映影片>></button>
         </div>
 
     </div>
