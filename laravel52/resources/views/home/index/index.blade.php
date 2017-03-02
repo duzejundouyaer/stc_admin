@@ -174,9 +174,8 @@
         </div>
 
         <div class="clear" style="">
-            <button type="button" class="btn_hs cur">更多即将上映影片>></button>
+            <a type="button" class="btn_hs cur" href="{{URL('forthcoming')}}">更多即将上映影片>></a>
         </div>
-
     </div>
     <!--TAB1样式结束-->
     <div id="shadow"></div>
