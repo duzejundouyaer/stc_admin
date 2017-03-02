@@ -47,11 +47,34 @@ class GrabController extends Controller
         if($res)
         {
             //支付
-            $this->zfbPay($data['order_number'],$data['price'],$data['count'],$str);die;
+            $this->zfbPay($data['order_number'],$data['price'],$data['count'],$str);
+        }else{
+            echo "<script>alert('下订单失败');location.href='grab/$play_id'</script>";
         }
 
     }
+    //同步地址
+    public function successUrl()
+    {
 
+        if(isset($_GET['out_trade_no']))
+        {
+            $sn = $_GET['out_trade_no'];
+            $data['status'] = 1;
+            $res = DB::table('order')->where("order_number",'=',$sn)->update($data);
+            if($res)
+            {
+                //修改订单状态给用户发短信
+                $mess = DB::table('order')->join('users', 'users.u_id', '=', 'order.user_id')->where("order_number",'=',$sn)->first();
+                print_r($mess);
+//                $user = $mess->user;
+//                $content =
+//                $this->Short();
+            }
+        }else{
+            echo "<script>alert('购买失败');location.href='/'</script>";
+        }
+    }
     //查询已购买的位置
     public function checked()
     {
@@ -64,14 +87,13 @@ class GrabController extends Controller
         }
         echo json_encode($result);die;
     }
-
     //手机支付
     public function zfbPay($sn,$price,$count,$str)
     {
         $url = 'http://localhost:9096/training/stc_admin/laravel52/public/1/wappay/pay.php';
         $data = [
             'WIDout_trade_no' => $sn,
-            'WIDsubject'      => '购买'.$count.'电影票',
+            'WIDsubject'      => '购买'.$count.'张电影票',
             'WIDtotal_amount' => $price,
             'WIDbody'  =>         '支付'
         ];
@@ -93,4 +115,54 @@ class GrabController extends Controller
         $data = curl_exec($ch);//运行curl
         return $data;
     }
+    //拼接短信参数
+    public function Short($tel,$content)
+    {
+
+        $nowapi_parm['app']='sms.send';
+        $nowapi_parm['param']= $content;
+        $nowapi_parm['tempid']=50895;
+        $nowapi_parm['phone']=$tel;
+        $nowapi_parm['appkey']=20892;
+        $nowapi_parm['sign']='28feb41149334bcdb2d02918f618d98d';
+        $nowapi_parm['format']='json';
+        $result=$this->nowapi_call($nowapi_parm);
+        if($result['status'] == 'OK'){
+            return 1;
+        }
+    }
+    //短信接口
+    public function nowapi_call($a_parm){
+        if(!is_array($a_parm)){
+            return false;
+        }
+        //combinations
+        $a_parm['format']=empty($a_parm['format'])?'json':$a_parm['format'];
+        $apiurl=empty($a_parm['apiurl'])?'http://api.k780.com:88/?':$a_parm['apiurl'].'/?';
+        unset($a_parm['apiurl']);
+        foreach($a_parm as $k=>$v){
+            $apiurl.=$k.'='.$v.'&';
+        }
+        $apiurl=substr($apiurl,0,-1);
+        if(!$callapi=file_get_contents($apiurl)){
+            return false;
+        }
+        //format
+        if($a_parm['format']=='base64'){
+            $a_cdata=unserialize(base64_decode($callapi));
+        }elseif($a_parm['format']=='json'){
+            if(!$a_cdata=json_decode($callapi,true)){
+                return false;
+            }
+        }else{
+            return false;
+        }
+        //array
+        if($a_cdata['success']!='1'){
+            echo $a_cdata['msgid'].' '.$a_cdata['msg'];
+            return false;
+        }
+        return $a_cdata['result'];
+    }
+
 }
