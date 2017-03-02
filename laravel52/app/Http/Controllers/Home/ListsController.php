@@ -10,9 +10,18 @@ use App\Http\Controllers\Controller;
 class ListsController extends Controller
 {
     //正在热播
-    public function lists(){
+    public function lists()
+    {
         $movie = DB::table('movie')->where('is_hot', '=',1)->where('is_status','=',1)->where('release','=',1)->get();
         $number = count($movie);
         return view('home.lists.lists',['movie'=>$movie,'number'=>$number]);
     }
+    //即将上映
+    public function forthcoming()
+    {
+        $movie = DB::table('movie')->where('release','=',0)->get();
+        $number = sizeof($movie);
+        return view('home.lists.forthcoming',['movie'=>$movie,'number'=>$number]);
+    }
+
 }
