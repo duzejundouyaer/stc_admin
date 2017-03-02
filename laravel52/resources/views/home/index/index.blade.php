@@ -7,7 +7,7 @@
     <meta content="black" name="apple-mobile-web-app-status-bar-style" />
     <meta content="telephone=no" name="format-detection" />
     <title>
-	仿新版中影票务通触屏版自适应手机wap电影网站模板下载
+	首页
     </title>
     <link id="ctl00_css1" href="{{asset('style/home/css/style.css')}}" rel="stylesheet" />
     <link id="ctl00_css2" href="{{asset('style/home/css/inside_pages.css')}}" rel="stylesheet" />
@@ -66,10 +66,14 @@
             <a href="javascript:void(0)">
                 <img src="http://m.douyou100.com/Resources/douyou100_1/images/LOGO.png" width="180" height="36" /></a>
        </li>
-        <li class="fr city Hide">
+        <li class="fr Hide">
             <label>
-                <p class="fl paint Hide"><a href="javascript:void(0)" style="color: white;"><b id="defaultCityName">深圳</b></a></p>
-                <img src="http://m.douyou100.com/Resources/douyou100_1/images/city.png" width="12" height="11"  />
+                @if(session('nickname')){
+                    <p class="fl paint Hide"><a href="" style="color: white; margin-right:10px;">session(nickname)</a>,<a href="{{URL('login_out')}}">退出</a></p>
+                }
+                @endif
+                <p class="fl paint Hide"><a href="{{URL('login')}}" style="color: white; margin-right:10px;">登陆</a></p>
+               
             </label>
         </li>
         
