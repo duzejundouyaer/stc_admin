@@ -19,6 +19,7 @@ Route::get('/lists','Home\ListsController@lists');//正在热播
 
 
 Route::get('/details','Home\DetailsController@details');//详情页
+Route::post('/commont','Home\DetailsController@commonts');//用户评论
 
 /**
  * 登陆
