@@ -9,33 +9,44 @@
     <link rel="stylesheet" type="text/css" href="{{asset('style/home/css/stylecenter.css')}}">
 </head>
 
-<body>
+<body style="background-color: #868288">
 
 <div id="_centent">
-    <header>
+    <header style="background-color: #000000;color: #fdf8f8">
         <div class="rt-bk">
-            <i class="bk"></i>
-            <p>返回</p>
+            {{--<i class="bk"></i>--}}
+            <p onclick="history.back(-1);"><< 返回</p>
         </div>
         <div class="top-name"><p>个人中心</p></div>
     </header>
 
-    <div class="head">
+    <div class="head" style="background-image: url({{asset('style/home/img/zuo.png')}})">
         <div class="head-img">
-            <img src="{{asset('style/home/img/head-img.png')}}">
+            <label>
+                <input type="file" accept="audio/*;capture=microphone" name="file" onchange="readFile(this)"  style="display: none ">
+                <img src="{{asset($userone['img'])}}" id="art_thumb_img">
+            </label>
+            {{--<label>--}}
+                  {{-- <img src="{{$val->n_img}}" alt="" height="100" width="100" class="qq">--}}
+                 {{--<input type="file" id="file1" style="VISIBILITY: hidden"  >--}}
+                {{--<img id="preview" width="100" height="100" src="{{asset($userone['img'])}}">--}}
+                {{--<input type="file" name="touxiang" id="doc" style="display:none" onchange="javascript:setImagePreview();">--}}
+            {{--</label>--}}
         </div>
         <div class="head-dsb">
-            <p class="dsb-name">--凌乱</p>
-            <p class="dsb-id">ID  1271543621</p>
+            <p class="dsb-name">{{$userone['nickname']}}</p>
+            <p class="dsb-id">手机  {{$userone['user']}}</p>
         </div>
     </div>
 
     <div class="nav">
         <ul>
-            <li>
-                <i class="idt"></i>
-                <p>订单</p>
-            </li>
+            <a href="{{URL('orders')}}">
+                <li>
+                    <i class="idt"></i>
+                    <p>订单</p>
+                </li>
+            </a>
             <li class="pt-line">
                 <i class="clt"></i>
                 <p>收藏</p>
@@ -49,10 +60,12 @@
 
     <section class="mt-1">
         <div class="ps-lt">
-            <div class="lt-dsb">
-                <p>修改个人资料</p>
-                <i class="arr-right"></i>
-            </div>
+            <a href="{{URL('updateone')}}">
+                <div class="lt-dsb">
+                    <p>修改个人资料</p>
+                    <i class="arr-right"></i>
+                </div>
+            </a>
             <div class="lt-dsb cl-bb">
                 <p>修改密码</p>
                 <i class="arr-right"></i>
@@ -90,33 +103,48 @@
         </div>
         <div class="ps-lt">
             <div class="lt-dsb cl-bb">
-                <p>设置</p>
+                <p id="ppp">设置</p>
                 <i class="arr-right"></i>
             </div>
         </div>
     </section>
-
+    <input type="hidden" id="lala" value="" ids=""/>
     <div class="jg"></div>
 </div>
-{{--<footer>--}}
-    {{--<div class="mune">--}}
-        {{--<img src="img/1.png">--}}
-        {{--<p>首页</p>--}}
-    {{--</div>--}}
-    {{--<div class="mune">--}}
-        {{--<img src="img/2.png">--}}
-        {{--<p>商家</p>--}}
-    {{--</div>--}}
-    {{--<div class="mune">--}}
-        {{--<img src="img/3.png">--}}
-        {{--<p>申请加盟</p>--}}
-    {{--</div>--}}
-    {{--<div class="mune">--}}
-        {{--<img src="img/4.png">--}}
-        {{--<p>个人中心</p>--}}
-    {{--</div>--}}
-{{--</footer>--}}
+<script type="text/javascript" src="{{asset('style/home/js/jquery-1.8.0.min.js')}}"></script>
+<script>
+    function readFile(obj) {
+        var file = obj.files[0];
+        //判断类型是不是图片
+        if (!/image\/\w+/.test(file.type)) {
+            alert("请确保文件为图像类型");
+            return false;
+        }
+        var reader = new FileReader();
+        reader.readAsDataURL(file);
+        reader.onload = function (e) {
+          imag = this.result; //就是base64
+//            alert(img);
+//            $('#lala').attr('ids',img);
+            var _token="{{csrf_token()}}";
+            $.ajax({
+                type: "POST",
+                {{--url: "{{URL('updatecenter')}}?imag="+img,--}}
+                url: "updatecenter",
+                data: {imag:imag,_token:_token},
+                dataType: "json",
+                success: function(msg){
+                    //alert(msg);
+                    if(msg==0){
 
+                    }else{
+                        $('#art_thumb_img').attr('src','/'+msg);
+                    }
+                }
+            });
+        }
+    }
+</script>
 <script>
     (function (doc, win) {
         var docEl = doc.documentElement,
@@ -132,11 +160,12 @@
         doc.addEventListener('DOMContentLoaded', recalc, false);
     })(document, window);
 </script>
-<script type="text/javascript" src="{{asset('style/home/js/jquery-1.8.0.min.js')}}"></script>
+
 <script type="text/javascript">
     $('.check-on').click(function(){
         $(this).toggleClass('check-off');
     })
 </script>
+
 </body>
 </html>
