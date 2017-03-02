@@ -395,11 +395,11 @@ $session = new Session;
                 
                 <div class="cloum" >
                     <span>发表评论</span><span style="margin-left:180px;">共有<span>10000</span>条评论</span>
-                    <textarea  class="emotion" name="" id="" cols="50" rows="10" style="" placeholder='来说点儿什么吧。'></textarea>
+                    <textarea  class="emotion" name="" id="content" cols="50" rows="10" style="" placeholder='来说点儿什么吧。'></textarea>
                 </div>
                 <div style="margin-left:30px;">
-                    <span><a href="javascript:void(0)" style="color:#3C3C3C;" id="face">表情</a></span>
-                    <span style="margin-left:260px;" ><a href="javascript:void(0)" id="analytic"   style="color:red;">发布</a></span>
+                    <span><a href="javascript:void(0)" style="color:#3C3C3C;" id="face"></a></span>
+                    <span style="margin-left:260px;" id="{{$desc->movie_id}}"><a href="javascript:void(0)" id="analytic"   style="color:red;">发布</a></span>
                 </div>
                 <h3 style="margin-top:40px;margin-left:10px;">请您注意:</h3>
                 <div style="margin-top:5px;margin-left:30px">
@@ -411,7 +411,7 @@ $session = new Session;
             <div class="hsz" style="width: 94%; height:100%; margin: 0 3%; line-height: 35px; text-decoration:underline" id="header">
                 <span class="fr">
                     <?php  
-                         if($session->get('username')!='')
+                         if($session->get('nickname')=='')
                          {
                             echo "<a class='hhsz' 'FilmReview(10001449);' href='login'>登录发表评论</a>";
                          }else
@@ -423,7 +423,7 @@ $session = new Session;
                 </span>
                   <img src='http://m.douyou100.com/Resources/douyou100_1/images/discuss.png' width='14' height='12' class='fr' style='margin-top: 12px;' />
             </div >
-            <hr style="height:1px;border:none;border-top:1px dashed #0066CC; width:500px;" />
+            <hr style="height:1px;border:none;border-top:1px dashed #0066CC; width:500px;" id="under"/>
             <div class="hsz" style="width: 94%; height:100%; margin: 0 3%; line-height: 35px; text-decoration:underline">
                   <div style="500%"><dl style="width:350px;">
                       <dt  style="float:left; width:40px;"><img  src="http://douyou100.com:7000/Upload/FilmPic/201607/201607191024302995.jpg_170x240.jpg" alt="" style="margin-top:10px;border-radius:80px;width:50px;height:50px;">
@@ -479,7 +479,7 @@ $session = new Session;
             </div>
         </div>
 
-
+<input type="hidden" id="_token" value="{{csrf_token()}}">
         <!--正在热映详情样式结束-->
         <script>
             Utils.onPageLoad=setupZoom();
@@ -559,6 +559,32 @@ $session = new Session;
            $("#newtab2").css("background","#272727")
            $("#newtab2").css("color","#fff")
         })
-       
+       //发布评论
+       $("#analytic").click(function(){
+              var content = $("#content").val();
+              var movie_id = $(this).parent().attr('id');
+              var _token =$('#_token').val();
+              if(content.length<5)
+              {
+                  alert('请输入5-40个字符之间');
+                  return false;
+              }else if(content.length>40)
+              {
+                  alert('请输入5-40个字符之间');
+                  return false;
+              }else
+              {
+                    $.ajax({
+                   type: "POST",
+                   url: "{{URL('commont')}}",
+                   data: {content:content,movie_id:movie_id,_token:_token},
+                   dataType:'json',
+                   success: function(msg){
+                        alert(msg.url);return;
+                       $("#under").after("<div class='hsz' style='width: 94%; height:100%; margin: 0 3%; line-height: 35px; text-decoration:underline'><div style='500%'><dl style='width:350px;'><dt  style='float:left; width:40px;'><img  src='"+msg.url+""+msg.img+"'  style='margin-top:10px;border-radius:80px;width:50px;height:50px;'></dt><dd  style='float:right;width:280px;margin-left:20px;'><p>"+msg.c_content+"</p></dd></dl></div><hr style='height:1px;border:none;border-top:1px dashed #C6A300; width:500px;' /></div>");
+                   }
+                });
+              }
+       })
  })
 </script>
