@@ -15,7 +15,9 @@
 //    return view('welcome');
 //});
 Route::get('/','Home\IndexController@index');//首页
-Route::get('/lists','Home\IndexController@lists');//正在热播
+Route::get('/lists','Home\ListsController@lists');//正在热播
+
+
 Route::get('/details','Home\DetailsController@details');//详情页
 <<<<<<< HEAD
 /**
@@ -63,4 +65,7 @@ Route::group(['prefix'=>'admin','namespace'=>'Admin'], function () {
 
     Route::get('foot','FootController@foot');//添加食品
     Route::post('addfoot','FootController@addfoot');//食物入库
+    Route::get('footshow','FootController@footshow');//食物展示
+    Route::any('package','FootController@package');//添加套餐
+    Route::any('packageshow','FootController@packageshow');//套餐展示
 });
