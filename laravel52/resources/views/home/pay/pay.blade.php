@@ -277,7 +277,7 @@ $session = new Session;
 
         <div class="nav">
             <div class="tab_nav tab_nav_one">
-                <a class="hide" href="javascript:void(0)javascript:history.go(-1)">
+                <a class="hide" href="javascript:history.go(-1)">
                     <img src="http://m.douyou100.com/Resources/douyou100_1/images/return.png" width="20" height="16" class="fl" /></a><div class="fl Hide
                             ">
                     {{$movieList->movie_name}} - 购票页
@@ -327,7 +327,13 @@ $session = new Session;
             <div class="story clear" style="height: auto;color: #FFFFff" >
                 <ul>
                     @foreach($todayList as $k=>$v)
-                    <li>{{$v->begin_time}} - {{$v->end_time}}&nbsp;&nbsp;{{$v->home_name}} <input name="" id="Gp" type="button" value="预  订" class="btn_infor_gp" style="width: 50px;margin-left: 150px"/></li>
+                    @if($v->zhuangtai == 1)
+                            <li>{{$v->begin_time}} - {{$v->end_time}}&nbsp;&nbsp;{{$v->home_name}} &nbsp;&nbsp;<span style="color:red ">还未开播</span> <input name="" id="Gp" type="button" value="预  订" class="btn_infor_gp" style="width: 50px;margin-left: 70px" onclick="window.location.href='{{URL('/grab')}}/{{$v->id}}'"/></li>
+                    @elseif($v->zhuangtai == 2)
+                             <li>{{$v->begin_time}} - {{$v->end_time}}&nbsp;&nbsp;{{$v->home_name}} &nbsp;&nbsp;<span style="color:forestgreen ">正在播放</span></li>
+                    @else
+                            <li>{{$v->begin_time}} - {{$v->end_time}}&nbsp;&nbsp;{{$v->home_name}} &nbsp;&nbsp;<span style="color:yellow ">已结束</span> </li>
+                        @endif
                      @endforeach
                 </ul>
             </div>
@@ -338,7 +344,13 @@ $session = new Session;
             <div class="story clear" style="height: auto;color: #FFFFff" >
                 <ul>
                     @foreach($tmorryList as $k=>$v)
-                        <li>{{$v->begin_time}} - {{$v->end_time}}&nbsp;&nbsp;{{$v->home_name}} <input name="" id="Gp" type="button" value="预  订" class="btn_infor_gp" style="width: 50px;margin-left: 150px"/></li>
+                        @if($v->zhuangtai == 1)
+                            <li>{{$v->begin_time}} - {{$v->end_time}}&nbsp;&nbsp;{{$v->home_name}} &nbsp;&nbsp;<span style="color:red ">还未开播</span> <input name="" id="Gp" type="button" value="预  订" class="btn_infor_gp" style="width: 50px;margin-left: 70px" onclick="window.location.href='{{URL('/grab')}}/{{$v->id}}'"/></li>
+                        @elseif($v->zhuangtai == 2)
+                            <li>{{$v->begin_time}} - {{$v->end_time}}&nbsp;&nbsp;{{$v->home_name}} &nbsp;&nbsp;<span style="color:forestgreen ">正在播放</span></li>
+                        @else
+                            <li>{{$v->begin_time}} - {{$v->end_time}}&nbsp;&nbsp;{{$v->home_name}} &nbsp;&nbsp;<span style="color:yellow ">已结束</span> </li>
+                        @endif
                     @endforeach
                 </ul>
             </div>
@@ -350,7 +362,13 @@ $session = new Session;
             <div class="story clear" style="height: auto;color: #FFFFff" >
             <ul>
                 @foreach($houtianList as $k=>$v)
-                    <li>{{$v->begin_time}} - {{$v->end_time}}&nbsp;&nbsp;{{$v->home_name}} <input name="" id="Gp" type="button" value="预  订" class="btn_infor_gp" style="width: 50px;margin-left: 150px"/></li>
+                    @if($v->zhuangtai == 1)
+                        <li>{{$v->begin_time}} - {{$v->end_time}}&nbsp;&nbsp;{{$v->home_name}} &nbsp;&nbsp;<span style="color:red ">还未开播</span> <input name="" id="Gp" type="button" value="预  订" class="btn_infor_gp" style="width: 50px;margin-left: 70px" onclick="window.location.href='{{URL('/grab')}}/{{$v->id}}'"/></li>
+                    @elseif($v->zhuangtai == 2)
+                        <li>{{$v->begin_time}} - {{$v->end_time}}&nbsp;&nbsp;{{$v->home_name}} &nbsp;&nbsp;<span style="color:forestgreen ">正在播放</span></li>
+                    @else
+                        <li>{{$v->begin_time}} - {{$v->end_time}}&nbsp;&nbsp;{{$v->home_name}} &nbsp;&nbsp;<span style="color:yellow ">已结束</span> </li>
+                    @endif
                 @endforeach
             </ul>
             </div>

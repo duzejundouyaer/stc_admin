@@ -23,12 +23,12 @@ License URL: http://creativecommons.org/licenses/by/3.0/
 </head>
 <body>
 <div class="content">
-    <h1>几号厅选票</h1>
+    <h1>{{$playInfo->home_name}}</h1>
     <div class="main">
-        <h2>电影名称</h2>
+        <h2>{{ $playInfo->movie_name }}</h2>
         <div class="demo">
             <div id="seat-map">
-                <div class="front">SCREEN</div>
+                <div class="front">电影屏幕</div>
             </div>
             <div class="booking-details">
                 <ul class="book-left">
@@ -39,8 +39,8 @@ License URL: http://creativecommons.org/licenses/by/3.0/
                     <li>Seats :</li>
                 </ul>
                 <ul class="book-right">
-                    <li>: Gingerclown</li>
-                    <li>: April 3, 21:00</li>
+                    <li>: {{ $playInfo->movie_name }}</li>
+                    <li>: {{ $playInfo->day }} {{ $playInfo->begin_time }}</li>
                     <li>: <span id="counter">0</span></li>
                     <li>: <b><i>$</i><span id="total">0</span></b></li>
                 </ul>
@@ -55,7 +55,7 @@ License URL: http://creativecommons.org/licenses/by/3.0/
         </div>
 
         <script type="text/javascript">
-            var price = 10; //price
+            var price = {{ $playInfo->day_price }}; //price
             $(document).ready(function() {
                 var $cart = $('#selected-seats'), //Sitting Area
                         $counter = $('#counter'), //Votes
@@ -116,8 +116,18 @@ License URL: http://creativecommons.org/licenses/by/3.0/
                         }
                     }
                 });
-                //sold seat
-                sc.get(['1_2', '4_4','4_5','6_6','6_7','8_5','8_6','8_7','8_8', '10_1', '10_2']).status('unavailable');
+
+                $.ajax({
+                    type: "POST",
+                    url: "{{URL('checked')}}",
+                    data: "play_id={{ $playInfo->id }}"+"&_token={{csrf_token()}}",
+                    dataType:'json',
+                    success: function(msg){
+                        //默认选中
+                        sc.get(msg).status('unavailable');
+                    }
+                });
+
 
             });
             //sum total money
@@ -129,6 +139,25 @@ License URL: http://creativecommons.org/licenses/by/3.0/
 
                 return total;
             }
+            function sub()
+            {
+                var str = '';
+                $(".seatCharts-seat").each(function()
+                {
+                    if($(this).attr('aria-checked') == 'true')
+                    {
+                         str += $(this).attr('id')+',';
+                    }
+                })
+                return str;
+            }
+            //购买
+            $(".checkout-button").click(function()
+            {
+                var str = sub();
+                var play_id = "{{ $playInfo->id }}";
+                location.href = "{{URL('payGrab')}}?str="+str+'&play_id='+play_id;
+            })
         </script>
     </div>
     <p class="copy_rights">&copy; 2016 Movie Ticket Booking Widget. All Rights Reserved | Design by  <a href="http://w3layouts.com/" target="_blank"> W3layouts</a></p>

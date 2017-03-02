@@ -29,17 +29,19 @@ class PayController extends Controller
                 $movieList->$k = str_replace(',','/',$v);
             }
         }
-
         //查询该电影下的 今天 明天  后天的
         $time = date('Y-m-d');
         $tmorry = date('Y-m-d',strtotime($time) + 24 * 60 * 60);
         $houtian = date('Y-m-d',strtotime($time) + 2 * 24 * 60 * 60);
-        //该电影今天播放的场次
-        $todayList = DB::table('play')->select(['id','begin_time','end_time','home_name','day_price'])->join('home', 'home.home_id', '=', 'play.home_id')->where("movie_id",'=',$movie_id)->where("day",'=',$time)->get();
+        //该电影今天播放的场次 //过滤已结束 正在播放 未播放
+        $todayList = DB::table('play')->select(['id','day','begin_time','end_time','home_name','day_price'])->join('home', 'home.home_id', '=', 'play.home_id')->where("movie_id",'=',$movie_id)->where("day",'=',$time)->get();
+        $todayList = $this->comlun($todayList);
         //该电影明天播放的场次
-        $tmorryList = DB::table('play')->select(['id','begin_time','end_time','home_name','day_price'])->join('home', 'home.home_id', '=', 'play.home_id')->where("movie_id",'=',$movie_id)->where("day",'=',$tmorry)->get();
+        $tmorryList = DB::table('play')->select(['id','day','begin_time','end_time','home_name','day_price'])->join('home', 'home.home_id', '=', 'play.home_id')->where("movie_id",'=',$movie_id)->where("day",'=',$tmorry)->get();
+        $tmorryList = $this->comlun($tmorryList);
         //该电影后天播放的场次
-        $houtianList = DB::table('play')->select(['id','begin_time','end_time','home_name','day_price'])->join('home', 'home.home_id', '=', 'play.home_id')->where("movie_id",'=',$movie_id)->where("day",'=',$houtian)->get();
+        $houtianList = DB::table('play')->select(['id','day','begin_time','end_time','home_name','day_price'])->join('home', 'home.home_id', '=', 'play.home_id')->where("movie_id",'=',$movie_id)->where("day",'=',$houtian)->get();
+        $houtianList = $this->comlun($houtianList);
         $data = [
             'todayList' =>$todayList,
             'tmorryList' =>$tmorryList,
@@ -47,5 +49,31 @@ class PayController extends Controller
             'movieList' =>$movieList
         ];
         return view('home.pay.pay',$data);
+    }
+
+    public function comlun($obj)
+    {
+        date_default_timezone_set('PRC');
+        $his = date('H:i',time());
+        $date = date('Y-m-d');
+        foreach ($obj as $k=>$v)
+        {
+            //明天或者后天
+            if($v->day > $date)
+            {
+                $obj[$k]->zhuangtai = '1';
+                continue;
+            }
+            if($v->begin_time < $his && $v->end_time < $his)
+            {
+                $obj[$k]->zhuangtai = '3';
+
+            }else if($v->begin_time < $his && $v->end_time > $his){
+                $obj[$k]->zhuangtai = '2';
+            }else {
+                $obj[$k]->zhuangtai = '1';
+            }
+        }
+        return $obj;
     }
 }
