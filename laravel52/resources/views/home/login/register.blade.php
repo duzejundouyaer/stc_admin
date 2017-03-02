@@ -66,14 +66,26 @@
                 return false;
         }
     })
+ // $(document).on('blur','#code',function () {
+ //       // alert(1);
+ //        var code=$(this).val();
+ //        if(code==''){
+ //            $("#errorInfo").html("请获取验证码");
+ //                return false;
+ //        }
+ //    })
+
     $(document).on('blur','#code',function () {
         var code = $(this).val();
-        //alert(1);
-        $.ajax({
-            type: "get",
-            url: "{{URL('contrast')}}",
-            data: {code:code},
-            success: function(msg){
+        //alert(code);
+        if(code==""){
+             $("#errorInfo").html("请获取验证码");
+        }else{
+             $.ajax({
+                  type: "get",
+                  url: "{{URL('contrast')}}",
+                  data: {code:code},
+                 success: function(msg){
                if(msg == 1){
                    $("#error").val(1);
                    $("#errorInfo").html("验证码正确");
@@ -85,6 +97,7 @@
                }
             }
         });
+        }
     })
 
     $(document).ready(function(){
