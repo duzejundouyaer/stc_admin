@@ -27,7 +27,10 @@ class DetailsController extends Controller
                $food_id[] = $value->foot_id;//将套餐ID合并成一维数组
             }
             $packages = DB::table('pack')->whereIn('id',$food_id)->get(); //获取套餐详情
-        return view('home.details.details',['desc'=>$desc,'packages'=>$packages]);
+            $comment = DB::table('comment')->leftJoin('users', 'comment.users_id', '=', 'users.u_id')->where('movie_id',$movie_id)->orderBy('c_date', 'desc')
+->get();
+            $num = DB::table('comment')->where('movie_id',$movie_id)->count();
+        return view('home.details.details',['desc'=>$desc,'packages'=>$packages,'comment'=>$comment,'num'=>$num]);
     }
     public function commonts(Request $request)
     {
@@ -35,8 +38,8 @@ class DetailsController extends Controller
         $request = $request->all();
         $movie_id = $request['movie_id'];//电影ID
         $strs  = $request['content'];//用户评论内容
-        //$user_id = $session->get('u_id');//用户ID
-        $user_id = '1';
+        $user_id = $session->get('u_id');//用户ID
+        $star = $request['star'];//星级分数
         $datetime = date("Y-m-d H:i:s",time()+8*60*60);
         $Sensitive = DB::table('sensitive')->get();
         $newArray = array();
@@ -48,14 +51,14 @@ class DetailsController extends Controller
         {
             $strs = $this->strreplace($value,$strs);//过滤敏感词
         }
-       $result = DB::table('comment')->insert(['users_id'=>$user_id,'c_content'=>$strs,'c_date'=>$datetime,'movie_id'=>$movie_id,'c_number'=>5]);
+       $result = DB::table('comment')->insert(['users_id'=>$user_id,'c_content'=>$strs,'c_date'=>$datetime,'movie_id'=>$movie_id,'c_number'=>$star]);
        $info = array();
        if($result)
        {
           $user = DB::table('users')->where('u_id',$user_id)->first();
           $info['c_content'] = $strs;
           $info['img'] = $user->img;
-          $info['url'] = public_path('uploads');
+          $info['c_date'] = $datetime;
           return json_encode($info,true);  
        }
     }
