@@ -70,7 +70,7 @@ $session = new Session;
                 <a class="hide" href="javascript:void(0);history.back(-1);">
                     <img src="http://m.douyou100.com/Resources/douyou100_1/images/return.png" width="20" height="16" class="fl" /></a><div class="fl Hide
                             ">
-                    单号：{{$orderone->order_number}}
+                    来晚了！
                 </div>
             </div>
         </div>
@@ -81,90 +81,33 @@ $session = new Session;
             <div class="movie_in fl top">
                 <dl>
                     <dt>
-                        <img src="{{asset($orderone->movie_img)}}" width="147" height="203" /></dt>
                     <dd>
                         <div class="all_dd">
-                            <p class="Hide f15 fl w_movie">{{$orderone->movie_name}}</p>
                         </div><br/>
-                        <p class="all_dd clear Hide f12"><span class="hhsz">票数：</span>{{$orderone->count}} 张</p>
-                        <p class="all_dd clear Hide f12"><span class="hhsz">单价：</span>￥{{$orderone->day_price}} &nbsp;&nbsp;&nbsp;<span style="text-decoration:line-through;">￥{{$orderone->movie_price}} </span></p>
-                        <p class="all_dd clear Hide f12"><span class="hhsz">总价：</span>￥{{$orderone->price}}</p>
-                        <p class="all_dd clear Hide f12"><span class="hhsz">厅号：</span>{{$orderone->home_name}}</p>
-                        {{--<p class="all_dd clear Hide f12"><span class="hhsz">产地： </span>{}</p>--}}
-                        <br/>
-                        <p class="all_dd clear Hide f12"><span class="hhsz">开播时间:</span>{{$orderone->day}}&nbsp;&nbsp;{{$orderone->begin_time}}&nbsp;--&nbsp;{{$orderone->end_time}}</p>
-                        <br/>
-                        <?php if($orderone->status==0){?>
-                        <div class="all_dd clear" style="margin-bottom: 4px;">
-                                <input name="" id="Gp" type="button" value="购  票" class="btn_infor_gp"   onclick="window.location.href='{{URL('/ispayshou')}}/{{$orderone->order_id}}'" />
+                        <div style="text-align: center;color: #fdf8f8;font-size: 20px;">
+                            你来支付晚了！由于您为及时付款！
+                            <br/>
+                            <br/>
+                            你选的座位&nbsp;
+                            <?php foreach($arr as $key=>$val){?>
+                                 <?=$val?>&nbsp;&nbsp;,
+                            <?php }?>
+                            已经被别人买了；
                         </div>
-                        <?php }?>
                     </dd>
                 </dl>
-
                 <div class="clear"></div>
             </div>
-
-
-
         </div>
-            <div class="new_nav clear fl">
-                <ul>
-                    <li class="cur" id='newtab1' >剧情</li>
-                    <li class="cur " id='newtab2' >套餐<div class="border fl"></div>
-                    </li>
-                    <li class="cur new_nav_sel_li" id='newtab3'>座号<div class="border fl"></div>
-                    </li>
-                </ul>
-            </div>
 
-        <div id='newtabid1' class='tabid clear mr_top' style='display: none;'>
-            <div class="story clear">
-                <div class="fl">剧情：</div>
 
-            </div>
 
-        </div>
-            <div id='newtabid2' class='tabid clear' style='display: none;'>
-                    <div class="poster fl" style="height: auto">
-                        <a href="javascript:void(0)" style="float:right;margin-right:30px;margin-top:15px;">购买</a>
-                        <div class="hsz" style="width: 94%; height:100%; margin: 0 3%; line-height: 35px; text-decoration:underline">
-                            <div style="500%"><dl style="width:350px;">
-                                    <dt  style="float:left; width:40px;"><img  src="" alt="" style="margin-top:10px;border-radius:80px;width:50px;height:50px;">
-                                    </dt>
-                                    <dd  style="float:right;width:280px;margin-left:20px;">
-                                        <p>套餐名称：</p>
-                                        <p>套餐价格：</p>
-                                    </dd>
-                                </dl>
-                            </div>
-                            <hr style="height:1px;border:none;border-top:1px dashed #C6A300; width:500px;" />
-                        </div>
-                    </div>
 
-            </div>
-                    <!--   <div class="more clear">
-                <button type="button" class="btn_jz cur" id="more" "var ClientID = document.getElementById('ClientID').value; window.location.href='javascript:void(0)PictureList.aspx?filmNo=10001449&ClientID='+ClientID">更多剧照>></button>
-            </div> -->
+        <!--   <div class="more clear">
+    <button type="button" class="btn_jz cur" id="more" "var ClientID = document.getElementById('ClientID').value; window.location.href='javascript:void(0)PictureList.aspx?filmNo=10001449&ClientID='+ClientID">更多剧照>></button>
+</div> -->
 </div>
-<div id='newtabid3' class='tabid clear' >
-    <div class="poster fl" style="height: auto">
-        <a href="javascript:void(0)" style="float:right;margin-right:30px;margin-top:15px;"></a>
-        <div class="hsz" style="width: 94%; height:100%; margin: 0 3%; line-height: 35px; text-decoration:underline">
-            <div style="500%"><dl style="width:350px;">
-                    <dt  style="float:left; width:40px;">{{$orderone->home_name}}</dt>
-                    <dd  style="float:right;width:280px;margin-left:20px;">
-                        <?php foreach($orderone->zuo as $key=>$val){?>
-                        <p><?=$val?></p>
-                        <?php }?>
-                    </dd>
-                </dl>
-            </div>
-            <hr style="height:1px;border:none;border-top:1px dashed #C6A300; width:500px;" />
-        </div>
-    </div>
 
-</div>
 
 
 <!--正在热映详情样式结束-->
@@ -185,48 +128,6 @@ $session = new Session;
     </div>
 </div>
 <div id="overlayAll" class="overlayAll"></div>
-<script type="text/javascript">
-    /*创建于2016-06-14*/
-    var cpro_id = "u2671677";
-</script>
-{{--<script src="http://cpro.baidustatic.com/cpro/ui/cm.js" type="text/javascript"></script>--}}
+
 </body>
 </html>
-<script>
-    $(function(){
-        $("#newtab1").click(function(){
-            $("#newtabid1").show();
-            $("#newtabid2").hide();
-            $("#newtabid3").hide();
-            $(this).css("background","#FFD306")
-            $(this).css("color","#272727")
-            $("#newtab2").css("background","#272727")
-            $("#newtab2").css("color","#fff")
-            $("#newtab3").css("background","#272727")
-            $("#newtab3").css("color","#fff")
-        })
-        $("#newtab2").click(function(){
-            $("#newtabid1").hide();
-            $("#newtabid2").show();
-            $("#newtabid3").hide();
-            $(this).css("background","#FFD306")
-            $(this).css("color","#272727")
-            $("#newtab1").css("background","#272727")
-            $("#newtab1").css("color","#fff")
-            $("#newtab3").css("background","#272727")
-            $("#newtab3").css("color","#fff")
-        })
-        $("#newtab3").click(function(){
-            $("#newtabid1").hide();
-            $("#newtabid2").hide();
-            $("#newtabid3").show();
-            $(this).css("background","#FFD306")
-            $(this).css("color","#272727")
-            $("#newtab1").css("background","#272727")
-            $("#newtab1").css("color","#fff")
-            $("#newtab2").css("background","#272727")
-            $("#newtab2").css("color","#fff")
-        })
-
-    })
-</script>

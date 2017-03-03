@@ -75,6 +75,37 @@ class CenterController extends Controller
         //print_r($orderone);die;
         return view('home.center.disorder',['orderone'=>$orderone]);
     }
+    //ispayshou
+    public function ispayshou($order_id){
+        $order=DB::table('order')->where('order_id', '=',$order_id)->first();
+        //print_r($order);die;
+        $play=DB::table('order')->where('play_id', '=',$order->play_id)->where('status','=',1)->select('value')->get();
+        $movie_id=DB::table('play')->where('id', '=',$order->play_id)->select('movie_id')->first();
+        if($play){
+            foreach($play as $key=>$val){
+                $val->values=explode(",",$val->value);
+                foreach($val->values as $k=>$v){
+                    $info[]=$v;
+                }
+            }
+        $xianzuo=explode(",",$order->value);
+            $arr=[];
+            for($i=0;$i<count($xianzuo);$i++){
+                if(in_array($xianzuo[$i],$info)){
+                    $arr[]=$xianzuo[$i];
+                }
+            }
+//            print_r($arr);die;
+            if($arr!=[]){
+                return view('errors.yipay',['arr'=>$arr]);
+            }else{
+                return redirect('pay/'.$movie_id->movie_id);
+            }
+        }else{
+            return redirect('pay/'.$movie_id->movie_id);
+        }
+//        echo $order_id;
+    }
 
 
 
