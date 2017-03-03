@@ -29,6 +29,7 @@ class GrabController extends Controller
 //            $result['msg'] = '请先登录';
 //            die(json_encode($result));
 //        }
+        date_default_timezone_set('PRC');
         $str = trim(Input::get('str'),',');
         $play_id =Input::get('play_id');
         $playInfo = DB::table("play")->where("id",'=',$play_id)->first();
@@ -56,7 +57,6 @@ class GrabController extends Controller
     //同步地址
     public function successUrl()
     {
-
         if(isset($_GET['out_trade_no']))
         {
             $sn = $_GET['out_trade_no'];
@@ -64,12 +64,24 @@ class GrabController extends Controller
             $res = DB::table('order')->where("order_number",'=',$sn)->update($data);
             if($res)
             {
-                //修改订单状态给用户发短信
+                //购买给用户发短信  票房加
                 $mess = DB::table('order')->join('users', 'users.u_id', '=', 'order.user_id')->where("order_number",'=',$sn)->first();
-                print_r($mess);
-//                $user = $mess->user;
-//                $content =
-//                $this->Short();
+                $play_id = $mess->play_id;
+                $movieId = DB::table('play')->select('movie_id')->where("id",'=',$play_id)->first();
+                $movieId = $movieId->movie_id;
+                $movieInfo = DB::table('movie')->where("movie_id",'=',$movieId)->first();
+                $newbox = $movieInfo->movie_box + $mess->count;
+                $upStatus = DB::table('movie')->where("movie_id",'=',$movieId)->update(['movie_box'=>$newbox]);
+                $tel = $mess->user;
+                $content = "nickname=".$mess->nickname.'&num='.$mess->count.'&order_number='.$mess->order_number;
+                $status = $this->Short($tel,$content);
+                if($status)
+                {
+                     echo "<script>alert('购买成功,短信已发送到您的手机');location.href='/'</script>";
+                }else{
+                    echo "<script>alert('系统出错,请联系网站管理员');location.href='/'</script>";
+                }
+
             }
         }else{
             echo "<script>alert('购买失败');location.href='/'</script>";
@@ -118,10 +130,9 @@ class GrabController extends Controller
     //拼接短信参数
     public function Short($tel,$content)
     {
-
         $nowapi_parm['app']='sms.send';
-        $nowapi_parm['param']= $content;
-        $nowapi_parm['tempid']=50895;
+        $nowapi_parm['param']= urlencode($content);
+        $nowapi_parm['tempid']=50921;
         $nowapi_parm['phone']=$tel;
         $nowapi_parm['appkey']=20892;
         $nowapi_parm['sign']='28feb41149334bcdb2d02918f618d98d';
@@ -129,6 +140,9 @@ class GrabController extends Controller
         $result=$this->nowapi_call($nowapi_parm);
         if($result['status'] == 'OK'){
             return 1;
+        }else{
+            //失败了继续调
+            $this->Short($tel,$content);
         }
     }
     //短信接口

@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Home;
 
+use App\Model\Move;
 use Illuminate\Http\Request;
 use DB;
 use App\Model\User;
@@ -42,8 +43,37 @@ class CenterController extends Controller
         }
     }
     //订单
-    public function orders(){
-        return view('home.center.orders');
+    public function orders(Request $request){
+        $session=new Session();
+//        $u_id=$session->get('u_id','');
+        $u_id=1;
+        $move=new Move();
+        if($request->isMethod("post")) {
+            $num= $request->input("pay");
+            if($num==0){
+                $datas=$move->ordersShow($u_id,$num);
+                return json_encode($datas);
+            }else if($num==1){
+                $datas=$move->ordersShow($u_id,$num);
+                return json_encode($datas);
+            }else if($num==3){
+                $datas=$move->ordersShow($u_id,$num);
+                return json_encode($datas);
+            }
+        }else{
+            ///已支付 u_id , status
+            $data=$move->ordersShow($u_id,1);
+//        print_r($data);die;
+//        die;
+            return view('home.center.orders',['data'=>$data]);
+        }
+    }
+    //订单详情
+    public function disorder($order_id){
+        $move = new Move();
+        $orderone = $move->orderOnedis($order_id);
+        //print_r($orderone);die;
+        return view('home.center.disorder',['orderone'=>$orderone]);
     }
 
 
@@ -87,7 +117,7 @@ class CenterController extends Controller
         preg_match("/^.*,(.*)$/is",$img,$res);
         $name = time().rand(100,900);
         file_put_contents("./images/users/$name.jpg",base64_decode($res[1]));
-        $filename = "./images/users/$name.jpg";
+        $filename = "images/users/$name.jpg";
         $session=new Session();
         $u_id=$session->get('u_id','');
         //return $u_id;die;

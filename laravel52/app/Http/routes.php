@@ -30,9 +30,11 @@ Route::get('/only','Home\LoginController@only');//注册唯一性
 Route::get('/short','Home\LoginController@short');//发送短信
 Route::get('/contrast','Home\LoginController@contrast');//验证码对比
 
+Route::any('/center','Home\CenterController@center');//个人中心页
 Route::any('/updatecenter','Home\CenterController@updatecenter');//个人中心页
 Route::any('/updateone','Home\CenterController@updateone');//个人中心页
-Route::get('/orders','Home\CenterController@orders');//orders
+Route::any('/orders','Home\CenterController@orders');//orders
+Route::get('/disorder/{order_id}','Home\CenterController@disorder');//订单详情
 
 
 
