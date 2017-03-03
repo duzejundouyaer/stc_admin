@@ -90,7 +90,7 @@ class GrabController extends Controller
     //手机支付
     public function zfbPay($sn,$price,$count,$str)
     {
-        $url = 'http://localhost:9096/training/stc_admin/laravel52/public/1/wappay/pay.php';
+        $url = 'http://localhost/dayi/stc_admin/laravel52/public/1/wappay/pay.php';
         $data = [
             'WIDout_trade_no' => $sn,
             'WIDsubject'      => '购买'.$count.'张电影票',
