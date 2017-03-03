@@ -6,10 +6,10 @@
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <title>个人中心</title>
-    <link rel="stylesheet" type="text/css" href="{{asset('style/home/css/stylecenter.css')}}">
+    <link rel="stylesheet" type="text/css" href="{{asset('style/css/stylecenter.css')}}">
 </head>
 
-<body style="background-color: #868288">
+<body>
 
 <div id="_centent">
     <header style="background-color: #000000;color: #fdf8f8">
@@ -90,16 +90,20 @@
 
     <section class="mt-3">
         <div class="ps-lt">
+            <a href="{{URL('lists')}}">
             <div class="lt-dsb">
                 <p>猜你喜欢</p>
                 <i class="arr-right"></i>
             </div>
+           </a>
         </div>
         <div class="ps-lt">
+            <a href="{{URL('lists')}}">
             <div class="lt-dsb">
                 <p>附近热门</p>
                 <i class="arr-right"></i>
             </div>
+            </a>
         </div>
         <div class="ps-lt">
             <div class="lt-dsb">
