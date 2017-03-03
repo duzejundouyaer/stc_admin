@@ -36,6 +36,7 @@ Route::any('/updateone','Home\CenterController@updateone');//个人中心页
 Route::any('/orders','Home\CenterController@orders');//orders
 Route::get('/disorder/{order_id}','Home\CenterController@disorder');//订单详情
 Route::get('/ispayshou/{order_id}','Home\CenterController@ispayshou');//ispayshou
+Route::get('/againpay','Home\GrabController@againpay');//重新支付
 
 
 

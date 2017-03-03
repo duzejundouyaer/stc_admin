@@ -24,7 +24,7 @@
         <div class="head-img">
             <label>
                 <input type="file" accept="audio/*;capture=microphone" name="file" onchange="readFile(this)"  style="display: none ">
-                <img src="{{asset($userone['img'])}}" id="art_thumb_img">
+                <img src="{!!asset($userone['img'])!!}" id="art_thumb_img">
             </label>
             {{--<label>--}}
                   {{-- <img src="{{$val->n_img}}" alt="" height="100" width="100" class="qq">--}}

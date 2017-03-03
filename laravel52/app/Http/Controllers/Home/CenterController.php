@@ -97,17 +97,24 @@ class CenterController extends Controller
             }
 //            print_r($arr);die;
             if($arr!=[]){
-                return view('errors.yipay',['arr'=>$arr]);
+                return view('errors.yipay',['arr'=>$arr,'movie_id'=>$movie_id->movie_id]);
             }else{
-                return redirect('pay/'.$movie_id->movie_id);
+                return redirect("againpay?order_number=$order->order_number&price=$order->price&count=$order->count&value=$order->value");
             }
         }else{
-            return redirect('pay/'.$movie_id->movie_id);
+            return redirect("againpay?order_number=$order->order_number&price=$order->price&count=$order->count&value=$order->value");
         }
 //        echo $order_id;
     }
 
-
+    public function againpay(Request $request){
+        $order_number=$request->input("order_number");
+        $price=$request->input("price");
+        $count=$request->input("count");
+        $value=$request->input("value");
+        //支付
+        $this->zfbPay($order_number,$price,$count,$value);
+    }
 
 
 

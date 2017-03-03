@@ -93,6 +93,11 @@ $session = new Session;
                                  <?=$val?>&nbsp;&nbsp;,
                             <?php }?>
                             已经被别人买了；
+                            <br/>
+                            <br/>
+                            <div class="all_dd clear" style="margin-bottom: 4px;">
+                                <input name="" id="Gp" type="button" value="重新去购票" class="btn_infor_gp"   onclick="window.location.href='{{URL('/pay')}}/{{$movie_id}}'" />
+                            </div>
                         </div>
                     </dd>
                 </dl>
