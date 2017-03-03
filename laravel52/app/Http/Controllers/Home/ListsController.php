@@ -12,7 +12,7 @@ class ListsController extends Controller
     //正在热播
     public function lists()
     {
-        $movie = DB::table('movie')->where('is_hot', '=',1)->where('is_status','=',1)->where('release','=',1)->get();
+        $movie = DB::table('movie')->where('is_hot', '=',1)->where('is_status','=',1)->where('release','=',1)->orderBy('movie_box','desc')->get();
         $number = count($movie);
         return view('home.lists.lists',['movie'=>$movie,'number'=>$number]);
     }
