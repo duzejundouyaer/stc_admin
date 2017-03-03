@@ -45,8 +45,8 @@ class CenterController extends Controller
     //订单
     public function orders(Request $request){
         $session=new Session();
-//        $u_id=$session->get('u_id','');
-        $u_id=1;
+        $u_id=$session->get('u_id','');
+//        $u_id=1;
         $move=new Move();
         if($request->isMethod("post")) {
             $num= $request->input("pay");
@@ -72,8 +72,10 @@ class CenterController extends Controller
     public function disorder($order_id){
         $move = new Move();
         $orderone = $move->orderOnedis($order_id);
-        //print_r($orderone);die;
-        return view('home.center.disorder',['orderone'=>$orderone]);
+        $pack=DB::table('pack')->where('id', '=',$orderone->package_id)->first();
+//        print_r($orderone);die;
+        //print_r($pack);die;
+        return view('home.center.disorder',['orderone'=>$orderone,'pack'=>$pack]);
     }
     //ispayshou
     public function ispayshou($order_id){
@@ -115,7 +117,12 @@ class CenterController extends Controller
 //        //支付
 //        $this->zfbPay($order_number,$price,$count,$value);
 //    }
-
+     //修改密码
+    public function updatepwd(){
+        $session=new Session();
+        $u_id=$session->get('u_id','');
+        return view('home.center.updatepwd',['u_id'=>$u_id]);
+    }
 
 
 
