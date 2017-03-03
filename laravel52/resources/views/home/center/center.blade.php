@@ -47,14 +47,18 @@
                     <p>订单</p>
                 </li>
             </a>
+            <a href="{{URL('lists')}}">
             <li class="pt-line">
                 <i class="clt"></i>
                 <p>收藏</p>
             </li>
+            </a>
+            <a href="{{URL('lists')}}">
             <li>
                 <i class="rcm"></i>
                 <p>推荐</p>
             </li>
+            </a>
         </ul>
     </div>
 
@@ -66,10 +70,12 @@
                     <i class="arr-right"></i>
                 </div>
             </a>
+            <a href="{{URL('updatepwd')}}">
             <div class="lt-dsb cl-bb">
                 <p>修改密码</p>
                 <i class="arr-right"></i>
             </div>
+            </a>
         </div>
     </section>
 

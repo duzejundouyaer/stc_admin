@@ -130,12 +130,20 @@ $session = new Session;
                         <a href="javascript:void(0)" style="float:right;margin-right:30px;margin-top:15px;">购买</a>
                         <div class="hsz" style="width: 94%; height:100%; margin: 0 3%; line-height: 35px; text-decoration:underline">
                             <div style="500%"><dl style="width:350px;">
-                                    <dt  style="float:left; width:40px;"><img  src="" alt="" style="margin-top:10px;border-radius:80px;width:50px;height:50px;">
-                                    </dt>
-                                    <dd  style="float:right;width:280px;margin-left:20px;">
-                                        <p>套餐名称：</p>
-                                        <p>套餐价格：</p>
-                                    </dd>
+                                    <?php if($pack==""){?>
+                                        <dd  style="float:right;width:280px;margin-left:20px;">
+                                            <p>你没有买套餐！☹</p>
+                                        </dd>
+                                    <?php }else{ ?>
+                                        <dt  style="float:left; width:40px;">
+                                            <img  src="{{$pack->pack_img}}" alt="" style="margin-top:10px;border-radius:80px;width:50px;height:50px;">
+                                        </dt>
+                                        <dd  style="float:right;width:280px;margin-left:20px;">
+                                            <p>套餐名称：{{$pack->pack_name}}</p>
+                                            <p>套餐价格：{{$pack->discount_price}}&nbsp;&nbsp;&nbsp;<span style="text-decoration:line-through;">￥{{$pack->original_price}} </span></p>
+                                        </dd>
+                                    <?php }?>
+
                                 </dl>
                             </div>
                             <hr style="height:1px;border:none;border-top:1px dashed #C6A300; width:500px;" />
