@@ -243,7 +243,7 @@ public function register(){
             'nickname'=>$name,
             'regist_method' =>0,
             'auth_id' =>0,
-            'img'=>'./style/img/1a.png'
+            'img'=>'./style/home/img/1a.png'
         );
 
         $re = DB::table('users')->insert($user);
