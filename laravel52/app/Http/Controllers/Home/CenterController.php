@@ -107,14 +107,14 @@ class CenterController extends Controller
 //        echo $order_id;
     }
 
-    public function againpay(Request $request){
-        $order_number=$request->input("order_number");
-        $price=$request->input("price");
-        $count=$request->input("count");
-        $value=$request->input("value");
-        //支付
-        $this->zfbPay($order_number,$price,$count,$value);
-    }
+//    public function againpay(Request $request){
+//        $order_number=$request->input("order_number");
+//        $price=$request->input("price");
+//        $count=$request->input("count");
+//        $value=$request->input("value");
+//        //支付
+//        $this->zfbPay($order_number,$price,$count,$value);
+//    }
 
 
 
