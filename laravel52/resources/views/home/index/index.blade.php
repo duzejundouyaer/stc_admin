@@ -154,7 +154,7 @@
                      </a>
                      <div class="poster">
                          <p class="Hide">{{$val['movie_name']}}</p>
-                         <a href="javascript:void(0)" class="btn">立即购票</a>                                       </div>
+                         <a href="pay/{{$val['movie_id']}}" class="btn">立即购票</a>                                       </div>
                      <div class=" ">
                          <div class="tag_wz"></div>
                      </div>

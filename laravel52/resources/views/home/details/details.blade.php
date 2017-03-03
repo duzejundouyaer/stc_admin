@@ -5,7 +5,55 @@ $session = new Session;
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml">
 <style>
-    .cloum{text-align: center;margin-top:70px; }
+    .cloum{text-align: center;margin-top:; }
+    .rating{
+    width:80px;
+    height:16px;
+    margin:0 0 20px 0;
+    padding:0;
+    list-style:none;
+    clear:both;
+    position:relative;
+    background: url("{{asset('star-matrix.gif')}}") no-repeat 0 0;
+}
+.nostar {background-position:0 0}
+.onestar {background-position:0 -16px}
+.twostar {background-position:0 -32px}
+.threestar {background-position:0 -48px}
+.fourstar {background-position:0 -64px}
+.fivestar {background-position:0 -80px}
+ul.rating li {
+    cursor: pointer;
+    float:left;
+    text-indent:-999em;
+}
+ul.rating li a {
+    position:absolute;
+    left:0;
+    top:0;
+    width:16px;
+    height:16px;
+    text-decoration:none;
+    z-index: 200;
+}
+ul.rating li.one a {left:0}
+ul.rating li.two a {left:16px;}
+ul.rating li.three a {left:32px;}
+ul.rating li.four a {left:48px;}
+ul.rating li.five a {left:64px;}
+ul.rating li a:hover {
+    z-index:2;
+    width:80px;
+    height:16px;
+    overflow:hidden;
+    left:0; 
+    background: url("{{asset('star-matrix.gif')}}") no-repeat 0 0
+}
+ul.rating li.one a:hover {background-position:0 -96px;}
+ul.rating li.two a:hover {background-position:0 -112px;}
+ul.rating li.three a:hover {background-position:0 -128px}
+ul.rating li.four a:hover {background-position:0 -144px}
+ul.rating li.five a:hover {background-position:0 -160px}
 </style>
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
@@ -233,45 +281,7 @@ $session = new Session;
 
             </ul>
         </div>
-        <script>
-            document.getElementById("defaultCityName").innerHTML = Utils.getCookie("CityName");
-            document.getElementById("defaultCityName").title = Utils.getCookie("CityName");
-            //function CurentTime()
-            //{
-            //    var now = new Date();
-
-            //    var year = now.getFullYear();       //年
-            //    var month = now.getMonth() + 1;     //月
-            //    var day = now.getDate();            //日
-
-            //    var hh = now.getHours();            //时
-            //    var mm = now.getMinutes();          //分
-
-            //    var clock = year + "-";
-
-            //    if(month < 10)
-            //        clock += "0";
-
-            //    clock += month + "-";
-
-            //    if(day < 10)
-            //        clock += "0";
-
-            //    clock += day + " ";
-
-            //    if(hh < 10)
-            //        clock += "0";
-
-            //    clock += hh + ":";
-            //    if (mm < 10) clock += '0';
-            //    clock += mm;
-            //    return(clock);
-            //}
-            //if ((new Date(CurentTime())) >= new Date("2014-03-27 08:00:00")) {
-            //    document.getElementById("tips").style.display = "none";
-            //}
-        </script>
-
+       
 
         <!--导航样式-->
 
@@ -307,7 +317,12 @@ $session = new Session;
                             @if($desc->release==0)
                             <input name="" id="Gp" type="button" value="还未上映" class="btn_infor_gp" "Buymovie('10001449','我最好朋友的婚礼');" disabled='disabled' onclick="window.location.href='{{URL('/pay')}}/{{$desc->movie_id}}'" />
                             @else
-                               <input name="" id="Gp" type="button" value="购  票" class="btn_infor_gp" "Buymovie('10001449','我最好朋友的婚礼');"  onclick="window.location.href='{{URL('/pay')}}/{{$desc->movie_id}}'" />
+                                 
+                                @if($session->get('nickname')=='')
+                                    <input  id='Gp' type='button' value='请登录' class='btn_infor_gp'   onclick="window.location.href='{{URL('/login')}}'" />
+                               @else
+                                    <input  id='Gp' type='button' value='购  票' class='btn_infor_gp'   onclick="window.location.href='{{URL('/pay')}}/{{$desc->movie_id}}'" />
+                               @endif
                             @endif
                         </div>
 
@@ -353,7 +368,11 @@ $session = new Session;
         <div id='newtabid2' class='tabid clear' style='display: none;'>
             @foreach($packages as $key => $val)
             <div class="poster fl" style="height: auto">
-                          <a href="javascript:void(0)" style="float:right;margin-right:30px;margin-top:15px;">购买</a>
+                          @if($session->get('nickname') == '')
+                           <a href="javascript:void(0)" style="float:right;margin-right:30px;margin-top:15px;" onclick="window.location.href='{{URL('/login')}}'">登录</a>
+                          @else
+                          <a href="javascript:void(0)" style="float:right;margin-right:30px;margin-top:15px;" onclick="window.location.href='{{URL('/pay')}}/{{$val->id}}/{{$desc->movie_id}}'">购买</a>
+                          @endif
                 <div class="hsz" style="width: 94%; height:100%; margin: 0 3%; line-height: 35px; text-decoration:underline">
                   <div style="500%"><dl style="width:350px;">
                       <dt  style="float:left; width:40px;"><img  src="{{asset($val->pack_img)}}" alt="" style="margin-top:10px;border-radius:80px;width:50px;height:50px;">
@@ -392,16 +411,27 @@ $session = new Session;
         <div id='newtabid3' class='tabid clear' >
             {{--评论--}}
             <div id="dloginbox">
-                
+                <span id="number" style="float:right;margin-right:180px;font-size:32px;font-style:italic;color:#00DB00;" ></span>
+                 <div class="pro_rating" style=" margin-left:20px; float:left; ">
+                给电影评分：
+                <ul class="rating nostar" id="infos">
+                    <li class="one"><a href="#" title="2" >2</a></li>
+                    <li class="two"><a href="#" title="4">4</a></li>
+                    <li class="three"><a href="#" title="6">6</a></li>
+                    <li class="four"><a href="#" title="8">8</a></li>
+                    <li class="five"><a href="#" title="10">10</a></li>
+                </ul>
+            </div>
                 <div class="cloum" >
-                    <span>发表评论</span><span style="margin-left:180px;">共有<span>10000</span>条评论</span>
-                    <textarea  class="emotion" name="" id="" cols="50" rows="10" style="" placeholder='来说点儿什么吧。'></textarea>
+
+            <span style="margin-left:180px;">共有<span id="num" style="font-size:18px;color:#FF2D2D;">{{$num}}</span>条评论</span>
+                    <textarea  class="emotion" name="" style="font-size:16px;" id="content" cols="50" rows="10" style="" placeholder='来说点儿什么吧。'></textarea>
                 </div>
                 <div style="margin-left:30px;">
-                    <span><a href="javascript:void(0)" style="color:#3C3C3C;" id="face">表情</a></span>
-                    <span style="margin-left:260px;" ><a href="javascript:void(0)" id="analytic"   style="color:red;">发布</a></span>
+                    <span><a href="javascript:void(0)" style="color:#3C3C3C;" id="face"></a></span>
+                    <span style="margin-left:260px;" id="{{$desc->movie_id}}"><a href="javascript:void(0)" id="analytic"   style="color:red;">发布</a></span>
                 </div>
-                <h3 style="margin-top:40px;margin-left:10px;">请您注意:</h3>
+                <h3 style="margin-top:10px;margin-left:10px;">请您注意:</h3>
                 <div style="margin-top:5px;margin-left:30px">
                     <p>自觉遵守：爱国、守法、自律、真实、文明的原则。</p>
                     <p>尊重网上道德，遵守《全国人大常委会关于维护互联网安全的决定》及中华人民共和国其他各项有关法律法规。</p>
@@ -411,7 +441,7 @@ $session = new Session;
             <div class="hsz" style="width: 94%; height:100%; margin: 0 3%; line-height: 35px; text-decoration:underline" id="header">
                 <span class="fr">
                     <?php  
-                         if($session->get('username')!='')
+                         if($session->get('nickname')=='')
                          {
                             echo "<a class='hhsz' 'FilmReview(10001449);' href='login'>登录发表评论</a>";
                          }else
@@ -423,89 +453,34 @@ $session = new Session;
                 </span>
                   <img src='http://m.douyou100.com/Resources/douyou100_1/images/discuss.png' width='14' height='12' class='fr' style='margin-top: 12px;' />
             </div >
-            <hr style="height:1px;border:none;border-top:1px dashed #0066CC; width:500px;" />
+            <hr style="height:1px;border:none;border-top:1px dashed #0066CC; width:500px;" id="under"/>
+            @foreach($comment as $key =>$value)
             <div class="hsz" style="width: 94%; height:100%; margin: 0 3%; line-height: 35px; text-decoration:underline">
                   <div style="500%"><dl style="width:350px;">
-                      <dt  style="float:left; width:40px;"><img  src="http://douyou100.com:7000/Upload/FilmPic/201607/201607191024302995.jpg_170x240.jpg" alt="" style="margin-top:10px;border-radius:80px;width:50px;height:50px;">
+                      <dt  style="float:left; width:40px;"><img  src="{{asset($value->img)}}" style='margin-top:10px;border-radius:80px;width:50px;height:50px;'>
                     </dt>
-                   
-                      <dd  style="float:right;width:280px;margin-left:20px;"><p>的卡拉季昆仑决圣诞快乐发生了还是死啦的骄傲的骄傲</p></dd>
+                      <dd  style="float:right;width:280px;margin-left:20px;"><p>{{$value->c_content}}</p></dd>
                        </dl>
                  </div>
+                 <span style="margin-left:80px;">发表于{{$value->c_date}}</span>
                   <hr style="height:1px;border:none;border-top:1px dashed #C6A300; width:500px;" />
             </div>
-             <div class="hsz" style="width: 94%; height:100%; margin: 0 3%; line-height: 35px; text-decoration:underline">
-                  <div style="500%"><dl style="width:350px;">
-                      <dt  style="float:left; width:40px;"><img  src="http://douyou100.com:7000/Upload/FilmPic/201607/201607191024302995.jpg_170x240.jpg" alt="" style="margin-top:10px;border-radius:80px;width:50px;height:50px;">
-                    </dt>
-                   
-                      <dd  style="float:right;width:280px;margin-left:20px;"><p>的卡拉季昆仑决圣诞快乐发生了还是死啦的骄傲的骄傲</p></dd>
-                       </dl>
-                 </div>
-                  <hr style="height:1px;border:none;border-top:1px dashed #C6A300; width:500px;" />
-            </div>
-             <div class="hsz" style="width: 94%; height:100%; margin: 0 3%; line-height: 35px; text-decoration:underline">
-                  <div style="500%"><dl style="width:350px;">
-                      <dt  style="float:left; width:40px;"><img  src="http://douyou100.com:7000/Upload/FilmPic/201607/201607191024302995.jpg_170x240.jpg" alt="" style="margin-top:10px;border-radius:80px;width:50px;height:50px;">
-                    </dt>
-                   
-                      <dd  style="float:right;width:280px;margin-left:20px;"><p>的卡拉季昆仑决圣诞快乐发生了还是死啦的骄傲的骄傲</p></dd>
-                       </dl>
-                 </div>
-                  <hr style="height:1px;border:none;border-top:1px dashed #C6A300; width:500px;" />
-            </div>
-             <div class="hsz" style="width: 94%; height:100%; margin: 0 3%; line-height: 35px; text-decoration:underline">
-                  <div style="500%"><dl style="width:350px;">
-                      <dt  style="float:left; width:40px;"><img  src="http://douyou100.com:7000/Upload/FilmPic/201607/201607191024302995.jpg_170x240.jpg" alt="" style="margin-top:10px;border-radius:80px;width:50px;height:50px;">
-                    </dt>
-                   
-                      <dd  style="float:right;width:280px;margin-left:20px;"><p>的卡拉季昆仑决圣诞快乐发生了还是死啦的骄傲的骄傲</p></dd>
-                       </dl>
-                 </div>
-                  <hr style="height:1px;border:none;border-top:1px dashed #C6A300; width:500px;" />
-            </div>
-             <div class="hsz" style="width: 94%; height:100%; margin: 0 3%; line-height: 35px; text-decoration:underline">
-                  <div style="500%"><dl style="width:350px;">
-                      <dt  style="float:left; width:40px;"><img  src="http://douyou100.com:7000/Upload/FilmPic/201607/201607191024302995.jpg_170x240.jpg" alt="" style="margin-top:10px;border-radius:80px;width:50px;height:50px;">
-                    </dt>
-                   
-                      <dd  style="float:right;width:280px;margin-left:20px;"><p>的卡拉季昆仑决圣诞快乐发生了还是死啦的骄傲的骄傲</p></dd>
-                       </dl>
-                 </div>
-                  <hr style="height:1px;border:none;border-top:1px dashed #C6A300; width:500px;" />
-            </div>
+            @endforeach
              <div class="more clear">
                 <button type="button" class="btn_jz cur" id="more" "var ClientID = document.getElementById('ClientID').value; window.location.href='javascript:void(0)PictureList.aspx?filmNo=10001449&ClientID='+ClientID">更多评论>></button>
             </div>
         </div>
 
-
+<input type="hidden" id="_token" value="{{csrf_token()}}">
         <!--正在热映详情样式结束-->
-        <script>
-            Utils.onPageLoad=setupZoom();
-        </script>
+
 
 
         <div id="footer" class="foot clear" >
             <p><a href="javascript:void(0)../help.aspx?ClientID=" class="c1">帮助</a><a  href="javascript:void(0)../client.aspx?ClientID=" class="c1">客户端</a><a href="javascript:void(0)../idear.aspx?ClientID=" class="c1">意见反馈</a></p>
-            <p><a href="javascript:void(0)tel:400-066-8882" style="margin-right:10px;" id="CustomService">400-066-8882</a>     http://m.douyou100.com</p>
+            <p><a href="javascript:void(0)tel:400-066-8882" style="margin-right:10px;" id="CustomService">400-666-8888</a>     http://m.douyou100.com</p>
             <p class="f10">Copyright2005-2013 兜有电影版权所有. </p>
         </div>
-        <script>
-            var CityName=document.getElementById("defaultCityName").innerHTML = Utils.getCookie("CityName");
-            if (CityName == '北京市') {
-                document.getElementById("CustomService").innerHTML = '400-010-1515';
-                document.getElementById("CustomService").href = 'tel:400-010-1515';
-            }
-            else {
-                document.getElementById("CustomService").innerHTML = '400-066-8882';
-                document.getElementById("CustomService").href = 'tel:400-066-8882';
-            }
-            var ClientID = document.getElementById("ClientID").value;
-            if (ClientID == 'C100000175') {
-                document.getElementById("foot").style.display="none";
-            }
-        </script>
     </form>
 
 </div>
@@ -517,15 +492,12 @@ $session = new Session;
     </div>
 </div>
 <div id="overlayAll" class="overlayAll"></div>
-<script type="text/javascript">
-    /*创建于2016-06-14*/
-    var cpro_id = "u2671677";
-</script>
-{{--<script src="http://cpro.baidustatic.com/cpro/ui/cm.js" type="text/javascript"></script>--}}
+
 </body>
 </html>
 <script>
     $(function(){
+        var star = '';
       $("#newtab1").click(function(){
            $("#newtabid1").show();
            $("#newtabid2").hide();
@@ -559,6 +531,56 @@ $session = new Session;
            $("#newtab2").css("background","#272727")
            $("#newtab2").css("color","#fff")
         })
-       
+       //通过修改样式来显示不同的星级
+    $("ul.rating li a").click(function(){
+         var title = $(this).html();
+         //alert("您给此电影的评分是："+title);"title"
+         star = title;
+         $("#number").html(title+"分");
+         var cl = $(this).parent().attr("class");
+         $(this).parent().parent().removeClass().addClass("rating "+cl+"star");
+         $(this).blur();//去掉超链接的虚线框
+         return false;
+    })
+       //发布评论
+       $("#analytic").click(function(){
+              var content = $("#content").val();
+              var movie_id = $(this).parent().attr('id');
+              var _token =$('#_token').val();
+              var num = $("#num").html();
+             $("#analytic").attr("disabled", true);
+             $("#analytic").css('color','#6C6C6C');
+             if(star == '')
+             {
+                  alert('请给电影评分,谢谢');
+                  return false;
+             }else if(content.length<5)
+              {
+                  alert('请输入5-40个字符之间');
+                  return false;
+              }else if(content.length>40)
+              {
+                  alert('请输入5-40个字符之间');
+                  return false;
+              }else
+              {
+                    $.ajax({
+                   type: "POST",
+                   url: "{{URL('commont')}}",
+                   data: {content:content,movie_id:movie_id,_token:_token,star:star},
+                   dataType:'json',
+                   success: function(msg){
+                    var image = msg.img;
+                    var img = "{!!asset('/')!!}"+image;
+                       $("#under").after("<div class='hsz' style='width: 94%; height:100%; margin: 0 3%; line-height: 35px; text-decoration:underline'><div style='500%'><dl style='width:350px;'><dt  style='float:left; width:40px;'><img  src='"+img+"'  style='margin-top:10px;border-radius:80px;width:50px;height:50px;'></dt><dd  style='float:right;width:280px;margin-left:20px;'><p>"+msg.c_content+"</p></dd></dl></div><span style='margin-left:80px;'>发表于"+msg.c_date+"</span><hr style='height:1px;border:none;border-top:1px dashed #C6A300; width:500px;' /></div>");
+                       num++
+                       $("#num").html(num);
+                        $("#analytic").removeAttr("disabled");
+                        $("#analytic").css('color','red');
+                   }
+                });
+            
+            }
+       })
  })
 </script>
