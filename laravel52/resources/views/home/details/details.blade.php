@@ -350,7 +350,7 @@ ul.rating li.five a:hover {background-position:0 -160px}
         <div class="new_nav clear fl">
             <ul>
                 <li class="cur" id='newtab1' >剧情</li>
-                <li class="cur " id='newtab2' >新套餐<div class="border fl"></div>
+                <li class="cur " id='newtab2' >零食<div class="border fl"></div>
                 </li>
                 <li class="cur new_nav_sel_li" id='newtab3'>影评<div class="border fl"></div>
                 </li>
@@ -371,7 +371,7 @@ ul.rating li.five a:hover {background-position:0 -160px}
                           @if($session->get('nickname') == '')
                            <a href="javascript:void(0)" style="float:right;margin-right:30px;margin-top:15px;" onclick="window.location.href='{{URL('/login')}}'">登录</a>
                           @else
-                          <a href="javascript:void(0)" style="float:right;margin-right:30px;margin-top:15px;" onclick="window.location.href='{{URL('/pay')}}/{{$val->id}}/{{$desc->movie_id}}'">购买</a>
+                          <a href="javascript:void(0)" style="float:right;margin-right:30px;margin-top:15px;" onclick="window.location.href='{{URL('/pack')}}/{{$val->id}}/{{$val->discount_price}}'">购买</a>
                           @endif
                 <div class="hsz" style="width: 94%; height:100%; margin: 0 3%; line-height: 35px; text-decoration:underline">
                   <div style="500%"><dl style="width:350px;">
@@ -379,7 +379,8 @@ ul.rating li.five a:hover {background-position:0 -160px}
                     </dt>
                       <dd  style="float:right;width:280px;margin-left:20px;">
                         <p>套餐名称：{{$val->pack_name}}</p>
-                        <p>套餐价格：<?php echo $desc->movie_price+$val->discount_price?></p>
+                        <p>套餐原价：<?php echo $val->original_price?></p>
+                        <p>折扣价：<?php echo $val->discount_price?></p>
                     </dd>
                        </dl>
                  </div>
