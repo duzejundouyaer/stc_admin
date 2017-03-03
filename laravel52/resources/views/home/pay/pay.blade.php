@@ -326,15 +326,19 @@ $session = new Session;
         <div id='newtabid1' class='tabid clear mr_top' >
             <div class="story clear" style="height: auto;color: #FFFFff" >
                 <ul>
-                    @foreach($todayList as $k=>$v)
-                    @if($v->zhuangtai == 1)
-                            <li>{{$v->begin_time}} - {{$v->end_time}}&nbsp;&nbsp;{{$v->home_name}} &nbsp;&nbsp;<span style="color:red ">还未开播</span> <input name="" id="Gp" type="button" value="预  订" class="btn_infor_gp" style="width: 50px;margin-left: 70px" onclick="window.location.href='{{URL('/grab')}}/{{$v->id}}'"/></li>
-                    @elseif($v->zhuangtai == 2)
-                             <li>{{$v->begin_time}} - {{$v->end_time}}&nbsp;&nbsp;{{$v->home_name}} &nbsp;&nbsp;<span style="color:forestgreen ">正在播放</span></li>
-                    @else
-                            <li>{{$v->begin_time}} - {{$v->end_time}}&nbsp;&nbsp;{{$v->home_name}} &nbsp;&nbsp;<span style="color:yellow ">已结束</span> </li>
+                    @if($todayList)
+                        @foreach($todayList as $k=>$v)
+                            @if($v->zhuangtai == 1)
+                                <li>{{$v->begin_time}} - {{$v->end_time}}&nbsp;&nbsp;{{$v->home_name}} &nbsp;&nbsp;<span style="color:red ">还未开播</span> <input name="" id="Gp" type="button" value="预  订" class="btn_infor_gp" style="width: 50px;margin-left: 70px" onclick="window.location.href='{{URL('/grab')}}/{{$v->id}}'"/></li>
+                            @elseif($v->zhuangtai == 2)
+                                <li>{{$v->begin_time}} - {{$v->end_time}}&nbsp;&nbsp;{{$v->home_name}} &nbsp;&nbsp;<span style="color:forestgreen ">正在播放</span></li>
+                            @else
+                                <li>{{$v->begin_time}} - {{$v->end_time}}&nbsp;&nbsp;{{$v->home_name}} &nbsp;&nbsp;<span style="color:yellow ">已结束</span> </li>
+                            @endif
+                        @endforeach
+                        @else
+                        <li style="text-align: center"><span style="color: red">暂无场次!</span></li>
                         @endif
-                     @endforeach
                 </ul>
             </div>
 
@@ -343,6 +347,7 @@ $session = new Session;
         <div id='newtabid2' class='tabid clear' style='display: none;'>
             <div class="story clear" style="height: auto;color: #FFFFff" >
                 <ul>
+                    @if($tmorryList)
                     @foreach($tmorryList as $k=>$v)
                         @if($v->zhuangtai == 1)
                             <li>{{$v->begin_time}} - {{$v->end_time}}&nbsp;&nbsp;{{$v->home_name}} &nbsp;&nbsp;<span style="color:red ">还未开播</span> <input name="" id="Gp" type="button" value="预  订" class="btn_infor_gp" style="width: 50px;margin-left: 70px" onclick="window.location.href='{{URL('/grab')}}/{{$v->id}}'"/></li>
@@ -352,6 +357,9 @@ $session = new Session;
                             <li>{{$v->begin_time}} - {{$v->end_time}}&nbsp;&nbsp;{{$v->home_name}} &nbsp;&nbsp;<span style="color:yellow ">已结束</span> </li>
                         @endif
                     @endforeach
+                        @else
+                            <li style="text-align: center"><span style="color: red">暂无场次!</span></li>
+                        @endif
                 </ul>
             </div>
 
@@ -361,6 +369,7 @@ $session = new Session;
 
             <div class="story clear" style="height: auto;color: #FFFFff" >
             <ul>
+                @if($houtianList)
                 @foreach($houtianList as $k=>$v)
                     @if($v->zhuangtai == 1)
                         <li>{{$v->begin_time}} - {{$v->end_time}}&nbsp;&nbsp;{{$v->home_name}} &nbsp;&nbsp;<span style="color:red ">还未开播</span> <input name="" id="Gp" type="button" value="预  订" class="btn_infor_gp" style="width: 50px;margin-left: 70px" onclick="window.location.href='{{URL('/grab')}}/{{$v->id}}'"/></li>
@@ -370,6 +379,9 @@ $session = new Session;
                         <li>{{$v->begin_time}} - {{$v->end_time}}&nbsp;&nbsp;{{$v->home_name}} &nbsp;&nbsp;<span style="color:yellow ">已结束</span> </li>
                     @endif
                 @endforeach
+                    @else
+                        <li style="text-align: center"><span style="color: red">暂无场次!</span></li>
+                    @endif
             </ul>
             </div>
         </div>

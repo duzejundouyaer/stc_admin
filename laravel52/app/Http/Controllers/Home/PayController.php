@@ -64,11 +64,14 @@ class PayController extends Controller
                 $obj[$k]->zhuangtai = '1';
                 continue;
             }
-            if($v->begin_time < $his && $v->end_time < $his)
+
+            if(strtotime($his) > strtotime($v->begin_time) && strtotime($his) > strtotime($v->end_time))
             {
+                //已结束
                 $obj[$k]->zhuangtai = '3';
 
-            }else if($v->begin_time < $his && $v->end_time > $his){
+            }else if(strtotime($v->begin_time) < strtotime($his) && strtotime($v->end_time) > strtotime($his)){
+                //正在播放
                 $obj[$k]->zhuangtai = '2';
             }else {
                 $obj[$k]->zhuangtai = '1';
