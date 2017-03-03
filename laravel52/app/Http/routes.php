@@ -3,9 +3,10 @@
 Route::get('/','Home\IndexController@index');//首页
 Route::get('/lists','Home\ListsController@lists');//正在热播
 
-
-Route::get('/details','Home\DetailsController@details');//详情页
+Route::post('/commont','Home\DetailsController@commonts');//用户评论
 Route::get('/pay/{movie_id?}','Home\PayController@pay');//详情页
+Route::get('/details','Home\DetailsController@details');//详情页
+
 
 Route::get('/grab/{play_id?}','Home\GrabController@index');//选座页
 Route::any('/payGrab','Home\GrabController@payGrab');//购买座位
