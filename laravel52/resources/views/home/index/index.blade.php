@@ -78,44 +78,44 @@
         
     </ul>
 </div>
-<script>
-    document.getElementById("defaultCityName").innerHTML = Utils.getCookie("CityName");
-    document.getElementById("defaultCityName").title = Utils.getCookie("CityName");
-    //function CurentTime()
-    //{
-    //    var now = new Date();
-       
-    //    var year = now.getFullYear();       //年
-    //    var month = now.getMonth() + 1;     //月
-    //    var day = now.getDate();            //日
-       
-    //    var hh = now.getHours();            //时
-    //    var mm = now.getMinutes();          //分
-       
-    //    var clock = year + "-";
-       
-    //    if(month < 10)
-    //        clock += "0";
-       
-    //    clock += month + "-";
-       
-    //    if(day < 10)
-    //        clock += "0";
-           
-    //    clock += day + " ";
-       
-    //    if(hh < 10)
-    //        clock += "0";
-           
-    //    clock += hh + ":";
-    //    if (mm < 10) clock += '0';
-    //    clock += mm;
-    //    return(clock);
-    //}
-    //if ((new Date(CurentTime())) >= new Date("2014-03-27 08:00:00")) {
-    //    document.getElementById("tips").style.display = "none";
-    //}
-</script>
+{{--<script>--}}
+    {{--document.getElementById("defaultCityName").innerHTML = Utils.getCookie("CityName");--}}
+    {{--document.getElementById("defaultCityName").title = Utils.getCookie("CityName");--}}
+    {{--//function CurentTime()--}}
+    {{--//{--}}
+    {{--//    var now = new Date();--}}
+       {{----}}
+    {{--//    var year = now.getFullYear();       //年--}}
+    {{--//    var month = now.getMonth() + 1;     //月--}}
+    {{--//    var day = now.getDate();            //日--}}
+       {{----}}
+    {{--//    var hh = now.getHours();            //时--}}
+    {{--//    var mm = now.getMinutes();          //分--}}
+       {{----}}
+    {{--//    var clock = year + "-";--}}
+       {{----}}
+    {{--//    if(month < 10)--}}
+    {{--//        clock += "0";--}}
+       {{----}}
+    {{--//    clock += month + "-";--}}
+       {{----}}
+    {{--//    if(day < 10)--}}
+    {{--//        clock += "0";--}}
+           {{----}}
+    {{--//    clock += day + " ";--}}
+       {{----}}
+    {{--//    if(hh < 10)--}}
+    {{--//        clock += "0";--}}
+           {{----}}
+    {{--//    clock += hh + ":";--}}
+    {{--//    if (mm < 10) clock += '0';--}}
+    {{--//    clock += mm;--}}
+    {{--//    return(clock);--}}
+    {{--//}--}}
+    {{--//if ((new Date(CurentTime())) >= new Date("2014-03-27 08:00:00")) {--}}
+    {{--//    document.getElementById("tips").style.display = "none";--}}
+    {{--//}--}}
+{{--</script>--}}
 
         
     <!--导航样式-->
@@ -234,90 +234,90 @@
         window.location.href = "buy_movie.aspx?filmNo=" + obj1 + "&filmName=" + obj2 + "&ClientID=" + ClientID;
     }
 
-    function getAddress() {
-        var positionFlag = Utils.getCookie("positionflag");
-        if (!positionFlag) {
+//    function getAddress() {
+//        var positionFlag = Utils.getCookie("positionflag");
+//        if (!positionFlag) {
+//
+//            if (navigator.geolocation) {
+//                navigator.geolocation.getCurrentPosition(function (pos) {
+//                    var coords = pos.coords;
+//
+//                    var _params = {
+//                        latitude: coords.latitude,
+//                        longitude: coords.longitude
+//                    };
+//
+//                    Ajax.m_action = "getCityNo";
+//                    Ajax.m_dtype = "row";
+//                    Ajax.request("MWebServices.ashx", _params, function (r) {
+//                        r = r.toJson();
+//                        Utils.setCookie("positionflag", true, 1);
+//                        if (r.areaNo != Utils.getCookie("CityNo")) {
+//                            Utils.setCookie("CityName", r.areaName);
+//                            Utils.setCookie("CityNo", r.areaNo);
+//                            //window.location.reload();
+//                            window.location.href = "/movie.aspx?ClientID=" + document.getElementById("ClientID").value;
+//                        }
+//                    });
+//                }, function () {
+//                    //异常，则设置标记
+//                    Utils.setCookie("positionflag", true, 1);
+//                });
+//            }
+//            else {
+//                //对象不可用，则设置标记
+//                Utils.setCookie("positionflag", true, 1);
+//            }
+//        }
+//    }
 
-            if (navigator.geolocation) {
-                navigator.geolocation.getCurrentPosition(function (pos) {
-                    var coords = pos.coords;
+//    Utils.onPageLoad = function () {
+//        getAddress();
+//        activity_ad.Init();
+//
+//        //setTimeout(function () {
+//        //    activity_ad.ShowAd();
+//        //    setTimeout(activity_ad.CloseAd, 10000);
+//        //}, 2000);
+//    };
 
-                    var _params = {
-                        latitude: coords.latitude,
-                        longitude: coords.longitude
-                    };
-
-                    Ajax.m_action = "getCityNo";
-                    Ajax.m_dtype = "row";
-                    Ajax.request("MWebServices.ashx", _params, function (r) {
-                        r = r.toJson();
-                        Utils.setCookie("positionflag", true, 1);
-                        if (r.areaNo != Utils.getCookie("CityNo")) {
-                            Utils.setCookie("CityName", r.areaName);
-                            Utils.setCookie("CityNo", r.areaNo);
-                            //window.location.reload();
-                            window.location.href = "/movie.aspx?ClientID=" + document.getElementById("ClientID").value;
-                        }
-                    });
-                }, function () {
-                    //异常，则设置标记
-                    Utils.setCookie("positionflag", true, 1);
-                });
-            }
-            else {
-                //对象不可用，则设置标记
-                Utils.setCookie("positionflag", true, 1);
-            }
-        }
-    }
-
-    Utils.onPageLoad = function () {
-        getAddress();
-        activity_ad.Init();
-
-        //setTimeout(function () {
-        //    activity_ad.ShowAd();
-        //    setTimeout(activity_ad.CloseAd, 10000);
-        //}, 2000);
-    };
-
-    var activity_ad = {
-        body: null,
-        shadow: null,
-        ad: null,
-        Init: function () {
-            var _this = activity_ad;
-
-            _this.body = document.body;
-            _this.shadow = $$("shadow");
-            _this.ad = $$("activity_ad");
-            _this.ad.addEventListener("click", function () {
-                _this.CloseAd();
-            }, false);
-
-        },
-        ShowShadow: function () {
-            var height = document.body.clientHeight > document.documentElement.clientHeight ? document.body.clientHeight : document.documentElement.clientHeight;
-            activity_ad.shadow.setAttribute("style", "height:" + height + "px;display:block");
-        },
-        CloseShadow: function () {
-            activity_ad.shadow.setAttribute("style", "display:none");
-        },
-        ShowAd: function () {
-            var _this = activity_ad;
-
-            _this.ShowShadow();
-
-            _this.ad.setAttribute("class", "activity_ad_animation_show");
-        },
-        CloseAd: function () {
-            var _this = activity_ad;
-
-            _this.CloseShadow();
-
-            _this.ad.setAttribute("class", "activity_ad_animation_close");
-        }
-    }
+//    var activity_ad = {
+//        body: null,
+//        shadow: null,
+//        ad: null,
+//        Init: function () {
+//            var _this = activity_ad;
+//
+//            _this.body = document.body;
+//            _this.shadow = $$("shadow");
+//            _this.ad = $$("activity_ad");
+//            _this.ad.addEventListener("click", function () {
+//                _this.CloseAd();
+//            }, false);
+//
+//        },
+//        ShowShadow: function () {
+//            var height = document.body.clientHeight > document.documentElement.clientHeight ? document.body.clientHeight : document.documentElement.clientHeight;
+//            activity_ad.shadow.setAttribute("style", "height:" + height + "px;display:block");
+//        },
+//        CloseShadow: function () {
+//            activity_ad.shadow.setAttribute("style", "display:none");
+//        },
+//        ShowAd: function () {
+//            var _this = activity_ad;
+//
+//            _this.ShowShadow();
+//
+//            _this.ad.setAttribute("class", "activity_ad_animation_show");
+//        },
+//        CloseAd: function () {
+//            var _this = activity_ad;
+//
+//            _this.CloseShadow();
+//
+//            _this.ad.setAttribute("class", "activity_ad_animation_close");
+//        }
+//    }
 </script>
 <script src="{{asset('style/home/js/public.js')}}"></script>
 <script type="text/javascript" name="baidu-tc-cerfication" src="{{asset('style/home/js/lightapp.js')}}"></script>
