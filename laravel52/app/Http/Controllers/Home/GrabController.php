@@ -8,6 +8,7 @@ use App\Http\Requests;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Input;
+use Symfony\Component\HttpFoundation\Session\Session;
 class GrabController extends Controller
 {
     //抢位页面
@@ -22,7 +23,8 @@ class GrabController extends Controller
     //购买票
     public function payGrab()
     {
-        session_start();
+        $session = new Session();
+        $user_id = $session->get('u_id');
 //        if(!isset($_SESSION['userInfo']))
 //        {
 //            $result['status'] = 0;
@@ -41,7 +43,7 @@ class GrabController extends Controller
         $data['is_package'] = 0;
         $data['value'] = trim(Input::get('str'),',');
         $data['pay_time'] = date('Y-m-d H:i:s');
-        $data['user_id'] = 1;
+        $data['user_id'] = $user_id;
         $data['status'] = 0;
         $data['package_id'] = '';
         $res = DB::table('order')->insert($data);
@@ -60,30 +62,47 @@ class GrabController extends Controller
         if(isset($_GET['out_trade_no']))
         {
             $sn = $_GET['out_trade_no'];
-            $data['status'] = 1;
-            $res = DB::table('order')->where("order_number",'=',$sn)->update($data);
-            if($res)
-            {
-                //购买给用户发短信  票房加
-                $mess = DB::table('order')->join('users', 'users.u_id', '=', 'order.user_id')->where("order_number",'=',$sn)->first();
-                $play_id = $mess->play_id;
-                $movieId = DB::table('play')->select('movie_id')->where("id",'=',$play_id)->first();
-                $movieId = $movieId->movie_id;
-                $movieInfo = DB::table('movie')->where("movie_id",'=',$movieId)->first();
-                $newbox = $movieInfo->movie_box + $mess->count;
-                $upStatus = DB::table('movie')->where("movie_id",'=',$movieId)->update(['movie_box'=>$newbox]);
+            preg_match("/^ls(.*)$/",$sn,$res);
+            if(empty($res)){
+                $data['status'] = 1;
+                $res = DB::table('order')->where("order_number",'=',$sn)->update($data);
+                if($res)
+                {
+                    //购买给用户发短信  票房加
+                    $mess = DB::table('order')->join('users', 'users.u_id', '=', 'order.user_id')->where("order_number",'=',$sn)->first();
+                    $play_id = $mess->play_id;
+                    $movieId = DB::table('play')->select('movie_id')->where("id",'=',$play_id)->first();
+                    $movieId = $movieId->movie_id;
+                    $movieInfo = DB::table('movie')->where("movie_id",'=',$movieId)->first();
+                    $newbox = $movieInfo->movie_box + $mess->count;
+                    $upStatus = DB::table('movie')->where("movie_id",'=',$movieId)->update(['movie_box'=>$newbox]);
+                    $tel = $mess->user;
+                    $content = "nickname=".$mess->nickname.'&num='.$mess->count.'&order_number='.$mess->order_number;
+                    $status = $this->Short($tel,$content);
+                    if($status)
+                    {
+                        return redirect('/');
+                        //echo "<script>alert('购买成功,短信已发送到您的手机');location.href='/'</script>";
+                    }else{
+                        //return redirect('/');
+                        echo "<script>alert('系统出错,请联系网站管理员');location.href='/'</script>";
+                    }
+
+                }
+            }else{
+                DB::table('pack_order')->where("order_name",'=',$sn)->update(['status'=>1]);
+                $mess = DB::table('pack_order')->join('users', 'users.u_id', '=', 'pack_order.user_id')->where("order_name",'=',$sn)->first();
                 $tel = $mess->user;
-                $content = "nickname=".$mess->nickname.'&num='.$mess->count.'&order_number='.$mess->order_number;
+                $content = "nickname=".$mess->nickname.'&order_number='.$mess->order_name;
                 $status = $this->Short($tel,$content);
                 if($status)
                 {
                     return redirect('/');
-                     //echo "<script>alert('购买成功,短信已发送到您的手机');location.href='/'</script>";
                 }else{
                     echo "<script>alert('系统出错,请联系网站管理员');location.href='/'</script>";
                 }
-
             }
+
         }else{
             echo "<script>alert('购买失败');location.href='/'</script>";
         }
@@ -179,5 +198,54 @@ class GrabController extends Controller
         }
         return $a_cdata['result'];
     }
+
+
+    //套餐
+    public function pack($pack_id,$price){
+          $session = new Session();
+          $user_id = $session->get('u_id');
+          $playInfo = DB::table("pack")->where("id",'=',$pack_id)->first();
+          $order_number = 'ls'.time();
+          $lin = $playInfo->pack_name;
+          $data['order_name'] = $order_number;
+          $data['price'] = $price;
+          $data['user_id'] = $user_id;
+          $data['time'] = date('Y-m-d h:i:s');
+          $data['status'] = 0;
+          $data['pack_id'] = $pack_id;
+          $res = DB::table('pack_order')->insert($data);
+          if($res)
+          {
+              $this->lala($order_number,$price,$lin);
+          }else
+              {
+                  echo "下单失败";
+              }
+
+
+
+    }
+
+    public function lala($order_number,$price,$lin)
+    {
+        $url = 'http://localhost/dayi/stc_admin/laravel52/public/1/wappay/pay.php';
+        $data = [
+            'WIDout_trade_no' => $order_number,
+            'WIDsubject'      => '购买'.$lin.'零食组合套餐',
+            'WIDtotal_amount' => $price,
+            'WIDbody'  =>         '支付'
+        ];
+        echo $this->curlPost($url,$data);
+    }
+
+    public function againpay(Request $request){
+        $order_number=$request->input("order_number");
+        $price=$request->input("price");
+        $count=$request->input("count");
+        $value=$request->input("value");
+        //支付
+        $this->zfbPay($order_number,$price,$count,$value);
+    }
+
 
 }

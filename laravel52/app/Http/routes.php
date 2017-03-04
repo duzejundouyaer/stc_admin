@@ -63,3 +63,6 @@ Route::group(['prefix'=>'admin','namespace'=>'Admin'], function () {
     Route::any('package','FootController@package');//添加套餐
     Route::any('packageshow','FootController@packageshow');//套餐展示
 });
+
+
+Route::get('/pack/{pack_id}/{price}','Home\GrabController@pack');//详情页
