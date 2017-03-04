@@ -120,7 +120,7 @@
             <ul>
                 <li class="fl cur"><a href="javascript:void(0);" class="oaClick">影片</a></li>
                 <li class="fl cur"><a href="javascript:void(0)">选购套餐</a></li>
-                <li class="fl cur"><a href="javascript:void(0)">票房排行</a></li>
+                <li class="fl cur"><a href="{{URL('orby')}}">票房排行</a></li>
                 <li class="fl cur"><a href="{{URL('center')}}">我的地盘</a></li>
             </ul>
         </div>

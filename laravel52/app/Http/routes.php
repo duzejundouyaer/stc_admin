@@ -1,6 +1,7 @@
 <?php
 
 Route::get('/','Home\IndexController@index');//首页
+Route::get('/orby','Home\IndexController@orby');//票房排行
 Route::get('/lists','Home\ListsController@lists');//正在热播
 
 Route::post('/commont','Home\DetailsController@commonts');//用户评论
