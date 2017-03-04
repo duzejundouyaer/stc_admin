@@ -6,10 +6,10 @@
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <title>个人中心</title>
-    <link rel="stylesheet" type="text/css" href="{{asset('style/home/css/stylecenter.css')}}">
+    <link rel="stylesheet" type="text/css" href="{{asset('style/css/stylecenter.css')}}">
 </head>
 
-<body style="background-color: #868288">
+<body>
 
 <div id="_centent">
     <header style="background-color: #000000;color: #fdf8f8">
@@ -24,7 +24,7 @@
         <div class="head-img">
             <label>
                 <input type="file" accept="audio/*;capture=microphone" name="file" onchange="readFile(this)"  style="display: none ">
-                <img src="{{asset($userone['img'])}}" id="art_thumb_img">
+                <img src="{!!asset($userone['img'])!!}" id="art_thumb_img">
             </label>
             {{--<label>--}}
                   {{-- <img src="{{$val->n_img}}" alt="" height="100" width="100" class="qq">--}}
@@ -47,14 +47,18 @@
                     <p>订单</p>
                 </li>
             </a>
+            <a href="{{URL('lists')}}">
             <li class="pt-line">
                 <i class="clt"></i>
                 <p>收藏</p>
             </li>
+            </a>
+            <a href="{{URL('lists')}}">
             <li>
                 <i class="rcm"></i>
                 <p>推荐</p>
             </li>
+            </a>
         </ul>
     </div>
 
@@ -66,10 +70,12 @@
                     <i class="arr-right"></i>
                 </div>
             </a>
+            <a href="{{URL('updatepwd')}}">
             <div class="lt-dsb cl-bb">
                 <p>修改密码</p>
                 <i class="arr-right"></i>
             </div>
+            </a>
         </div>
     </section>
 
@@ -84,16 +90,20 @@
 
     <section class="mt-3">
         <div class="ps-lt">
+            <a href="{{URL('lists')}}">
             <div class="lt-dsb">
                 <p>猜你喜欢</p>
                 <i class="arr-right"></i>
             </div>
+           </a>
         </div>
         <div class="ps-lt">
+            <a href="{{URL('lists')}}">
             <div class="lt-dsb">
                 <p>附近热门</p>
                 <i class="arr-right"></i>
             </div>
+            </a>
         </div>
         <div class="ps-lt">
             <div class="lt-dsb">

@@ -34,10 +34,13 @@ Route::get('/short','Home\LoginController@short');//发送短信
 Route::get('/contrast','Home\LoginController@contrast');//验证码对比
 
 Route::any('/center','Home\CenterController@center');//个人中心页
-Route::any('/updatecenter','Home\CenterController@updatecenter');//个人中心页
+Route::any('/updatecenter','Home\CenterController@updatecenter');//修改
 Route::any('/updateone','Home\CenterController@updateone');//个人中心页
+Route::get('/updatepwd','Home\CenterController@updatepwd');//修改密码
 Route::any('/orders','Home\CenterController@orders');//orders
 Route::get('/disorder/{order_id}','Home\CenterController@disorder');//订单详情
+Route::get('/ispayshou/{order_id}','Home\CenterController@ispayshou');//ispayshou
+Route::get('/againpay','Home\GrabController@againpay');//重新支付
 
 
 

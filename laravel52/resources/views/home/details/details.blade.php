@@ -305,7 +305,7 @@ ul.rating li.five a:hover {background-position:0 -160px}
                     <dd>
                         <div class="all_dd">
                             <p class="Hide f15 fl w_movie">{{$desc->movie_name}}  </p>
-                            <span class="fr hsz">{{$desc->movie_score}}</span>
+                            <span class="fr hsz" id="pingfeng">{{$desc->movie_score}}</span>
                         </div>
                         <p class="all_dd clear Hide f12"><span class="hhsz">导演：</span> {{$desc->movie_director}}</p>
                         <p class="all_dd clear Hide f12"><span class="hhsz">主演：</span>{{$desc->movie_boss}}</p>
@@ -578,6 +578,7 @@ ul.rating li.five a:hover {background-position:0 -160px}
                        $("#num").html(num);
                         $("#analytic").removeAttr("disabled");
                         $("#analytic").css('color','red');
+                         $("#pingfeng").html(msg.pingfeng);
                    }
                 });
             

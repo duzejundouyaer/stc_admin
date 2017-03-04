@@ -45,8 +45,8 @@ class CenterController extends Controller
     //订单
     public function orders(Request $request){
         $session=new Session();
-//        $u_id=$session->get('u_id','');
-        $u_id=1;
+        $u_id=$session->get('u_id','');
+//        $u_id=1;
         $move=new Move();
         if($request->isMethod("post")) {
             $num= $request->input("pay");
@@ -72,12 +72,57 @@ class CenterController extends Controller
     public function disorder($order_id){
         $move = new Move();
         $orderone = $move->orderOnedis($order_id);
-        //print_r($orderone);die;
-        return view('home.center.disorder',['orderone'=>$orderone]);
+        $pack=DB::table('pack')->where('id', '=',$orderone->package_id)->first();
+//        print_r($orderone);die;
+        //print_r($pack);die;
+        return view('home.center.disorder',['orderone'=>$orderone,'pack'=>$pack]);
+    }
+    //ispayshou
+    public function ispayshou($order_id){
+        $order=DB::table('order')->where('order_id', '=',$order_id)->first();
+        //print_r($order);die;
+        $play=DB::table('order')->where('play_id', '=',$order->play_id)->where('status','=',1)->select('value')->get();
+        $movie_id=DB::table('play')->where('id', '=',$order->play_id)->select('movie_id')->first();
+        if($play){
+            foreach($play as $key=>$val){
+                $val->values=explode(",",$val->value);
+                foreach($val->values as $k=>$v){
+                    $info[]=$v;
+                }
+            }
+        $xianzuo=explode(",",$order->value);
+            $arr=[];
+            for($i=0;$i<count($xianzuo);$i++){
+                if(in_array($xianzuo[$i],$info)){
+                    $arr[]=$xianzuo[$i];
+                }
+            }
+//            print_r($arr);die;
+            if($arr!=[]){
+                return view('errors.yipay',['arr'=>$arr,'movie_id'=>$movie_id->movie_id]);
+            }else{
+                return redirect("againpay?order_number=$order->order_number&price=$order->price&count=$order->count&value=$order->value");
+            }
+        }else{
+            return redirect("againpay?order_number=$order->order_number&price=$order->price&count=$order->count&value=$order->value");
+        }
+//        echo $order_id;
     }
 
-
-
+//    public function againpay(Request $request){
+//        $order_number=$request->input("order_number");
+//        $price=$request->input("price");
+//        $count=$request->input("count");
+//        $value=$request->input("value");
+//        //支付
+//        $this->zfbPay($order_number,$price,$count,$value);
+//    }
+     //修改密码
+    public function updatepwd(){
+        $session=new Session();
+        $u_id=$session->get('u_id','');
+        return view('home.center.updatepwd',['u_id'=>$u_id]);
+    }
 
 
 
