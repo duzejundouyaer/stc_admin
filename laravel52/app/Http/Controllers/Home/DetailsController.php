@@ -54,8 +54,8 @@ class DetailsController extends Controller
        $result = DB::table('comment')->insert(['users_id'=>$user_id,'c_content'=>$strs,'c_date'=>$datetime,'movie_id'=>$movie_id,'c_number'=>$star]);
        $movie_score = DB::table('comment')->where('movie_id',$movie_id)->count(); //此电影共有的评论
        $score = DB::table('comment')->where('movie_id',$movie_id)->sum('c_number');//此电影的所有评分
-       $re = $score/$movie_score*1;
-       $pingfeng = number_format($re, 1);  
+       $re = $score/$movie_score*1;   //电影评分
+       $pingfeng = number_format($re, 1);  //电影评分取小数点后第一位
        $r = DB::table('movie')->where('movie_id',$movie_id)->update(['movie_score'=>$pingfeng]);
        $info = array();
        if($result)
