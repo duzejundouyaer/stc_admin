@@ -37,7 +37,7 @@ class DetailsController extends Controller
         $session = $session = new Session;
         $request = $request->all();
         $movie_id = $request['movie_id'];//电影ID
-        $strs  = $request['content'];//用户评论内容
+        $strs  = htmlspecialchars($request['content']);//用户评论内容
         $user_id = $session->get('u_id');//用户ID
         $star = $request['star'];//星级分数
         $datetime = date("Y-m-d H:i:s",time()+8*60*60);
