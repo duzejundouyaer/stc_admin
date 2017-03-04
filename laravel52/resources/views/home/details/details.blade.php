@@ -102,7 +102,7 @@ ul.rating li.five a:hover {background-position:0 -160px}
                <?php if($session->get('nickname')==""){?>
                     <p class="fl paint Hide"><a href="{{URL('login')}}" style="color: white; margin-right:10px;">登陆</a></p>
                <?php }else {?>
-                    <p class="fl paint Hide"><a href="{{URL('center')}}" style="color: white; margin-right:10px;">{{$nickname}}</a></p>
+                    <p class="fl paint Hide"><a href="{{URL('center')}}" style="color: white; margin-right:10px;">{{$session->get('nickname')}}</a></p>
                 <?php }?>
             </label>
         </li>
