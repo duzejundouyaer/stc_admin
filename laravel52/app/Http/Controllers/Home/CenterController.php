@@ -19,8 +19,12 @@ class CenterController extends Controller
     public function center(){
         $session=new Session();
         $u_id=$session->get('u_id','');
-        $userone=User::where('u_id',$u_id)->first();
-        return view('home.center.center',['userone'=>$userone]);
+        if($u_id==""){
+            return view('errors.login');
+        }else{
+            $userone=User::where('u_id',$u_id)->first();
+            return view('home.center.center',['userone'=>$userone]);
+        }
     }
     //修改个人信息
     public function updateone(Request $request){
