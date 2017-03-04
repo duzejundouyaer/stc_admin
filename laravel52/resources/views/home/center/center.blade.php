@@ -9,7 +9,7 @@
     <link rel="stylesheet" type="text/css" href="{{asset('style/home/css/stylecenter.css')}}">
 </head>
 
-<body style="background-color: #868288">
+<body >
 
 <div id="_centent">
     <header style="background-color: #000000;color: #fdf8f8">
