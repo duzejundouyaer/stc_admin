@@ -6,7 +6,7 @@
     background: url(../images/reg_bg.jpg) no-repeat;    filter:"progid:DXImageTransform.Microsoft.AlphaImageLoader(sizingMethod='scale')";
    -moz-background-size:100% 100%;
     background-size:100% 100%;
-    min-height:480px; 
+    min-height:615px; 
 }
 #layout span{
     display: block;
