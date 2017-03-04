@@ -380,6 +380,7 @@ ul.rating li.five a:hover {background-position:0 -160px}
                       <dd  style="float:right;width:280px;margin-left:20px;">
                         <p>套餐名称：{{$val->pack_name}}</p>
                         <p>套餐原价：<?php echo $val->original_price?></p>
+                        <p>折扣：<?php echo $val->zheshu?>折</p>
                         <p>折扣价：<?php echo $val->discount_price?></p>
                     </dd>
                        </dl>
