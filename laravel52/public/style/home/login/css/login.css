@@ -6,18 +6,21 @@
     background: url(../images/login_bg.jpg) no-repeat;    filter:"progid:DXImageTransform.Microsoft.AlphaImageLoader(sizingMethod='scale')";
    -moz-background-size:100% 100%;
     background-size:100% 100%;
-    min-height:480px; 
+    min-height:615px; 
 }
 .login-title{
     position: relative;
     width:100%;
     height:80px;
-    line-height: 80px;
+    line-height: 75px;
     text-align: center;
     font-size: 1.7em;
     font-family: "Microsoft YaHei";
     color:#fff;
+    
 }
+
+
 .login-title i{
     position: absolute;
     top:130px;
@@ -31,7 +34,7 @@
 .login-bar{
     position: relative;
     width:100%;
-    height:30%;
+    height:40%;
     
 }
 .login-bar ul li{

@@ -18,9 +18,9 @@
             <form action="{{URL('adds')}}" method="post" id="form">
             {{csrf_field()}}
             <ul>
-            <div align="center">
-                <p style="font-size: 16px; color:#ff7575;" id="errorInfo"></p>
-            </div>
+            
+                <p align="center" style="font-size: 16px; color:#FF2D2D;" id="errorInfo"></p>
+           
              
                 <p id="err_msg"></p>
                 <li><i class="un"><img src="{{asset('style/home/login/images/user_name.png')}}"></i><input class="username" type="text" id="username" name="tel" placeholder="请输入手机号" /></li>
