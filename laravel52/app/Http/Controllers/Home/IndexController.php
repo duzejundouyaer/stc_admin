@@ -21,8 +21,13 @@ class IndexController extends Controller
         return view('home.index.index',['well'=>$well,'soon'=>$soon,'nickname'=>$nickname]);
     }
 
-    //正在热播
-    public function lists(){
-        return view('home.index.lists');
+    public function orby(){
+        $move = new Move();
+        $well = $move->fourOrderby();
+        return view('home.index.orby',['well'=>$well]);
     }
+//    //正在热播
+//    public function lists(){
+//        return view('home.index.lists');
+//    }
 }

@@ -20,6 +20,15 @@ class Move extends Model
                     ->take(4)
                     ->get();
     }
+    ///票房
+    public function fourOrderby(){
+        return self::where('release',1)
+            ->where('is_hot',1)
+            ->where('is_status',1)
+            ->orderBy('movie_box','desc')
+//            ->take(4)
+            ->get();
+    }
     ///查询订单
     public function ordersShow($u_id,$status){
         $sql="select a.order_id,a.order_number,a.is_package,a.count,a.user_id,a.play_id,a.status,a.price,a.value,b.id,b.movie_id,b.home_id,b.day,b.begin_time,b.end_time,b.day_price,c.home_id,c.home_name,c.is_open,d.movie_id,d.movie_name,d.movie_img,d.movie_price from `order` a,play b,home c,movie d where a.play_id=b.id and b.home_id=c.home_id and b.movie_id=d.movie_id and a.user_id=$u_id";

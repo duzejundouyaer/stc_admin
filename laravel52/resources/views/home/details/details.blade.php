@@ -60,201 +60,25 @@ ul.rating li.five a:hover {background-position:0 -160px}
     <meta name="viewport" content="initial-scale=1.0,user-scalable=no" />
     <meta content="yes" name="apple-mobile-web-app-capable" />
     <meta content="black" name="apple-mobile-web-app-status-bar-style" />
-    <meta content="telephone=no" name="format-detection" /><title>
-    爱影院
-    </title><link id="ctl00_css1" href="{{asset('style/home/css/style.css')}}" rel="stylesheet" />
+    <meta content="telephone=no" name="format-detection" />
+    <title>
+         爱影院
+    </title>
+    <link id="ctl00_css1" href="{{asset('style/home/css/style.css')}}" rel="stylesheet" />
     <link id="ctl00_css2" href="{{asset('style/home/css/inside_pages.css')}}" rel="stylesheet" />
     <link id="ctl00_css2" href="{{asset('style/home/css/demo.css')}}" rel="stylesheet" />
-  
-    <script src="{{asset('style/home/js/public.js')}}"></script>
- 
-    <script src="{{asset('style/home/js/jquery-1.10.2.min.js')}}"></script>
-    <script src="{{asset('style/home/layer/layer.js')}}"></script>
-    <script src="{{asset('style/home/js/demo.js')}}"></script>
-    <script src="{{asset('style/home/js/iscroll.js')}}"></script>
     <style>
         .all
         {
             width: 100%;
         }
     </style>
-    <link href="css/scrollbar.css" rel="stylesheet" />
-    <script src="js/FancyZoom_zzjs_net.js"></script>
-    <script src="js/FancyZoomHTML.js"></script>
 
-    <script type="text/javascript">
-        var url = location.href;
-        var filmNo = url.substring(url.lastIndexOf("=") + 1, url.length);
-        var pageCount = 0;
-        var pageindex = 2;
-
-
-        //window.onload=LoadDate();
-        function LoadDate() {
-            var failure;
-            var actionurl = 'MWebServices.ashx';
-            Ajax.m_action = "getFilmReviews";
-            Ajax.m_dtype = 'row';
-            if (pageCount == 0 || pageindex <= pageCount)
-                Ajax.request(actionurl, { "filmNo": filmNo, "numPerPage": 10, "pageIdx": pageindex }, function (json) {
-                    var obj = eval("(" + json + ")");
-                    if (obj.reviews.length > 0) {
-                        pageCount = obj.pageCount;
-                        if (pageindex <= pageCount) {
-                            pageindex++;
-                            for (var i = 0; i < obj.reviews.length; i++) {
-                                var ss = " <dl class='fl'><dt class=''><img src='" + obj.reviews[i].image + "' width='50' height='50' /><br /><span class='hsz'>" + obj.reviews[i].mobile + "</span></dt> <dd class=''> <p>" + obj.reviews[i].content + "</p> <p class=''>" + obj.reviews[i].datetime + "</p> </dd></dl>";
-                                document.getElementById("Add").insertAdjacentHTML("beforeEnd", ss);
-                            }
-                        }
-                    }
-                }, failure);
-
-        }
-
-        function newtab(n) {
-            var tabnav = "newtab" + n;
-            var tabid = "newtabid" + n;
-            cleardisplay();
-            if(tabid=="newtabid2"&&$$("newtabid2").getElementsByTagName("img").length==0)
-                document.getElementById("more").style.display="none";
-
-            document.getElementById(tabid).style.display = "block";
-            f_addClass(document.getElementById(tabnav),'new_nav_sel_li');
-        }
-        function cleardisplay() {
-            for (i = 1; i < 4; i++) {
-                var cleartabid = "newtabid" + i;
-                document.getElementById(cleartabid).style.display = "none";
-                f_removeClass(document.getElementById("newtab"+i),'new_nav_sel_li');
-            }
-        }
-        function f_addClass(obj,className)
-        {
-            if (obj) {obj.className+= ' '+className;}
-        }
-        function f_removeClass(obj,className) {
-            var reg = new RegExp('^'+className+'\\s|\\s'+className+'$|'+className+'\\s');
-            if (obj) {obj.className = obj.className.replace(reg,'');}
-        }
-        function Buymovie(No, name) {
-            var ClientID = document.getElementById("ClientID").value;
-            var url = location.href;
-            var type = url.substring(url.indexOf("=") + 1, url.indexOf("=") + 2);
-            if (type != "2") {
-                window.location.href = 'buy_movie.aspx?filmNo=' + No + '&filmName=' + name+"&ClientID="+ClientID;
-            } else {
-
-            }
-        }
-
-
-        function FilmReview(obj) {
-            var ClientID = document.getElementById("ClientID").value;
-            var username = "";
-            var url = location.href;
-            var type = url.substring(url.indexOf("=") + 1,url.indexOf("=") + 2);
-            if (username != '') {
-                window.location.href = "discuss.aspx?filmNo=" + obj+"&type="+type+"&ClientID="+ClientID;
-            } else {
-                window.location.href = "mobilelogin.aspx?ClientID="+ClientID;
-            }
-        }
-        var myScroll, pullDownEl, pullDownOffset, pullUpEl, pullUpOffset, generatedCount = 0;
-
-        var startY = 0;
-
-
-        function pullDownAction() {
-            setTimeout(function () {
-
-                //myScroll.refresh();
-            }, 1000);
-        }
-
-        function pullUpAction() {
-            setTimeout(function () {
-                LoadDate();
-                myScroll.refresh();
-            }, 1000);
-        }
-
-        /**
-         * 初始化iScroll控件
-         */
-        function loaded() {
-            pullDownEl = document.getElementById('pullDown');
-            pullDownOffset = pullDownEl.offsetHeight;
-            pullUpEl = document.getElementById('pullUp');
-            pullUpOffset = pullUpEl.offsetHeight;
-
-            myScroll = new iScroll('wrapper', {
-                scrollbarClass: 'myScrollbar', /* 重要样式 */
-                useTransition: false, /* 此属性不知用意，本人从true改为false */
-                topOffset: pullDownOffset,
-                onRefresh: function () {
-                    if (pullDownEl.className.match('loading')) {
-                        pullDownEl.className = '';
-                        pullDownEl.querySelector('.pullDownLabel').innerHTML = '下拉刷新...';
-                    } else if (pullUpEl.className.match('loading')) {
-                        pullUpEl.className = '';
-                        pullUpEl.querySelector('.pullUpLabel').innerHTML = '上拉加载更多...';
-                    }
-                },
-                onScrollMove: function () {
-                    if (this.y > this.minScrollY + 55 && !pullDownEl.className.match('flip')) {
-                        pullDownEl.className = 'flip';
-                        pullDownEl.querySelector('.pullDownLabel').innerHTML = '松手开始更新...';
-                        this.minScrollY = 0;
-                    } else if (this.y < this.minScrollY + 55 && pullDownEl.className.match('flip')) {
-                        pullDownEl.className = '';
-                        pullDownEl.querySelector('.pullDownLabel').innerHTML = '下拉刷新...';
-                        this.minScrollY = -pullDownOffset;
-                    } else if (this.y <(this.maxScrollY-55) && !pullUpEl.className.match('flip')) {
-                        pullUpEl.className = 'flip';
-                        pullUpEl.querySelector('.pullUpLabel').innerHTML = '上拉加载更多...';
-                        this.maxScrollY = this.maxScrollY;
-                    } else if (this.y > (this.maxScrollY + 55) && pullUpEl.className.match('flip')) {
-                        pullUpEl.className = '';
-                        pullUpEl.querySelector('.pullUpLabel').innerHTML = '上拉加载更多...';
-                        this.maxScrollY = pullUpOffset;
-                    }
-                },
-                onScrollEnd: function () {
-                    if (pullDownEl.className.match('flip')) {
-                        //pullDownEl.className = 'loading';
-                        //pullDownEl.querySelector('.pullDownLabel').innerHTML = '加载中...';
-                        // pullDownAction();	// Execute custom function (ajax call?)
-                    } else if (pullUpEl.className.match('flip')) {
-                        pullUpEl.className = 'loading';
-                        pullUpEl.querySelector('.pullUpLabel').innerHTML = '加载中...';
-                        pullUpAction();	// Execute custom function (ajax call?)
-                    }
-                }
-            });
-
-            setTimeout(function () { document.getElementById('wrapper').style.left = '0'; }, 800);
-        }
-        //初始化绑定iScroll控件 
-        //document.addEventListener('touchmove', function (e) { e.preventDefault(); }, false);
-        document.addEventListener('DOMContentLoaded', loaded, false);
-
-        function onclicks(url)
-        {
-            if(url.trim()!="")
-                window.location.href=url;
-            else
-                return;
-        }
-
-    </script>
 </head>
 <body>
 <div class="all">
     <form name="aspnetForm" method="post" action="Movie_detail.aspx?ftype=1&amp;filmNo=10001449&amp;ClientID=" id="aspnetForm">
-        <div>
-            <input type="hidden" name="__VIEWSTATE" id="__VIEWSTATE" value="/wEPDwULLTExOTYzMTIyMDQPZBYCZg9kFgQCAQ9kFgQCBg8WAh4EaHJlZgUkL1Jlc291cmNlcy9kb3V5b3UxMDBfMS9jc3Mvc3R5bGUuY3NzZAIHDxYCHwAFKy9SZXNvdXJjZXMvZG91eW91MTAwXzEvY3NzL2luc2lkZV9wYWdlcy5jc3NkAgMPZBYCAgEPZBYCAgEPFgIeC18hSXRlbUNvdW50AgEWAmYPZBYIZg8VDhjmiJHmnIDlpb3mnIvlj4vnmoTlqZrnpLxSaHR0cDovL2RvdXlvdTEwMC5jb206NzAwMC9VcGxvYWQvRmlsbVBpYy8yMDE2MDcvMjAxNjA3MTkxMDI0MzAyOTk1LmpwZ18xNzB4MjQwLmpwZxjmiJHmnIDlpb3mnIvlj4vnmoTlqZrnpLwDNy41CemZiOWlleWIqRvoiJLmt4cgLyDlhq/nu43ls7AgLyDlrovojJwP5Zac5YmnIC8g54ix5oOFAjkxDOS4reWbveWkp+mZhgoyMDE2LTA4LTA1DGJ0bl9pbmZvcl9ncAgxMDAwMTQ0ORjmiJHmnIDlpb3mnIvlj4vnmoTlqZrnpLzgBumhvuS9s++8iOiIkua3hyDppbDvvInmmK/lm73lhoXmn5Dml7blsJrmnYLlv5fnmoTmlrDku7vkuLvnvJbvvIzlpYnlkb3ljrvnsbPlhbDlj4LliqDml7boo4XlkajjgILkuIDpgJrmhI/lpJbnmoTnlLXor53orqnlpbnliJrliJrokL3lnLDlsLHmlL7lvIPkuoblt6XkvZzlronmjpLpo57lvoDkvKbmlabjgILlm6DkuLrlpbnmm77nu4/pgIPpgb/kvYblhbblrp7lhoXlv4Pmt7HniLHnmoTnlLfkurrmnpfnhLbvvIjlhq/nu43ls7Ag6aWw77yJ6ams5LiK5bCx6KaB5ZKM5LiA5L2N5bm06L275a+M5a625aWz6JCx6JCx77yI5a6L6IycIOmlsO+8iee7k+Wpmu+8jOWlueaDs+WcqOWpmuekvOS5i+WJjeaKiuaWsOmDjuaKouWbnuadpeOAguWcqOmjnuW+gOS8puaVpueahOmjnuacuuS4iu+8jOmhvuS9s+mCgumAheS6huWei+eUt05pY2vvvIjlh6TlsI/lsrMg6aWw77yJ77yM5aW55LiA55u05Ye657OX77yM5LukTmlja+mdnuW4uOWwtOWwrOOAguingemdouWQju+8jOael+eEtueahOWHhuaWsOWomOiQseiQseWNtOW+heWlueS6suWmguWnkOWmueOAguWwveeuoeWGheW/g+efm+ebvu+8jOmhvuS9s+i/mOaYr+acieaEj+aXoOaEj+eahOWItumAoOedgOm6u+eDpu+8jOW5tuWboOS4uuS4gOS4quivr+S8muS9v+WpmuekvOaXoOazleWcqOiLseWbveWmguacn+S4vuihjO+8jOS9huael+eEtuWSjOiQseiQseaDheavlOmHkeWdmu+8jOmhvuS9s+WGs+WumuWuieaOkuael+eEtuWSjOiQseiQseWOu+aEj+Wkp+WIqeWKnuWpmuekvOOAguWcqOexs+WFsO+8jOmhvuS9s+m8k+i1t+WLh+awlOWSjOael+eEtuihqOeZve+8jOWNtOaEj+Wkluiiq+iQseiQseaSnuinge+8jOS4ieS6uuWcqOihl+WktOWxleW8gOS6hui/vemAkOKApuKApmQCAQ8WAh8BAgYWDGYPZBYCZg8VAlZodHRwOi8vZG91eW91MTAwLmNvbTo3MDAwL1VwbG9hZC9GaWxtUGljdHVyZS8yMDE2MDcvMjAxNjA3MTkxMDI1MzY5NDI4LmpwZ182MDB4NDAwLmpwZ1ZodHRwOi8vZG91eW91MTAwLmNvbTo3MDAwL1VwbG9hZC9GaWxtUGljdHVyZS8yMDE2MDcvMjAxNjA3MTkxMDI1MzY5NDI4LmpwZ182MDB4NDAwLmpwZ2QCAQ9kFgJmDxUCVmh0dHA6Ly9kb3V5b3UxMDAuY29tOjcwMDAvVXBsb2FkL0ZpbG1QaWN0dXJlLzIwMTYwNy8yMDE2MDcxOTEwMjUzNzgxNjQuanBnXzYwMHg0MDAuanBnVmh0dHA6Ly9kb3V5b3UxMDAuY29tOjcwMDAvVXBsb2FkL0ZpbG1QaWN0dXJlLzIwMTYwNy8yMDE2MDcxOTEwMjUzNzgxNjQuanBnXzYwMHg0MDAuanBnZAICD2QWAmYPFQJWaHR0cDovL2RvdXlvdTEwMC5jb206NzAwMC9VcGxvYWQvRmlsbVBpY3R1cmUvMjAxNjA3LzIwMTYwNzE5MTAyNTM5MDAyMC5qcGdfNjAweDQwMC5qcGdWaHR0cDovL2RvdXlvdTEwMC5jb206NzAwMC9VcGxvYWQvRmlsbVBpY3R1cmUvMjAxNjA3LzIwMTYwNzE5MTAyNTM5MDAyMC5qcGdfNjAweDQwMC5qcGdkAgMPZBYCZg8VAlZodHRwOi8vZG91eW91MTAwLmNvbTo3MDAwL1VwbG9hZC9GaWxtUGljdHVyZS8yMDE2MDcvMjAxNjA3MTkxMDI1NDAwMzE2LmpwZ182MDB4NDAwLmpwZ1ZodHRwOi8vZG91eW91MTAwLmNvbTo3MDAwL1VwbG9hZC9GaWxtUGljdHVyZS8yMDE2MDcvMjAxNjA3MTkxMDI1NDAwMzE2LmpwZ182MDB4NDAwLmpwZ2QCBA9kFgJmDxUCVmh0dHA6Ly9kb3V5b3UxMDAuY29tOjcwMDAvVXBsb2FkL0ZpbG1QaWN0dXJlLzIwMTYwNy8yMDE2MDcxOTEwMjU0MTA5MjQuanBnXzYwMHg0MDAuanBnVmh0dHA6Ly9kb3V5b3UxMDAuY29tOjcwMDAvVXBsb2FkL0ZpbG1QaWN0dXJlLzIwMTYwNy8yMDE2MDcxOTEwMjU0MTA5MjQuanBnXzYwMHg0MDAuanBnZAIFD2QWAmYPFQJWaHR0cDovL2RvdXlvdTEwMC5jb206NzAwMC9VcGxvYWQvRmlsbVBpY3R1cmUvMjAxNjA3LzIwMTYwNzE5MTAyNTQyMTIyMC5qcGdfNjAweDQwMC5qcGdWaHR0cDovL2RvdXlvdTEwMC5jb206NzAwMC9VcGxvYWQvRmlsbVBpY3R1cmUvMjAxNjA3LzIwMTYwNzE5MTAyNTQyMTIyMC5qcGdfNjAweDQwMC5qcGdkAgIPFQIIMTAwMDE0NDkIMTAwMDE0NDlkAgMPFgIfAWZkZCXQAgRn88vYaF5BL4jjd5iZeQC+" />
-        </div>
+        
 
         <div>
 
@@ -266,21 +90,24 @@ ul.rating li.five a:hover {background-position:0 -160px}
 
 
         </div>
-        <div class="head">
-            <ul>
-                <li class="fl logo">
-                    <a href="javascript:void(0)/movie.aspx?ClientID=">
-                        <img src="http://m.douyou100.com/Resources/douyou100_1/images/LOGO.png" width="180" height="36" /></a>
-                </li>
-                <li class="fr city Hide">
-                    <label>
-                        <p class="fl paint Hide"><a href="javascript:void(0)../City.aspx?ClientID=" style="color: white;"><b id="defaultCityName">深圳</b></a></p>
-                        <img src="http://m.douyou100.com/Resources/douyou100_1/images/city.png" width="12" height="11" "javascript:return window.location.href='javascript:void(0)../City.aspx?ClientID='" />
-                    </label>
-                </li>
-
-            </ul>
-        </div>
+       <div class="head">
+    <ul>
+        <li class="fl logo">
+            <a href="javascript:void(0)">
+                <img src="http://m.douyou100.com/Resources/douyou100_1/images/LOGO.png" width="180" height="36" /></a>
+       </li>
+        <li class="fr Hide">
+            <label>
+               <?php if($session->get('nickname')==""){?>
+                    <p class="fl paint Hide"><a href="{{URL('login')}}" style="color: white; margin-right:10px;">登陆</a></p>
+               <?php }else {?>
+                    <p class="fl paint Hide"><a href="{{URL('center')}}" style="color: white; margin-right:10px;">{{$session->get('nickname')}}</a></p>
+                <?php }?>
+            </label>
+        </li>
+        
+    </ul>
+</div>
        
 
         <!--导航样式-->
@@ -350,7 +177,7 @@ ul.rating li.five a:hover {background-position:0 -160px}
         <div class="new_nav clear fl">
             <ul>
                 <li class="cur" id='newtab1' >剧情</li>
-                <li class="cur " id='newtab2' >新套餐<div class="border fl"></div>
+                <li class="cur " id='newtab2' >零食<div class="border fl"></div>
                 </li>
                 <li class="cur new_nav_sel_li" id='newtab3'>影评<div class="border fl"></div>
                 </li>
@@ -371,7 +198,7 @@ ul.rating li.five a:hover {background-position:0 -160px}
                           @if($session->get('nickname') == '')
                            <a href="javascript:void(0)" style="float:right;margin-right:30px;margin-top:15px;" onclick="window.location.href='{{URL('/login')}}'">登录</a>
                           @else
-                          <a href="javascript:void(0)" style="float:right;margin-right:30px;margin-top:15px;" onclick="window.location.href='{{URL('/pay')}}/{{$val->id}}/{{$desc->movie_id}}'">购买</a>
+                          <a href="javascript:void(0)" style="float:right;margin-right:30px;margin-top:15px;" onclick="window.location.href='{{URL('/pack')}}/{{$val->id}}/{{$val->discount_price}}'">购买</a>
                           @endif
                 <div class="hsz" style="width: 94%; height:100%; margin: 0 3%; line-height: 35px; text-decoration:underline">
                   <div style="500%"><dl style="width:350px;">
@@ -379,7 +206,9 @@ ul.rating li.five a:hover {background-position:0 -160px}
                     </dt>
                       <dd  style="float:right;width:280px;margin-left:20px;">
                         <p>套餐名称：{{$val->pack_name}}</p>
-                        <p>套餐价格：<?php echo $desc->movie_price+$val->discount_price?></p>
+                        <p>套餐原价：<?php echo $val->original_price?></p>
+                        <p>折扣：<?php echo $val->zheshu?>折</p>
+                        <p>折扣价：<?php echo $val->discount_price?></p>
                     </dd>
                        </dl>
                  </div>
@@ -404,9 +233,7 @@ ul.rating li.five a:hover {background-position:0 -160px}
             </div>
            </div> 
             @endif
-          <!--   <div class="more clear">
-                <button type="button" class="btn_jz cur" id="more" "var ClientID = document.getElementById('ClientID').value; window.location.href='javascript:void(0)PictureList.aspx?filmNo=10001449&ClientID='+ClientID">更多剧照>></button>
-            </div> -->
+         
         </div>
         <div id='newtabid3' class='tabid clear' >
             {{--评论--}}
@@ -495,6 +322,11 @@ ul.rating li.five a:hover {background-position:0 -160px}
 
 </body>
 </html>
+<script src="{{asset('style/home/js/public.js')}}"></script>
+<script src="{{asset('style/home/js/jquery-1.10.2.min.js')}}"></script>
+<script src="{{asset('style/home/layer/layer.js')}}"></script>
+<script src="{{asset('style/home/js/demo.js')}}"></script>
+<script src="{{asset('style/home/js/public.js')}}"></script>
 <script>
     $(function(){
         var star = '';

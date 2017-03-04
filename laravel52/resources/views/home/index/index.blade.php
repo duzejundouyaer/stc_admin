@@ -10,7 +10,11 @@
     <link id="ctl00_css1" href="{{asset('style/home/css/style.css')}}" rel="stylesheet" />
     <link id="ctl00_css2" href="{{asset('style/home/css/inside_pages.css')}}" rel="stylesheet" />
     <link href="{{asset('style/home/css/index.css')}}" rel="stylesheet" />
-        <style>
+    <link rel="stylesheet" href="{{asset('style/home/css/demo.css')}}">
+    <script src="{{asset('style/home/js/demo1.js')}}"></script>
+    <script src="{{asset('style/home/js/jquery-1.10.2.min.js')}}"></script>
+    <script src="{{asset('style/home/layer/layer.js')}}"></script>
+    <style>
         .all
         {
             width: 100%;
@@ -74,44 +78,44 @@
         
     </ul>
 </div>
-<script>
-    document.getElementById("defaultCityName").innerHTML = Utils.getCookie("CityName");
-    document.getElementById("defaultCityName").title = Utils.getCookie("CityName");
-    //function CurentTime()
-    //{
-    //    var now = new Date();
-       
-    //    var year = now.getFullYear();       //年
-    //    var month = now.getMonth() + 1;     //月
-    //    var day = now.getDate();            //日
-       
-    //    var hh = now.getHours();            //时
-    //    var mm = now.getMinutes();          //分
-       
-    //    var clock = year + "-";
-       
-    //    if(month < 10)
-    //        clock += "0";
-       
-    //    clock += month + "-";
-       
-    //    if(day < 10)
-    //        clock += "0";
-           
-    //    clock += day + " ";
-       
-    //    if(hh < 10)
-    //        clock += "0";
-           
-    //    clock += hh + ":";
-    //    if (mm < 10) clock += '0';
-    //    clock += mm;
-    //    return(clock);
-    //}
-    //if ((new Date(CurentTime())) >= new Date("2014-03-27 08:00:00")) {
-    //    document.getElementById("tips").style.display = "none";
-    //}
-</script>
+{{--<script>--}}
+    {{--document.getElementById("defaultCityName").innerHTML = Utils.getCookie("CityName");--}}
+    {{--document.getElementById("defaultCityName").title = Utils.getCookie("CityName");--}}
+    {{--//function CurentTime()--}}
+    {{--//{--}}
+    {{--//    var now = new Date();--}}
+       {{----}}
+    {{--//    var year = now.getFullYear();       //年--}}
+    {{--//    var month = now.getMonth() + 1;     //月--}}
+    {{--//    var day = now.getDate();            //日--}}
+       {{----}}
+    {{--//    var hh = now.getHours();            //时--}}
+    {{--//    var mm = now.getMinutes();          //分--}}
+       {{----}}
+    {{--//    var clock = year + "-";--}}
+       {{----}}
+    {{--//    if(month < 10)--}}
+    {{--//        clock += "0";--}}
+       {{----}}
+    {{--//    clock += month + "-";--}}
+       {{----}}
+    {{--//    if(day < 10)--}}
+    {{--//        clock += "0";--}}
+           {{----}}
+    {{--//    clock += day + " ";--}}
+       {{----}}
+    {{--//    if(hh < 10)--}}
+    {{--//        clock += "0";--}}
+           {{----}}
+    {{--//    clock += hh + ":";--}}
+    {{--//    if (mm < 10) clock += '0';--}}
+    {{--//    clock += mm;--}}
+    {{--//    return(clock);--}}
+    {{--//}--}}
+    {{--//if ((new Date(CurentTime())) >= new Date("2014-03-27 08:00:00")) {--}}
+    {{--//    document.getElementById("tips").style.display = "none";--}}
+    {{--//}--}}
+{{--</script>--}}
 
         
     <!--导航样式-->
@@ -119,17 +123,31 @@
         <div class="tab_nav">
             <ul>
                 <li class="fl cur"><a href="javascript:void(0);" class="oaClick">影片</a></li>
-                <li class="fl cur"><a href="javascript:void(0)">选购套餐</a></li>
-                <li class="fl cur"><a href="javascript:void(0)">票房排行</a></li>
+
+                <li class="fl cur"><a href="{{URL('')}}">选购套餐</a></li>
+                <li class="fl cur"><a href="{{URL('/box')}}">票房排行</a></li>
+
                 <li class="fl cur"><a href="{{URL('center')}}">我的地盘</a></li>
             </ul>
         </div>
     </div>
+{{--遮罩层--}}
+        <div id="dloginbox">
+            <h3 style="margin-top:20px;margin-left:10px;">请您注意:</h3>
+            <div style="margin-top:5px;margin-left:30px">
+                <p style="text-indent:2em;line-height:30px;font-size:15px">1.自觉遵守：爱国、守法、自律、真实、文明的原则。</p>
+                <p style="text-indent:2em;line-height:30px;font-size:15px">2.尊重网上道德，遵守《全国人大常委会关于维护互联网安全的决定》及中华人民共和国其他各项有关法律法规。</p>
+                <p style="text-indent:2em;line-height:30px;font-size:15px">3.请观众确认好电影的场次，电影票售出后概不退换。</p>
+                <p style="text-indent:2em;line-height:30px;font-size:15px">4.请您当面点清找零和票面金额，离开柜台概不负责。</p>
+                <p style="text-indent:2em;line-height:30px;font-size:15px">5.普通观众在非活动时间需按照正价购买影票，购买影票张数不限，每张票仅限一人使用。</p>
+                <p style="text-indent:2em;line-height:30px;font-size:15px">6.本影院支持支付宝，微信，现金支付，线上购票，线下消费。</p>
+            </div>
+        </div>
 
     <!--TAB1样式开始-->
     <div id='tabid1' class='tabid' style='display: block;'>
 
-        <p class="title"><img src="http://m.douyou100.com/Resources/douyou100_1/images/movie_icon.png" width="18" height="18" class="fl" style="margin:9px 3px 0px 0px;" /><span class="f15 hsz fl">正在热映</span><a class="fr" href="javascript:void(0);">如何购票<img src="http://m.douyou100.com/Resources/douyou100_1/images/how.png" width="12px" height="12px" /></a></p>
+        <p class="title"><img src="http://m.douyou100.com/Resources/douyou100_1/images/movie_icon.png" width="18" height="18" class="fl" style="margin:9px 3px 0px 0px;" /><span class="f15 hsz fl">正在热映</span><a class="cd-bouncy-nav-trigger" href="javascript:void(0);" onClick='ShowLoginBox()' style="float: right">购票须知<img src="http://m.douyou100.com/Resources/douyou100_1/images/how.png" width="12px" height="12px" /></a></p>
         <div class="all_movie clear">
              <?php foreach($well as $key=>$val){?>
                  <div class="movie">
@@ -187,11 +205,12 @@
         
     <div id="foot" class="foot clear">
 		<p><a href="javascript:void(0)" class="c1">帮助</a><a  href="javascript:void(0)" class="c1">客户端</a><a href="javascript:void(0)../idear.aspx?ClientID=" class="c1">意见反馈</a></p>
-		<p><a href="javascript:void(0)" style="margin-right:10px;" id="CustomService">400-066-8882</a>     http://m.douyou100.com</p>
-		<p class="f10">Copyright2005-2013 兜有电影版权所有. </p>
+		<p><a href="javascript:void(0)" style="margin-right:10px;" id="CustomService">400-066-8882</a>     http://aimovie.duzejun.cn    </p>
+		<p class="f10">Copyright2005-2013 爱影院版权所有. </p>
 	</div>
 </form>
     </div>
+
     <div id="my_errMsg" class="my_errMsg">
         <div class="errMsg">
             <div id="errTtile" class="errTtile"></div>
@@ -200,7 +219,7 @@
         </div>
     </div>
     <div id="overlayAll" class="overlayAll"></div>
-<script type="text/javascript">
+    <script type="text/javascript">
     function f_aClick(url) {
         var ClientID = document.getElementById("ClientID").value;
         window.location.href = url + "?ClientID=" + ClientID;
@@ -217,109 +236,109 @@
         window.location.href = "buy_movie.aspx?filmNo=" + obj1 + "&filmName=" + obj2 + "&ClientID=" + ClientID;
     }
 
-    function getAddress() {
-        var positionFlag = Utils.getCookie("positionflag");
-        if (!positionFlag) {
+//    function getAddress() {
+//        var positionFlag = Utils.getCookie("positionflag");
+//        if (!positionFlag) {
+//
+//            if (navigator.geolocation) {
+//                navigator.geolocation.getCurrentPosition(function (pos) {
+//                    var coords = pos.coords;
+//
+//                    var _params = {
+//                        latitude: coords.latitude,
+//                        longitude: coords.longitude
+//                    };
+//
+//                    Ajax.m_action = "getCityNo";
+//                    Ajax.m_dtype = "row";
+//                    Ajax.request("MWebServices.ashx", _params, function (r) {
+//                        r = r.toJson();
+//                        Utils.setCookie("positionflag", true, 1);
+//                        if (r.areaNo != Utils.getCookie("CityNo")) {
+//                            Utils.setCookie("CityName", r.areaName);
+//                            Utils.setCookie("CityNo", r.areaNo);
+//                            //window.location.reload();
+//                            window.location.href = "/movie.aspx?ClientID=" + document.getElementById("ClientID").value;
+//                        }
+//                    });
+//                }, function () {
+//                    //异常，则设置标记
+//                    Utils.setCookie("positionflag", true, 1);
+//                });
+//            }
+//            else {
+//                //对象不可用，则设置标记
+//                Utils.setCookie("positionflag", true, 1);
+//            }
+//        }
+//    }
 
-            if (navigator.geolocation) {
-                navigator.geolocation.getCurrentPosition(function (pos) {
-                    var coords = pos.coords;
+//    Utils.onPageLoad = function () {
+//        getAddress();
+//        activity_ad.Init();
+//
+//        //setTimeout(function () {
+//        //    activity_ad.ShowAd();
+//        //    setTimeout(activity_ad.CloseAd, 10000);
+//        //}, 2000);
+//    };
 
-                    var _params = {
-                        latitude: coords.latitude,
-                        longitude: coords.longitude
-                    };
-
-                    Ajax.m_action = "getCityNo";
-                    Ajax.m_dtype = "row";
-                    Ajax.request("MWebServices.ashx", _params, function (r) {
-                        r = r.toJson();
-                        Utils.setCookie("positionflag", true, 1);
-                        if (r.areaNo != Utils.getCookie("CityNo")) {
-                            Utils.setCookie("CityName", r.areaName);
-                            Utils.setCookie("CityNo", r.areaNo);
-                            //window.location.reload();
-                            window.location.href = "/movie.aspx?ClientID=" + document.getElementById("ClientID").value;
-                        }
-                    });
-                }, function () {
-                    //异常，则设置标记
-                    Utils.setCookie("positionflag", true, 1);
-                });
-            }
-            else {
-                //对象不可用，则设置标记
-                Utils.setCookie("positionflag", true, 1);
-            }
-        }
-    }
-
-    Utils.onPageLoad = function () {
-        getAddress();
-        activity_ad.Init();
-
-        //setTimeout(function () {
-        //    activity_ad.ShowAd();
-        //    setTimeout(activity_ad.CloseAd, 10000);
-        //}, 2000);
-    };
-
-    var activity_ad = {
-        body: null,
-        shadow: null,
-        ad: null,
-        Init: function () {
-            var _this = activity_ad;
-
-            _this.body = document.body;
-            _this.shadow = $$("shadow");
-            _this.ad = $$("activity_ad");
-            _this.ad.addEventListener("click", function () {
-                _this.CloseAd();
-            }, false);
-
-        },
-        ShowShadow: function () {
-            var height = document.body.clientHeight > document.documentElement.clientHeight ? document.body.clientHeight : document.documentElement.clientHeight;
-            activity_ad.shadow.setAttribute("style", "height:" + height + "px;display:block");
-        },
-        CloseShadow: function () {
-            activity_ad.shadow.setAttribute("style", "display:none");
-        },
-        ShowAd: function () {
-            var _this = activity_ad;
-
-            _this.ShowShadow();
-
-            _this.ad.setAttribute("class", "activity_ad_animation_show");
-        },
-        CloseAd: function () {
-            var _this = activity_ad;
-
-            _this.CloseShadow();
-
-            _this.ad.setAttribute("class", "activity_ad_animation_close");
-        }
-    }
+//    var activity_ad = {
+//        body: null,
+//        shadow: null,
+//        ad: null,
+//        Init: function () {
+//            var _this = activity_ad;
+//
+//            _this.body = document.body;
+//            _this.shadow = $$("shadow");
+//            _this.ad = $$("activity_ad");
+//            _this.ad.addEventListener("click", function () {
+//                _this.CloseAd();
+//            }, false);
+//
+//        },
+//        ShowShadow: function () {
+//            var height = document.body.clientHeight > document.documentElement.clientHeight ? document.body.clientHeight : document.documentElement.clientHeight;
+//            activity_ad.shadow.setAttribute("style", "height:" + height + "px;display:block");
+//        },
+//        CloseShadow: function () {
+//            activity_ad.shadow.setAttribute("style", "display:none");
+//        },
+//        ShowAd: function () {
+//            var _this = activity_ad;
+//
+//            _this.ShowShadow();
+//
+//            _this.ad.setAttribute("class", "activity_ad_animation_show");
+//        },
+//        CloseAd: function () {
+//            var _this = activity_ad;
+//
+//            _this.CloseShadow();
+//
+//            _this.ad.setAttribute("class", "activity_ad_animation_close");
+//        }
+//    }
 </script>
 <script src="{{asset('style/home/js/public.js')}}"></script>
 <script type="text/javascript" name="baidu-tc-cerfication" src="{{asset('style/home/js/lightapp.js')}}"></script>
 <script type="text/javascript">window.bd && bd._qdc && bd._qdc.init({ app_id: '7a7a35fe993bd40ac8ca2bae' });</script>
-<script>
-    var CityName=document.getElementById("defaultCityName").innerHTML = Utils.getCookie("CityName");
-    if (CityName == '北京市') {
-        document.getElementById("CustomService").innerHTML = '400-010-1515';
-        document.getElementById("CustomService").href = 'tel:400-010-1515';
-    }
-    else {
-        document.getElementById("CustomService").innerHTML = '400-066-8882';
-        document.getElementById("CustomService").href = 'tel:400-066-8882';
-    }
-    var ClientID = document.getElementById("ClientID").value;
-    if (ClientID == 'C100000175') {
-        document.getElementById("foot").style.display="none";
-    }
-</script>
+{{--<script>--}}
+    {{--var CityName=document.getElementById("defaultCityName").innerHTML = Utils.getCookie("CityName");--}}
+    {{--if (CityName == '北京市') {--}}
+        {{--document.getElementById("CustomService").innerHTML = '400-010-1515';--}}
+        {{--document.getElementById("CustomService").href = 'tel:400-010-1515';--}}
+    {{--}--}}
+    {{--else {--}}
+        {{--document.getElementById("CustomService").innerHTML = '400-066-8882';--}}
+        {{--document.getElementById("CustomService").href = 'tel:400-066-8882';--}}
+    {{--}--}}
+    {{--var ClientID = document.getElementById("ClientID").value;--}}
+    {{--if (ClientID == 'C100000175') {--}}
+        {{--document.getElementById("foot").style.display="none";--}}
+    {{--}--}}
+{{--</script>--}}
 <script type="text/javascript">
     //<![CDATA[
     var InterfaceErrMsg='';

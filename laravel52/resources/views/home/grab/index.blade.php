@@ -15,9 +15,11 @@ License URL: http://creativecommons.org/licenses/by/3.0/
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     <meta name="keywords" content="Movie Ticket Booking Widget Responsive, Login form web template, Sign up Web Templates, Flat Web Templates, Login signup Responsive web template, Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, SonyEricsson, Motorola web design" />
     <!-- //for-mobile-apps -->
-    <link href='//fonts.googleapis.com/css?family=Kotta+One' rel='stylesheet' type='text/css'>
-    <link href='//fonts.googleapis.com/css?family=Open+Sans:400,300,300italic,400italic,600,600italic,700,700italic,800,800italic' rel='stylesheet' type='text/css'>
+    {{--<link href='//fonts.googleapis.com/css?family=Kotta+One' rel='stylesheet' type='text/css'>--}}
+    {{--<link href='//fonts.googleapis.com/css?family=Open+Sans:400,300,300italic,400italic,600,600italic,700,700italic,800,800italic' rel='stylesheet' type='text/css'>--}}
     <link href="{{asset('style/home/grab/css/style.css')}}" rel="stylesheet" type="text/css" media="all" />
+    {{--<script src="{{asset('style/home/grab/js/jquery.nicescroll.js')}}"></script>--}}
+    {{--<script src="{{asset('style/home/grab/js/scripts.js')}}"></script>--}}
     <script src="{{asset('style/home/grab/js/jquery-1.11.0.min.js')}}"></script>
     <script src="{{asset('style/home/grab/js/jquery.seat-charts.js')}}"></script>
 </head>
@@ -160,9 +162,8 @@ License URL: http://creativecommons.org/licenses/by/3.0/
             })
         </script>
     </div>
-    <p class="copy_rights">&copy; 2016 Movie Ticket Booking Widget. All Rights Reserved | Design by  <a href="http://w3layouts.com/" target="_blank"> W3layouts</a></p>
+    {{--<p class="copy_rights">&copy; 2016 Movie Ticket Booking Widget. All Rights Reserved | Design by  <a href="http://w3layouts.com/" target="_blank"> W3layouts</a></p>--}}
 </div>
-<script src="{{asset('style/home/grab/js/jquery.nicescroll.js')}}"></script>
-<script src="{{asset('style/home/grab/js/scripts.js')}}"></script>
+
 </body>
 </html>

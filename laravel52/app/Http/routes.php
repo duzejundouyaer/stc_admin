@@ -1,7 +1,10 @@
 <?php
 
 Route::get('/','Home\IndexController@index');//首页
+Route::get('/orby','Home\IndexController@orby');//票房排行
 Route::get('/lists','Home\ListsController@lists');//正在热播
+Route::get('/forthcoming','Home\ListsController@forthcoming');//即将上映列表
+Route::get('/box','Home\ListsController@box');//票房排行
 
 Route::post('/commont','Home\DetailsController@commonts');//用户评论
 Route::get('/pay/{movie_id?}','Home\PayController@pay');//详情页
@@ -9,6 +12,7 @@ Route::get('/details','Home\DetailsController@details');//详情页
 
 
 Route::get('/grab/{play_id?}','Home\GrabController@index');//选座页
+Route::get('/pay/{movie_id?}','Home\PayController@pay');//选座页
 Route::any('/payGrab','Home\GrabController@payGrab');//购买座位
 Route::any('/checked','Home\GrabController@checked');//已购座位
 Route::any('/successUrl','Home\GrabController@successUrl');//支付成功同步地址
@@ -63,3 +67,6 @@ Route::group(['prefix'=>'admin','namespace'=>'Admin'], function () {
     Route::any('package','FootController@package');//添加套餐
     Route::any('packageshow','FootController@packageshow');//套餐展示
 });
+
+
+Route::get('/pack/{pack_id}/{price}','Home\GrabController@pack');//详情页

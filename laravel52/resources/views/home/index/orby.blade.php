@@ -89,13 +89,13 @@
         <!--导航样式-->
         <div class="nav">
             <div class="tab_nav tab_nav_one">
-                <a class="hide" href="javascript:void(0);history.back(-1);"><img src="http://m.douyou100.com/Resources/douyou100_1/images/return.png" width="20" height="16" class="fl"/></a><div class=" Hide fl">正在热映 <span class="movie_tag">{{$number}}</span></div>
+                <a class="hide" href="javascript:void(0);history.back(-1);"><img src="http://m.douyou100.com/Resources/douyou100_1/images/return.png" width="20" height="16" class="fl"/></a><div class=" Hide fl">票房排行 <span class="movie_tag">☟</span></div>
             </div>
         </div>
 
         <!--正在热映样式开始-->
         <div class="all_movie">
-            @foreach($movie as $v)
+            @foreach($well as $v)
             <div class="movie_in fl">
                 <dl>
                     <dt><a href="{{URL('details')}}?movie_id={{$v->movie_id}}"><img src='{{asset($v->movie_img)}}' width="87" height="120" / ></a></dt>
@@ -301,25 +301,25 @@
 
 
         <div id="foot" class="foot clear">
-            <p><a href="" class="c1">帮助</a><a  href="" class="c1">客户端</a><a href="">意见反馈</a></p>
-            <p><a href="javascript:void(0)tel:400-066-8882" style="margin-right:10px;" id="CustomService">400-066-8882</a>     http://aimovie.duzejun.cn</p>
+            <p><a href="javascript:void(0)" class="c1">帮助</a><a  href="javascript:void(0)" class="c1">客户端</a><a href="javascript:void(0)../idear.aspx?ClientID=" class="c1">意见反馈</a></p>
+            <p><a href="javascript:void(0)" style="margin-right:10px;" id="CustomService">400-066-8882</a>     http://aimovie.duzejun.cn</p>
             <p class="f10">Copyright2013- 2017爱电影版权所有. </p>
         </div>
-        {{--<script>--}}
-            {{--var CityName=document.getElementById("defaultCityName").innerHTML = Utils.getCookie("CityName");--}}
-            {{--if (CityName == '北京市') {--}}
-                {{--document.getElementById("CustomService").innerHTML = '400-010-1515';--}}
-                {{--document.getElementById("CustomService").href = 'tel:400-010-1515';--}}
-            {{--}--}}
-            {{--else {--}}
-                {{--document.getElementById("CustomService").innerHTML = '400-066-8882';--}}
-                {{--document.getElementById("CustomService").href = 'tel:400-066-8882';--}}
-            {{--}--}}
-            {{--var ClientID = document.getElementById("ClientID").value;--}}
-            {{--if (ClientID == 'C100000175') {--}}
-                {{--document.getElementById("foot").style.display="none";--}}
-            {{--}--}}
-        {{--</script>--}}
+        <script>
+            var CityName=document.getElementById("defaultCityName").innerHTML = Utils.getCookie("CityName");
+            if (CityName == '北京市') {
+                document.getElementById("CustomService").innerHTML = '400-010-1515';
+                document.getElementById("CustomService").href = 'tel:400-010-1515';
+            }
+            else {
+                document.getElementById("CustomService").innerHTML = '400-066-8882';
+                document.getElementById("CustomService").href = 'tel:400-066-8882';
+            }
+            var ClientID = document.getElementById("ClientID").value;
+            if (ClientID == 'C100000175') {
+                document.getElementById("foot").style.display="none";
+            }
+        </script>
 
 
         <script type="text/javascript">

@@ -10,7 +10,7 @@ $config = array (
 		'notify_url' => "http://localhost:9096/training/stc_admin/laravel52/public/successUrl",
 		
 		//同步跳转
-		'return_url' => "http://localhost:9096/training/stc_admin/laravel52/public/successUrl",
+		'return_url' => "http://localhost/dayi/stc_admin/laravel52/public/successUrl",
 
 		//编码格式
 		'charset' => "UTF-8",
