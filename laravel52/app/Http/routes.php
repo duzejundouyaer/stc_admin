@@ -4,7 +4,7 @@ Route::get('/','Home\IndexController@index');//首页
 Route::get('/orby','Home\IndexController@orby');//票房排行
 Route::get('/lists','Home\ListsController@lists');//正在热播
 Route::any('/seach','Home\IndexController@seach');//搜索
-Route::post('/jqjson','Home\IndexController@jqjson');//ss
+Route::any('/jqjson','Home\IndexController@jqjson');//ss
 Route::get('/forthcoming','Home\ListsController@forthcoming');//即将上映列表
 Route::get('/box','Home\ListsController@box');//票房排行
 

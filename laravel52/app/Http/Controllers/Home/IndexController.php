@@ -32,7 +32,7 @@ class IndexController extends Controller
         if($request->isMethod("post")) {
             $seach = $request->input('seach');
 //            echo $seach;
-            $movie=DB::table('movie')->where('movie_name','=',$seach)->get();
+            $movie=DB::table('movie')->where('movie_name','like',$seach.'%')->get();
             $number = count($movie);
             return view('home.lists.lists',['movie'=>$movie,'number'=>$number]);
         }else{
@@ -54,9 +54,10 @@ class IndexController extends Controller
 //        $token=Input::get('_token','');
 //        $pageStart=Input::get('pageStart','');
 //        $pageEnd=Input::get('pageEnd','');
-         $pageStart=$request->input('pageStart','');
-         $pageEnd=$request->input('pageEnd','');
-        $data=DB::table('movie')->skip($pageStart)->take($pageEnd)->get();
+//         $pageStart=$request->input('pageStart','');
+//         $pageEnd=$request->input('pageEnd','');
+//        $data=DB::table('movie')->skip($pageStart)->take($pageEnd)->get();
+        $data=DB::table('movie')->get();
         // print_r($data);die;
         return json_encode($data);
     }
