@@ -36,7 +36,7 @@ class IndexController extends Controller
             $number = count($movie);
             return view('home.lists.lists',['movie'=>$movie,'number'=>$number]);
         }else{
-            $movie=DB::table('movie')->select('movie_name')->get();
+            $movie=DB::table('movie')->get();
             foreach($movie as $key=>$val){
                 $arr[]=$val->movie_name;
             }
@@ -46,9 +46,19 @@ class IndexController extends Controller
 //            }
 //            $arr.="]";
 //            print_r($arr);die;
-            return view('home.index.seach',['arr'=>$arr]);
+            return view('home.index.seach',['arr'=>$arr,'movie'=>$movie]);
         }
 
+    }
+    public function jqjson(Request $request){
+//        $token=Input::get('_token','');
+//        $pageStart=Input::get('pageStart','');
+//        $pageEnd=Input::get('pageEnd','');
+         $pageStart=$request->input('pageStart','');
+         $pageEnd=$request->input('pageEnd','');
+        $data=DB::table('movie')->skip($pageStart)->take($pageEnd)->get();
+        // print_r($data);die;
+        return json_encode($data);
     }
 //    //正在热播
 //    public function lists(){

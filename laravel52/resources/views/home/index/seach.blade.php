@@ -44,7 +44,21 @@ $session = new Session;
 
 
         </div>
+        <div class="head">
+            <ul>
+                <li class="fl logo">
+                    <a href="javascript:void(0)">
+                        <img src="http://m.douyou100.com/Resources/douyou100_1/images/LOGO.png" width="180" height="36" /></a>
+                </li>
+                <li class="fr city Hide">
+                    <label>
+                        <p class="fl paint Hide"><a href="javascript:void(0)" style="color: white;"><b id="defaultCityName">北京</b></a></p>
+                        <img src="http://m.douyou100.com/Resources/douyou100_1/images/city.png" width="12" height="11"  />
+                    </label>
+                </li>
 
+            </ul>
+        </div>
         <!--导航样式-->
 
         <div class="nav">
@@ -76,19 +90,6 @@ $session = new Session;
                                         <input name="" id="Gp" type="submit" value="搜索" class="btn_infor_gp" style="width: 60px;"/>
                                     </div>
                                 </form>
-
-                                <br/>
-                                <br/>
-                                <br/>
-                                <br/>
-                                <br/>
-                                <br/>
-                                <br/>
-                                <br/>
-                                <br/>
-                                <br/>
-                                <br/>
-                                <br/>
                                 <br/>
                                 <br/>
                             </div>
@@ -107,7 +108,31 @@ $session = new Session;
 </div> -->
 </div>
 
+<div class="all_movie">
 
+    <div class="lists">
+
+        @foreach($movie as $v)
+            <div class="movie_in fl">
+                <dl>
+                    <dt><a href="{{URL('details')}}?movie_id={{$v->movie_id}}"><img src='{{asset($v->movie_img)}}' width="87" height="120" / ></a></dt>
+                    <dd >
+                        <div class="all_dd"><p class="Hide fl w_movie f15">{{$v->movie_name}}</p><span class="fr hsz">{{$v->movie_score}}</span></div>
+                        <p class="all_dd clear Hide f12"><span class="hhsz">导演：</span>{{$v->movie_director}}</p>
+                        <p class="all_dd clear Hide f12"><span class="hhsz">主演：</span>{{$v->movie_boss}}</p>
+                        <div class="all_dd clear">
+                            <div class="gp_movie Hide fl"><span class="hsz">{{$v->movie_box}}</span>人已购票</div>
+                            <a href="{{URL('/pay')}}/{{$v->movie_id}}"><button type="button" class="btn_gp cur fl">购 票</button></a>
+                        </div>
+                    </dd>
+                </dl>
+            </div>
+        @endforeach
+
+    </div>
+
+
+</div>
 
 <!--正在热映详情样式结束-->
 <div id="footer" class="foot clear" >
@@ -124,9 +149,90 @@ $session = new Session;
 <input type="hidden" name="lian" class="lian" value="<?=$val?>"/>
 <?php }?>
 </body>
+{{--<script src="{{asset('jquery/examples/js/zepto.min.js')}}"></script>--}}
+{{--<script src="{{asset('jquery/dist/dropload.min.js')}}"></script>--}}
+{{--<script>--}}
+
+{{--</script>--}}
 <script>
     $(function() {
-            var boxes = $(".lian");
+
+        {{--var counter = 0;--}}
+        {{--// 每页展示4个--}}
+        {{--var num = 4;--}}
+        {{--var pageStart = 0,pageEnd = 0;--}}
+        {{--var _token = "{{csrf_token()}}";--}}
+        {{--// dropload--}}
+        {{--$('.all_movie').dropload({--}}
+            {{--scrollArea : window,--}}
+            {{--loadDownFn : function(me){--}}
+                {{--counter++;--}}
+{{--//                        alert(counter);--}}
+                {{--pageEnd = num * counter;--}}
+                {{--pageStart = pageEnd - num;--}}
+                {{--$.ajax({--}}
+                    {{--type: 'PSOT',--}}
+                    {{--url: "{{URL('jqjson')}}",--}}
+                    {{--data: {pageStart:pageStart,pageEnd:pageEnd,token:_token},--}}
+                    {{--dataType: 'json',--}}
+                    {{--success: function(data){--}}
+                        {{--alert(data);--}}
+                        {{--var result="";--}}
+                        {{--result+=jsonpingjie(data);--}}
+                        {{--// 为了测试，延迟1秒加载--}}
+                        {{--setTimeout(function(){--}}
+                            {{--$('.lists').append(result);--}}
+                            {{--// 每次数据加载完，必须重置--}}
+                            {{--me.resetload();--}}
+                        {{--},1000);--}}
+                    {{--},--}}
+                    {{--error: function(xhr, type){--}}
+                        {{--alert('Ajax error!');--}}
+                        {{--// 即使加载出错，也得重置--}}
+                        {{--me.resetload();--}}
+                    {{--}--}}
+                {{--});--}}
+            {{--}--}}
+        {{--});--}}
+
+        {{--function jsonpingjie(data){--}}
+            {{--var result = '';--}}
+            {{--for(var i = pageStart; i < pageEnd; i++){--}}
+                {{--result += "<div class='movie_in fl'> " +--}}
+                {{--"<dl> " +--}}
+                {{--"<dt><a href='details?movie_id="+msg[i].movie_id+"'>" +--}}
+                {{--"<img src='"+msg[i].movie_img+"' width='87' height='120'  >" +--}}
+                {{--"</a></dt> " +--}}
+                {{--"<dd > " +--}}
+                {{--"<div class='all_dd'>" +--}}
+                {{--"<p class='Hide fl w_movie f15'>"+msg[i].movie_name+"</p>" +--}}
+                {{--"<span class='fr hsz'>"+msg[i].movie_img+"</span>" +--}}
+                {{--"</div> <p class='all_dd clear Hide f12'><span class='hhsz'>导演：</span>"+msg[i].movie_name+"</p> " +--}}
+                {{--"<p class='all_dd clear Hide f12'><span class='hhsz'>主演：</span>"+msg[i].movie_name+"</p> " +--}}
+                {{--"<div class='all_dd clear'>" +--}}
+                {{--" <div class='gp_movie Hide fl'>" +--}}
+                {{--"<span class='hsz'>"+msg[i].movie_name+"" +--}}
+                {{--"</span>人已购票</div> " +--}}
+                {{--"<a href='/pay'>" +--}}
+                {{--"<button type='button' class='btn_gp cur fl'>购 票</button>" +--}}
+                {{--"</a>" +--}}
+                {{--" </div> " +--}}
+                {{--"</dd> " +--}}
+                {{--"</dl> " +--}}
+                {{--"</div>"--}}
+                {{--if((i) >= data.length){--}}
+                    {{--// 锁定--}}
+                    {{--me.lock();--}}
+                    {{--// 无数据--}}
+                    {{--me.noData();--}}
+                    {{--break;--}}
+                {{--}--}}
+            {{--}--}}
+            {{--return result;--}}
+        {{--}--}}
+
+
+        var boxes = $(".lian");
             //alert(boxes);
             var availableTags = []
             for(i=0;i<boxes.length;i++){
@@ -138,6 +244,8 @@ $session = new Session;
                 $( "#tags1" ).autocomplete({
             source: availableTags
         });
+
+
 
     });
 </script>
